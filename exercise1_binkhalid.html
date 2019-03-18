@@ -7,19 +7,21 @@
 <body>
 <p id ='text'> Javascript DOM :: Changing paragraph style</p>
 <div>
-<button id="style" onclick="js_new_style()">New style</button>
+<button id="style" onclick="js_new_style()" color = "Pink">New style</button>
 </div>
 </body>
 </html>
 
 <script>
  function js_new_style(){
-   if(document.getElementById('style').innerHTML == "Previous"){
-     document.getElementById('style').innerHTML = "New style";
+   var buttonText = "New style";
+   var color = "Pink"
+   if(document.getElementById('style').innerHTML == "New style"){
+     buttonText = "Previous";
+     color = "Orange"
    }
-   else if (document.getElementById('style').innerHTML == "New style"){
-     document.getElementById('style').innerHTML = "Previous";
-   }
+    document.getElementById('style').innerHTML = buttonText;
+    document.getElementById('text').style.color = color;
 
  }
 </script>
