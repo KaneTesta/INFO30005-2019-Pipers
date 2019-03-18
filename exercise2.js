@@ -4,6 +4,5 @@ function getFormValue() {
     let firstName = formName.firstname.value;
     let lastName = formName.lastname.value;
 
-    alert("First Name: " + firstName + "\n" +
-        "Last Name: " + lastName);
+    alert("Hello! " + firstName + " " + lastName);
 }
