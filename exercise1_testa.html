@@ -24,7 +24,8 @@ function js_new_style(){
     var colors = ['red','black','blue','orange'];
     var sizes = ['18px','20px','5px','30px'];
     
-    rand = Math.random*4;
+    rand = Math.floor(Math.random()*4);
+    console.log(rand);
     name = document.getElementById("style").innerHTML;
     
     if (name === "New style"){
