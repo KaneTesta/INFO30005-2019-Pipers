@@ -17,6 +17,9 @@
 var prevCol = document.getElementById("text").style.color;
 
 var prevSize = document.getElementById("text").style.fontSize;
+    
+var newCol;
+var newZize;
 
 function js_new_style(){
 
@@ -29,16 +32,18 @@ function js_new_style(){
     name = document.getElementById("style").innerHTML;
     
     if (name === "New style"){
-        prevCol = colors[rand];
-        prevSize = sizes[rand];
+        newCol = colors[rand];
+        newSize = sizes[rand];
         name = "Previous style";
-        document.getElementById("text").style.color = prevCol;
-        document.getElementById("text").style.fontSize = prevSize;
+        document.getElementById("text").style.color = newCol;
+        document.getElementById("text").style.fontSize = newSize;
         
     } else {
         name= "New style";
         document.getElementById("text").style.color = prevCol;
         document.getElementById("text").style.fontSize = prevSize;
+        prevCol = newCol;
+        prevCol = newSize;
     }
     document.getElementById("style").innerHTML = name;
 }
