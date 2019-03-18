@@ -11,3 +11,19 @@
         </div>
     </body>
 </html>
+
+<script>
+
+function js_new_style(){
+    name = document.getElementById("style").innerHTML;
+    
+    if (name === "New style"){
+        name = "Previous style";
+    } else {
+        name= "New style";
+    }
+    document.getElementById("style").innerHTML = name;
+}
+
+
+</script>
