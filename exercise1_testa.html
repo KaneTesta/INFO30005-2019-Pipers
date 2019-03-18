@@ -11,3 +11,42 @@
         </div>
     </body>
 </html>
+
+<script>
+    
+var prevCol = document.getElementById("text").style.color;
+
+var prevSize = document.getElementById("text").style.fontSize;
+    
+var newCol;
+var newZize;
+
+function js_new_style(){
+
+
+    var colors = ['red','black','blue','orange'];
+    var sizes = ['18px','20px','5px','30px'];
+    
+    rand = Math.floor(Math.random()*4);
+    console.log(rand);
+    name = document.getElementById("style").innerHTML;
+    
+    if (name === "New style"){
+        newCol = colors[rand];
+        newSize = sizes[rand];
+        name = "Previous style";
+        document.getElementById("text").style.color = newCol;
+        document.getElementById("text").style.fontSize = newSize;
+        
+    } else {
+        name= "New style";
+        document.getElementById("text").style.color = prevCol;
+        document.getElementById("text").style.fontSize = prevSize;
+        prevCol = newCol;
+        prevCol = newSize;
+    }
+    document.getElementById("style").innerHTML = name;
+}
+
+
+</script>
