@@ -1,27 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset=utf-8 />
-<title> INFO30005 :: JavaScript - Workshop #2 </title>
-</head>
-<body>
-<p id ='text'> Javascript DOM :: Changing paragraph style</p>
-<div>
-<button id="style" onclick="js_new_style()" color = "Pink">New style</button>
-</div>
-</body>
+    <head>
+        <meta charset="utf-8"/>
+        <title> INFO30005 :: JavaScript - Workshop #2 </title>
+    </head>
+    <body>
+        <p id ="text"> Javascript DOM :: Changing paragraph style</p>
+        <div>
+            <button id="style" onclick="js_new_style()">New style</button>
+        </div>
+    </body>
 </html>
 
 <script>
- function js_new_style(){
-   var buttonText = "New style";
-   var color = "Pink"
-   if(document.getElementById('style').innerHTML == "New style"){
-     buttonText = "Previous";
-     color = "Orange"
-   }
-    document.getElementById('style').innerHTML = buttonText;
-    document.getElementById('text').style.color = color;
+    
+var oldColor = document.getElementById("text").style.color;
+var oldFont = "16px";
+var color;
+var font;
 
- }
+function js_new_style(){
+	var name = document.getElementById("style").innerHTML;
+	if(name == "New style"){
+    	name = "Previous";
+        color = "Pink";
+        font = "50px";
+    }
+    else {
+    	name = "New style";
+        color = oldColor;
+        font = oldFont;
+    }
+    document.getElementById("style").innerHTML = name;
+    document.getElementById("text").style.color = color;
+    document.getElementById("text").style.fontSize = font;
+}
 </script>
