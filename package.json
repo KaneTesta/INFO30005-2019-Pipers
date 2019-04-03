@@ -1,0 +1,19 @@
+{
+  "name": "piedpipers",
+  "version": "1.0.0",
+  "description": "A sample app with REST API capability",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "faker": "^4.1.0",
+    "git": "^0.1.5",
+    "mongodg": "^0.1.0",
+    "mongoose": "^5.4.21",
+    "node": "^11.12.0"
+  }
+}
