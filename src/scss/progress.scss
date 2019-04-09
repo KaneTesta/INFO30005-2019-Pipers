@@ -24,7 +24,6 @@ $progress-dot-size: 23px;
         height: $progress-dot-size;
         margin-right: $progress-dot-spacing;
 
-        cursor: pointer;
         transition: border-color 0.1s ease;
 
         border: 1px solid $border-color;
@@ -70,12 +69,9 @@ $progress-dot-size: 23px;
             background-color: $accent-color;
         }
 
-        &:hover,
-        &:focus {
-            border-color: $accent-color;
-        }
-
         &.active {
+            border-color: $accent-color;
+
             &::after {
                 transition: transform 0.1s ease-out;
                 transform: none;
