@@ -1,0 +1,85 @@
+$progress-max-dots: 10;
+$progress-dot-spacing: 32px;
+$progress-dot-size: 23px;
+
+.progress-dots {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 12px;
+
+    display: flex;
+    flex-direction: row;
+
+    margin: auto;
+
+    align-items: center;
+    justify-content: center;
+
+    .progress-dot {
+        position: relative;
+
+        box-sizing: border-box;
+        width: $progress-dot-size;
+        height: $progress-dot-size;
+        margin-right: $progress-dot-spacing;
+
+        cursor: pointer;
+        transition: border-color 0.1s ease;
+
+        border: 1px solid $border-color;
+        border-radius: 50%;
+        background-color: $background-color;
+
+        &::before {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            bottom: 0;
+
+            width: $progress-dot-spacing + 1;
+            height: 1px;
+            margin: auto;
+
+            content: "";
+
+            background-color: $border-color;
+        }
+
+        &:last-child {
+            margin-right: 0;
+
+            &::before {
+                content: none;
+            }
+        }
+
+        &::after {
+            position: absolute;
+            left: 2px;
+            right: 2px;
+            top: 2px;
+            bottom: 2px;
+
+            content: "";
+            transition: transform 0.1s ease-in;
+            transform: scale(0);
+            pointer-events: none;
+
+            border-radius: 50%;
+            background-color: $accent-color;
+        }
+
+        &:hover,
+        &:focus {
+            border-color: $accent-color;
+        }
+
+        &.active {
+            &::after {
+                transition: transform 0.1s ease-out;
+                transform: none;
+            }
+        }
+    }
+}

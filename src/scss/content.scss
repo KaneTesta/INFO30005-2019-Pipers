@@ -1,0 +1,70 @@
+body {
+    background-color: $background-color;
+}
+
+:focus {
+    outline: none;
+}
+
+.container-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-horizontal {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-vertical {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-responsive {
+    display: flex;
+    flex-direction: row;
+
+    @media screen and (max-width: $breakpoint-small) {
+        flex-direction: column;
+
+        text-align: center;
+    }
+}
+
+.flex-fill {
+    flex-grow: 1;
+}
+
+.fill-medium {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    box-sizing: border-box;
+    width: 50vw;
+    height: 40vh;
+    margin: auto;
+
+    @media screen and (max-width: $breakpoint-large) {
+        width: 70vw;
+    }
+
+    @media screen and (max-width: $breakpoint-medium) {
+        width: 90vw;
+    }
+
+    img {
+        height: 67%;
+    }
+}
+
+.fill-page {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
