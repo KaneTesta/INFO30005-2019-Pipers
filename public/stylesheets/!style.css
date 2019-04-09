@@ -54,6 +54,7 @@ body {
   bottom: 0; }
 
 body {
+  color: rgba(0, 0, 0, 0.95);
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-size: 16px; }
 
@@ -74,6 +75,46 @@ h6 {
   font-family: "Noto Serif", "Times New Roman", Times, serif;
   font-size: 2.4em; }
 
+button,
+.button {
+  position: relative;
+  margin: 24px 0;
+  padding: 12px 36px 12px 24px;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: 24px;
+  background-color: #34a534;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  font-size: 0.95em; }
+  button::after,
+  .button::after {
+    position: absolute;
+    right: 18px;
+    top: 0;
+    bottom: 0;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin: auto;
+    content: "";
+    transition: right 0.15s ease;
+    transform: rotate(45deg);
+    border-top: 3px solid rgba(255, 255, 255, 0.95);
+    border-right: 3px solid rgba(255, 255, 255, 0.95); }
+  button:hover,
+  .button:hover {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4); }
+  button:hover::after, button:focus::after,
+  .button:hover::after,
+  .button:focus::after {
+    right: 12px; }
+  button:active,
+  .button:active {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); }
+
 .progress-dots {
   position: fixed;
   left: 0;
@@ -90,7 +131,6 @@ h6 {
     width: 23px;
     height: 23px;
     margin-right: 32px;
-    cursor: pointer;
     transition: border-color 0.1s ease;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 50%;
@@ -121,8 +161,8 @@ h6 {
       pointer-events: none;
       border-radius: 50%;
       background-color: #34a534; }
-    .progress-dots .progress-dot:hover, .progress-dots .progress-dot:focus {
+    .progress-dots .progress-dot.active {
       border-color: #34a534; }
-    .progress-dots .progress-dot.active::after {
-      transition: transform 0.1s ease-out;
-      transform: none; }
+      .progress-dots .progress-dot.active::after {
+        transition: transform 0.1s ease-out;
+        transform: none; }
