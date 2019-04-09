@@ -1,0 +1,128 @@
+body {
+  background-color: #ffffff; }
+
+:focus {
+  outline: none; }
+
+.container-center {
+  align-items: center;
+  justify-content: center; }
+
+.flex-horizontal {
+  display: flex;
+  flex-direction: row; }
+
+.flex-vertical {
+  display: flex;
+  flex-direction: column; }
+
+.flex-responsive {
+  display: flex;
+  flex-direction: row; }
+  @media screen and (max-width: 460px) {
+    .flex-responsive {
+      flex-direction: column;
+      text-align: center; } }
+
+.flex-fill {
+  flex-grow: 1; }
+
+.fill-medium {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  width: 50vw;
+  height: 40vh;
+  margin: auto; }
+  @media screen and (max-width: 1200px) {
+    .fill-medium {
+      width: 70vw; } }
+  @media screen and (max-width: 800px) {
+    .fill-medium {
+      width: 90vw; } }
+  .fill-medium img {
+    height: 67%; }
+
+.fill-page {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0; }
+
+body {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-size: 16px; }
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+  font-size: 1em; }
+
+.subheading {
+  margin-bottom: 0.4em;
+  color: #34a534;
+  font-family: "Noto Serif", "Times New Roman", Times, serif;
+  font-size: 2.4em; }
+
+.progress-dots {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 12px;
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  align-items: center;
+  justify-content: center; }
+  .progress-dots .progress-dot {
+    position: relative;
+    box-sizing: border-box;
+    width: 23px;
+    height: 23px;
+    margin-right: 32px;
+    cursor: pointer;
+    transition: border-color 0.1s ease;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    background-color: #ffffff; }
+    .progress-dots .progress-dot::before {
+      position: absolute;
+      left: 100%;
+      top: 0;
+      bottom: 0;
+      width: 33px;
+      height: 1px;
+      margin: auto;
+      content: "";
+      background-color: rgba(0, 0, 0, 0.2); }
+    .progress-dots .progress-dot:last-child {
+      margin-right: 0; }
+      .progress-dots .progress-dot:last-child::before {
+        content: none; }
+    .progress-dots .progress-dot::after {
+      position: absolute;
+      left: 2px;
+      right: 2px;
+      top: 2px;
+      bottom: 2px;
+      content: "";
+      transition: transform 0.1s ease-in;
+      transform: scale(0);
+      pointer-events: none;
+      border-radius: 50%;
+      background-color: #34a534; }
+    .progress-dots .progress-dot:hover, .progress-dots .progress-dot:focus {
+      border-color: #34a534; }
+    .progress-dots .progress-dot.active::after {
+      transition: transform 0.1s ease-out;
+      transform: none; }

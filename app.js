@@ -1,12 +1,20 @@
 var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+
 var app = express();
 
-var router = require('./routes/routes');
-var PORT = process.env.PORT || 3000;
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.listen(PORT, function(){ console.log(`Express listening on port ${PORT}`);
-});
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
-
-app.use('/', router);
-
+module.exports = app;
