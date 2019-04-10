@@ -5,6 +5,9 @@ button,
 .button {
     position: relative;
 
+    display: inline-block;
+
+    box-sizing: content-box;
     margin: 24px 0;
     padding: 12px 36px 12px 24px;
 

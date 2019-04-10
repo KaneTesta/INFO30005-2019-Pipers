@@ -2,6 +2,94 @@ body {
     background-color: $background-color;
 }
 
+@keyframes page-fade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes page-right {
+    from {
+        transform: translateX(36px);
+
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0px);
+
+        opacity: 1;
+    }
+}
+
+@keyframes page-left {
+    from {
+        transform: translateX(-36px);
+
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0px);
+
+        opacity: 1;
+    }
+}
+
+.main {
+    overflow: hidden;
+
+    .animation-element {
+        overflow: hidden;
+    }
+
+    &[data-transition=page-fade] {
+        .animation-element {
+            animation: page-fade 0.15s ease-out;
+            animation-direction: normal;
+            animation-fill-mode: both;
+        }
+
+        &.is-exiting .animation-element {
+            animation: page-fade 0.15s ease-in;
+            animation-direction: reverse;
+            animation-fill-mode: both;
+        }
+    }
+
+    &[data-transition=page-right] {
+        .animation-element {
+            animation: page-right 0.15s ease-out;
+            animation-direction: normal;
+            animation-fill-mode: both;
+        }
+
+        &.is-exiting .animation-element {
+            animation: page-left 0.15s ease-in;
+            animation-direction: reverse;
+            animation-fill-mode: both;
+        }
+    }
+
+    &[data-transition=page-left] {
+        .animation-element {
+            animation: page-left 0.15s ease-out;
+            animation-direction: normal;
+            animation-fill-mode: both;
+        }
+
+        &.is-exiting .animation-element {
+            animation: page-right 0.15s ease-in;
+            animation-direction: reverse;
+            animation-fill-mode: both;
+        }
+    }
+}
+
 :focus {
     outline: none;
 }
