@@ -5,5 +5,7 @@ var recipeSchema = mongoose.Schema(
 		"ingredients": [{ingredient: String, amount: String}],
 		"method": [String],
 		"author": String
-	})
+
+	}
+);
 mongoose.model('recipes', recipeSchema);
