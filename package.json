@@ -3,10 +3,11 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "npm-run-all -p build:*",
+        "start": "npm run build:sass && node ./bin/www",
+        "test": "npm-run-all -p build:*",
         "build:sass": "gulp sass",
         "build:watch": "gulp sass:watch",
-        "build:run": "node ./bin/www"
+        "build:run": "nodemon ./bin/www"
     },
     "dependencies": {
         "cookie-parser": "~1.4.3",
@@ -18,6 +19,7 @@
         "autoprefixer": "^9.5.1",
         "gulp": "^4.0.0",
         "gulp-sass": "^4.0.2",
+        "nodemon": "^1.18.11",
         "npm-run-all": "^4.1.5"
     }
 }
