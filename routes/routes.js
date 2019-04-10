@@ -11,6 +11,6 @@ router.get('/ingredient/:ingredient', controller.findRecipeByIngredient);
 
 router.get('/storage/:ingredient', controller.findStorageInfo);
 
-router.get('/contacts', controller.showContactInfo)
+router.get('/contacts', controller.showContactInfo);
 
 module.exports = router;
