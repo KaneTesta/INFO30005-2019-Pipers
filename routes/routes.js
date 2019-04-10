@@ -7,5 +7,7 @@ router.get('/', function (req, res) {
   res.send('The Pied Pipers');
 });
 
+router.get('/ingredient/:ingredient', controller.findRecipeByIngredient);
+
 
 module.exports = router;
