@@ -6,5 +6,5 @@ var recipeSchema = mongoose.Schema(
 		"method": [String],
 		"author": String
 	}
-	
+);
 mongoose.model('recipes', recipeSchema);
