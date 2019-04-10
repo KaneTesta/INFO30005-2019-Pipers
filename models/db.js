@@ -20,3 +20,5 @@ mongoose.connect(dbURI, options).then(
 );
 
 require('./recipe.js');
+require('./contacts.js');
+require('./storage.js');
