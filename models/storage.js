@@ -7,4 +7,5 @@ var storageSchema = mongoose.Schema(
         "pantry" : String
 	}
 );
-mongoose.model('storage', storageSchema);
+//Needed to the collection for the model, the last param
+mongoose.model('storage', storageSchema, 'storage');
