@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var storageSchema = mongoose.Schema(
 	{
-		"name": String,
+		"ingredient": String,
         "tip" : String,
         "fridge" : String,
         "pantry" : String
