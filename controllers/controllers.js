@@ -15,7 +15,21 @@ var findRecipeByIngredient = function (req, res) {
     })
 }
 
+//This one works
 var findStorageInfo = function (req, res) {
+    var ingredientName = req.params.ingredient;
+    Storage.find({ingredient: ingredientName}, function(err, info){
+        if(!err){
+            res.json(info);
+        }
+        else{
+            res.sendStatus(404);
+        }
+    })
+}
+
+
+var showContactInfo = function (req, res) {
     var ingredientName = req.params.recipe;
     Storage.find({ingredient: ingredient}, function(err, recipe){
         if(!err){
@@ -29,3 +43,5 @@ var findStorageInfo = function (req, res) {
 
 
 module.exports.findRecipeByIngredient = findRecipeByIngredient;
+module.exports.findStorageInfo = findStorageInfo;
+module.exports.showContactInfo = showContactInfo;
