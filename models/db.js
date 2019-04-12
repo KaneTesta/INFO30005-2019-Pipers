@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 //TODO: whitelist heroku on atlas
 const ATLAS_PASS = process.env.ATLAS_PASS || ""
 const dbURI = 
-`mongodb+srv://endwaste:${ATLAS_PASS}@cluster0-0uuii.azure.mongodb.net/test?retryWrites=true`;
+`mongodb+srv://endwaste:ENTk912SteNvxW99@cluster0-0uuii.azure.mongodb.net/test?retryWrites=true`;
 
 const options = {
   useNewUrlParser: true,
