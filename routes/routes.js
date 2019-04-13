@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
   Returns an array of recipes using the ingredients given, delimited by '+'
   Example:
   /api/recipes/ingredient1+ingredient2
+  /api/recipes/Chicken+Tomato
  */
 
 router.get('/api/recipes/:ingredients', controller.findRecipeByIngredient);
