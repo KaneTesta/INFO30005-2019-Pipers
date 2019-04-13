@@ -27,7 +27,7 @@ var findStorageInfo = function (req, res) {
         }
     })
 };
-// Working. Try with id = 01 or 02
+// Working. Try with id = 01 to 50
 var showContactInfo = function (req, res) {
     var contactID = req.params.id;
     Contact.find({id: contactID}, function(err, info){
@@ -56,9 +56,7 @@ var createContact = function (req, res) {
             res.sendStatus(400);
         }
     });
-
 };
-
 
 
 
