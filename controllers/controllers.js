@@ -4,8 +4,8 @@ var Contact = mongoose.model('contacts');
 var Storage = mongoose.model('storage');
 
 var findRecipeByIngredient = function (req, res) {
-    var ingredientName = req.params.ingredient;
-    Recipe.find({ingredient: ingredientName}, function(err, recipe){
+    query = req.params.ingredients.split('+')
+    Recipe.find({ingredients: {$all: query}}, function(err, recipe){
         if(!err){
             res.json(recipe)
         }
@@ -15,10 +15,30 @@ var findRecipeByIngredient = function (req, res) {
     })
 };
 
-//This one works
+var insertRecipe = function (req, res) {
+    var recipe = new Recipe({
+        "title": req.body.title,
+        "ingredients": req.body.ingredients,
+        "method": req.body.method,
+        "author": req.body.string,
+        "serves": req.body.serves
+    });
+
+    recipe.save(function (err, newRecipe) {
+        if(!err){
+            res.send("Recipe: " + newRecipe.title + " added!");
+        }
+        else{
+            res.status(500).send({error: err});
+        }
+    });
+
+}
+
 var findStorageInfo = function (req, res) {
-    var ingredientName = req.params.ingredient;
-    Storage.find({ingredient: ingredientName}, function(err, info){
+    var ingredientName = new RegExp('^' + req.params.ingredient, 'i');
+
+    Storage.find({ingredient: {$regex: ingredientName}}, function(err, info){
         if(!err){
             res.json(info);
         }
@@ -27,12 +47,13 @@ var findStorageInfo = function (req, res) {
         }
     })
 };
-// Working. Try with id = 01 to 50
-var showContactInfo = function (req, res) {
-    var contactID = req.params.id;
-    Contact.find({id: contactID}, function(err, info){
+
+var findContact = function (req, res) {
+
+    Contact.find(req.query, function(err, info){
         if(!err){
             res.send(info);
+            res.sendStatus(200);
         }
         else{
             res.sendStatus(404);
@@ -40,27 +61,27 @@ var showContactInfo = function (req, res) {
     })
 };
 
-var createContact = function (req, res) {
+var insertContact = function (req, res) {
     var contact = new Contact({
-        "id" : req.body.id,
         "name": req.body.name,
         "phone": req.body.phone,
         "address": req.body.address
     });
     contact.save(function (err, newContact) {
         if(!err){
-            res.send(newContact);
+            res.send(name + " added!")
         }
         else{
-            res.send(err);
-            res.sendStatus(400);
+            res.status(500).send({error: err});
         }
     });
 };
 
 
-
-module.exports.findRecipeByIngredient = findRecipeByIngredient;
-module.exports.findStorageInfo = findStorageInfo;
-module.exports.showContactInfo = showContactInfo;
-module.exports.createContact = createContact;
+module.exports = {
+    findRecipeByIngredient,
+    insertRecipe,
+    findStorageInfo,
+    findContact,
+    insertContact
+};
