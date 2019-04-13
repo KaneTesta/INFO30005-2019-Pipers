@@ -1,0 +1,7 @@
+https://endwaste.herokuapp.com/api/recipes/Chicken+Tomato
+https://endwaste.herokuapp.com/api/recipes/Chicken+Oil
+https://endwaste.herokuapp.com/api/recipes/Chicken
+https://endwaste.herokuapp.com/api/recipes/Tomato
+https://endwaste.herokuapp.com/api/recipes/Oil
+https://endwaste.herokuapp.com/api/recipes/Chicken+Tomato+Oil
+https://endwaste.herokuapp.com/api/recipes/Potato+Oil
