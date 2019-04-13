@@ -4,8 +4,7 @@ var Contact = mongoose.model('contacts');
 var Storage = mongoose.model('storage');
 
 var findRecipeByIngredient = function (req, res) {
-    var ingredientName = req.params.ingredient;
-    Recipe.find({ingredient: ingredientName}, function(err, recipe){
+    Recipe.find({}, function(err, recipe){
         if(!err){
             res.json(recipe)
         }
@@ -17,8 +16,9 @@ var findRecipeByIngredient = function (req, res) {
 
 //This one works
 var findStorageInfo = function (req, res) {
-    var ingredientName = req.params.ingredient;
-    Storage.find({ingredient: ingredientName}, function(err, info){
+    var ingredientName = new RegExp('^' + req.params.ingredient, 'i');
+
+    Storage.find({ingredient: {$regex: ingredientName}}, function(err, info){
         if(!err){
             res.json(info);
         }
@@ -27,10 +27,11 @@ var findStorageInfo = function (req, res) {
         }
     })
 };
+
 // Working. Try with id = 01 or 02
 var showContactInfo = function (req, res) {
-    var contactID = req.params.id;
-    Contact.find({id: contactID}, function(err, info){
+
+    Contact.find(req.query, function(err, info){
         if(!err){
             res.send(info);
         }
@@ -42,7 +43,6 @@ var showContactInfo = function (req, res) {
 
 var createContact = function (req, res) {
     var contact = new Contact({
-        "id" : req.body.id,
         "name": req.body.name,
         "phone": req.body.phone,
         "address": req.body.address
@@ -61,8 +61,9 @@ var createContact = function (req, res) {
 
 
 
-
-module.exports.findRecipeByIngredient = findRecipeByIngredient;
-module.exports.findStorageInfo = findStorageInfo;
-module.exports.showContactInfo = showContactInfo;
-module.exports.createContact = createContact;
+module.exports = {
+    findRecipeByIngredient,
+    findStorageInfo,
+    showContactInfo,
+    createContact
+};
