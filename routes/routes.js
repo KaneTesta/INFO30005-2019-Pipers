@@ -9,12 +9,14 @@ router.get('/', function (req, res) {
 
 router.get('/api/recipes/:ingredients', controller.findRecipeByIngredient);
 
+router.post('/api/recipes', controller.insertRecipe)
+
 router.get('/api/storage/:ingredient', controller.findStorageInfo);
 
 router.route('/api/contacts')
 
   .get(controller.showContactInfo)
 
-  .post(controller.createContact)
+  .post(controller.insertContact)
 
 module.exports = router;
