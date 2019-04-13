@@ -15,7 +15,27 @@ var findRecipeByIngredient = function (req, res) {
     })
 };
 
-//This one works
+var insertRecipe = function (req, res) {
+    var recipe = new Recipe({
+        "title": req.body.title,
+        "ingredients": req.body.ingredients,
+        "method": req.body.method,
+        "author": req.body.string,
+        "serves": req.body.serves
+    });
+
+    recipe.save(function (err, newRecipe) {
+        if(!err){
+            res.send("Recipe: " + newRecipe.title + " added!");
+        }
+        else{
+            res.send(err);
+            res.sendStatus(400);
+        }
+    });
+
+}
+
 var findStorageInfo = function (req, res) {
     var ingredientName = new RegExp('^' + req.params.ingredient, 'i');
 
@@ -29,7 +49,6 @@ var findStorageInfo = function (req, res) {
     })
 };
 
-// Working. Try with id = 01 or 02
 var showContactInfo = function (req, res) {
 
     Contact.find(req.query, function(err, info){
@@ -42,7 +61,7 @@ var showContactInfo = function (req, res) {
     })
 };
 
-var createContact = function (req, res) {
+var insertContact = function (req, res) {
     var contact = new Contact({
         "name": req.body.name,
         "phone": req.body.phone,
@@ -62,7 +81,8 @@ var createContact = function (req, res) {
 
 module.exports = {
     findRecipeByIngredient,
+    insertRecipe,
     findStorageInfo,
     showContactInfo,
-    createContact
+    insertContact
 };
