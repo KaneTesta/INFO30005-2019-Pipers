@@ -15,7 +15,7 @@ router.get('/api/storage/:ingredient', controller.findStorageInfo);
 
 router.route('/api/contacts')
 
-  .get(controller.showContactInfo)
+  .get(controller.findContact)
 
   .post(controller.insertContact)
 
