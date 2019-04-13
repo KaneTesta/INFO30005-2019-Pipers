@@ -1,20 +1,19 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
-const controller = require('../controllers/controllers');
+const controller = require('../controllers/controllers')
 
 router.get('/', function (req, res) {
-  res.send('The Pied Pipers');
-});
+  res.send('The Pied Pipers')
+})
 
-/* 
+/*
   Returns an array of recipes using the ingredients given, delimited by '+'
   Example:
   /api/recipes/ingredient1+ingredient2
  */
 
-router.get('/api/recipes/:ingredients', controller.findRecipeByIngredient);
-
+router.get('/api/recipes/:ingredients', controller.findRecipeByIngredient)
 
 /*
   Adds a recipe to the collection, accepts json object in the format defined in
@@ -22,7 +21,6 @@ router.get('/api/recipes/:ingredients', controller.findRecipeByIngredient);
 */
 
 router.post('/api/recipes', controller.insertRecipe)
-
 
 /*
   Returns how to store a given ingredient
@@ -36,8 +34,7 @@ router.post('/api/recipes', controller.insertRecipe)
   for the item "Apples"
 */
 
-router.get('/api/storage/:ingredient', controller.findStorageInfo);
-
+router.get('/api/storage/:ingredient', controller.findStorageInfo)
 
 /*
   A multi-use route
@@ -55,7 +52,8 @@ router.get('/api/storage/:ingredient', controller.findStorageInfo);
   and adds it to the contacts collection
 */
 
-router.route('/api/contacts')
+router
+  .route('/api/contacts')
 
   .get(controller.findContact)
 
@@ -66,4 +64,4 @@ TODO
 Note, all of these routes have used different methods of collecting input to interact with the database, we should decide on one single method of passing info around to unify our backend, making it easier to incorporate with the frontend
 */
 
-module.exports = router;
+module.exports = router
