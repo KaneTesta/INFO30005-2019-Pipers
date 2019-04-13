@@ -4,7 +4,7 @@ var Contact = mongoose.model('contacts');
 var Storage = mongoose.model('storage');
 
 var findRecipeByIngredient = (req, res) => {
-  query = req.params.ingredients.split('+');
+  var query = req.params.ingredients.split('+');
   Recipe.find({ ingredients: { $all: query } }, (err, recipe) => {
     if (!err) {
       res.json(recipe);
