@@ -29,8 +29,7 @@ var insertRecipe = function (req, res) {
             res.send("Recipe: " + newRecipe.title + " added!");
         }
         else{
-            res.send(err);
-            res.sendStatus(400);
+            res.status(500).send({error: err});
         }
     });
 
@@ -54,6 +53,7 @@ var findContact = function (req, res) {
     Contact.find(req.query, function(err, info){
         if(!err){
             res.send(info);
+            res.sendStatus(200);
         }
         else{
             res.sendStatus(404);
@@ -69,11 +69,10 @@ var insertContact = function (req, res) {
     });
     contact.save(function (err, newContact) {
         if(!err){
-            res.send(newContact);
+            res.send(name + " added!")
         }
         else{
-            res.send(err);
-            res.sendStatus(400);
+            res.status(500).send({error: err});
         }
     });
 
