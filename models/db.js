@@ -7,7 +7,7 @@ const dbURI =
 
 const options = {
   useNewUrlParser: true,
-  dbName: "EndWaste"
+  dbName: "test"
 };
 
 mongoose.connect(dbURI, options).then(
@@ -19,6 +19,6 @@ mongoose.connect(dbURI, options).then(
  }
 );
 
-require('./recipe.js');
-require('./contacts.js');
-require('./storage.js');
+require('./recipe');
+require('./contacts');
+require('./storage');
