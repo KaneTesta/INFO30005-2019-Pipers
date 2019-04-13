@@ -7,12 +7,14 @@ router.get('/', function (req, res) {
   res.send('The Pied Pipers');
 });
 
-router.get('/ingredient/:ingredient', controller.findRecipeByIngredient);
+router.get('/api/recipes', controller.findRecipeByIngredient);
 
-router.get('/storage/:ingredient', controller.findStorageInfo);
+router.get('/api/storage/:ingredient', controller.findStorageInfo);
 
-router.get('/contacts/:id', controller.showContactInfo);
+router.route('/api/contacts')
 
-router.post('/contacts', controller.createContact);
+  .get(controller.showContactInfo)
+
+  .post(controller.createContact)
 
 module.exports = router;
