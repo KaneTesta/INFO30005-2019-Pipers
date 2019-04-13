@@ -49,7 +49,7 @@ var findStorageInfo = function (req, res) {
     })
 };
 
-var showContactInfo = function (req, res) {
+var findContact = function (req, res) {
 
     Contact.find(req.query, function(err, info){
         if(!err){
@@ -83,6 +83,6 @@ module.exports = {
     findRecipeByIngredient,
     insertRecipe,
     findStorageInfo,
-    showContactInfo,
+    findContact,
     insertContact
 };
