@@ -7,7 +7,7 @@ router.get('/', function (req, res) {
   res.send('The Pied Pipers');
 });
 
-router.get('/api/recipes', controller.findRecipeByIngredient);
+router.get('/api/recipes/:ingredients', controller.findRecipeByIngredient);
 
 router.get('/api/storage/:ingredient', controller.findStorageInfo);
 
