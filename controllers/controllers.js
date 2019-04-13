@@ -59,8 +59,6 @@ var createContact = function (req, res) {
 
 };
 
-
-
 module.exports = {
     findRecipeByIngredient,
     findStorageInfo,
