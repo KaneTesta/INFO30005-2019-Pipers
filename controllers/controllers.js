@@ -3,6 +3,7 @@ var Recipe = mongoose.model('recipes');
 var Contact = mongoose.model('contacts');
 var Storage = mongoose.model('storage');
 
+// Find recipes containing one or multiple ingredients
 var findRecipeByIngredient = (req, res) => {
   var query = req.params.ingredients.split('+');
   Recipe.find({ ingredients: { $all: query } }, (err, recipe) => {
@@ -14,6 +15,7 @@ var findRecipeByIngredient = (req, res) => {
   });
 };
 
+// Insert one recipe
 var insertRecipe = (req, res) => {
   var recipe = new Recipe({
     title: req.body.title,
@@ -32,6 +34,7 @@ var insertRecipe = (req, res) => {
   });
 };
 
+// Find storage information for one ingredient
 var findStorageInfo = (req, res) => {
   var ingredientName = new RegExp('^' + req.params.ingredient, 'i');
 
@@ -44,6 +47,7 @@ var findStorageInfo = (req, res) => {
   });
 };
 
+// Find contacts by name
 var findContact = (req, res) => {
   Contact.find(req.query, (err, info) => {
     if (!err) {
@@ -54,6 +58,7 @@ var findContact = (req, res) => {
   });
 };
 
+// Insert one contact
 var insertContact = (req, res) => {
   var contact = new Contact({
     name: req.body.name,
@@ -69,6 +74,7 @@ var insertContact = (req, res) => {
   });
 };
 
+// Exporting callbacks
 module.exports = {
   findRecipeByIngredient,
   insertRecipe,
