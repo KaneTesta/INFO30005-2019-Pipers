@@ -182,9 +182,22 @@ h3
 }
 
 
- .overlay-area {
-    background: green
-}
+.overlay-area{padding:200px 0 60px 0;position:relative;background:url(https://images.unsplash.com/photo-1523293915678-d126868e96f1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2550&q=80) no-repeat center center/cover}
+
+.overlay-area .overlay-bg{background:rgba(88, 183, 0, 0.85)}
+
+.overlay-area .overlay-content{text-align:center;position:relative;z-index:2}
+
+.overlay-area .overlay-content a{display:inline-block;margin-bottom:20px}
+
+.overlay-area .overlay-content h3{font-weight:600;font-size:18px;margin-bottom:10px;letter-spacing:2px}
+
+.overlay-area .overlay-content h4{font-weight:300;font-size:14px}
+
+.overlay-area .overlay-content .overlay-desc{margin-top:120px;text-align:right;align-self:flex-end}
+
+.overlay-bg{background:rgba(88, 183, 0, 0.85)}
+
 
  .banner-area{
     height: 100%
@@ -196,9 +209,13 @@ h3
     background: #fff
 }
 
+.facts {
+    text-align: center;
+}
+
 
  .feature-box{
-    background: green
+    background: rgba(88, 183, 0, 0.85)
 }
 
 
