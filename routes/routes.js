@@ -62,7 +62,9 @@ router
 
 /*
 TODO
-Note, all of these routes have used different methods of collecting input to interact with the database, we should decide on one single method of passing info around to unify our backend, making it easier to incorporate with the frontend
+Note, all of these routes have used different methods of collecting input to interact with the database,
+we should decide on one single method of passing info around to unify our backend, making it easier to
+incorporate with the frontend
 */
 
 module.exports = router;
