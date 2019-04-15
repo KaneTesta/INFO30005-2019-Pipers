@@ -1,9 +1,11 @@
+$progress-dot-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+// Sizes
 $progress-max-dots: 10;
 $progress-dot-spacing: 32px;
 $progress-dot-size: 23px;
 
 .progress-dots {
-    position: fixed;
+    position: absolute;
     z-index: 100;
     left: 0;
     right: 0;
@@ -32,6 +34,7 @@ $progress-dot-size: 23px;
         border: 1px solid $border-color;
         border-radius: 50%;
         background-color: $background-color;
+        box-shadow: $progress-dot-shadow;
 
         &::before {
             position: absolute;
