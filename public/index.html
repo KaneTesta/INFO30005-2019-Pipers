@@ -4,124 +4,142 @@
         <title>Recipe Builder</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/stylesheets/!style.css">
-        <link rel="stylesheet" href="/stylesheets/main.css">
         <link rel="stylesheet" href="/stylesheets/bootstrap.css">
-        <script src="javascript/jquery.smoothstate.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="javascript/transitions.js"></script>
-        <script src="javascript/main.js"></script>
-        
-        
-        <!-- Required for counterup-->
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
-        <script src="javascript/jquery.counterup.min.js"></script>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="javascript/jquery.smoothstate.min.js"></script>
+        <script src="javascript/transitions.js"></script>
+        <!--<script src="javascript/main.js"></script>-->
+
+
+        <!-- Required for counterup-->
+        <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+        <script src="javascript/jquery.counterup.min.js"></script>-->
         <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     </head>
 
     <body>
-            <div class="body-wrap"> <!--creates border effect-->
-
-                <section class="banner-area relative">
-                    <div class="container">
-                        <div id="ProgressDots" class="progress-dots" data-progress="0">
-                            <div class="progress-dot active"></div>
-                            <div class="progress-dot"></div>
-                            <div class="progress-dot"></div>
-                        </div>
-
-                        <div class="container-center flex-horizontal fill-page animation-element" data-viewport="0">
-                            <div class="container-center flex-responsive fill-medium">
-                                <img
-                                    src="https://cdn.shopify.com/s/files/1/1706/1307/products/Echinocactus-grusonii-Golden-Barrel-Cactus-Small.jpg?v=1546275616" />
-                                <div class="flex-fill">
-                                    <p class="subheading">Recipe Builder</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                    <a class="button" href="ingredients" data-target="1">Add Ingredients</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-
-                <section class="overlay-area pt-40 pb-40">
-                    <div class="overlay overlay-bg"></div>
-                    <div class="container">
-                        <div class="overlay-content">
-                            <div class="overlay-desc">
-                                <h3 class="h2 text-white text-uppercase">Helping manage Australia's waste epidemic</h3>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-
-                <section class="facts-area pt-100 pb-100">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-lg-6">
-                                <div class="story-content">
-                                   
-                                    <p class="mt-30">Australians discard up to 20% of the food they purchase. That equates to 1 out of every 5 bags of groceries and cost  $9.6 billion dollars worth in food and drinks annually, equating to $1050 per household. While we waste a significant proportion of edible food we purchase, nearly 18% of Australians (or 4 million people) were reported to have faced food insecurity in 2018. There also seems to be a disparity between the communities who waste food the most per capita (urban centres) and the communities most vulnerable to food insecurity (regional and remote areas). While negligence by the end consumer results in high levels of food wastage, it is not limited to that. Consumer’s high cosmetic standards also lead to an estimated 20-40% of fresh product being rejected before they even reach the shelves. Aside from contributing to food insecurity amongst low income Australians, this excessive level of food waste has a detrimental effect on our environment, since the rotting of food in landfills produce Methane, a greenhouse gas containing 25 times more carbon dioxide then what comes out of your car.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <img class="img-fluid flex mx-auto" src="https://o.aolcdn.com/images/dims3/GLOB/legacy_thumbnail/630x315/format/jpg/quality/85/http%3A%2F%2Fi.huffpost.com%2Fgen%2F4160780%2Fimages%2Fn-HEALTHY-FOOD-628x314.jpg" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="feature-box pt-100 pb-100 relative">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-6 col-sm-6 d-flex align-items-stretch">
-                                <div class="feature">
-                                    ADD ICON HERE
-                                    <div class="desc">
-                                        <h2 class="text-uppercase">Recipe Finder</h2>
-                                        <p>
-                                            Have ingredients near use by or left over? Use our recipe builder to limit your wastage.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6 d-flex align-items-stretch">
-                                <div class="feature">
-                                    ADD ICON HERE
-                                    <div class="desc">
-                                        <h2 class="text-uppercase">Access our contact list for food pickup</h2>
-                                        <p>
-                                            We can pickup your food scraps (No we can't)
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-
-                <section class="facts-area pt-100 pb-100">
-                    <div class="container">
-						<div class="facts">
-							<h2>$<span class="counter">9.6</span> billion</h2>
-                            <p>dollars worth of food & drinks are thrown out</p>
-						</div>
-						<div class="facts">
-							<h2><span class="counter">40</span>%</h2>
-                            <p>of food doesn't make the shelves</p>
-						</div>
-						<div class="facts">
-							<h2><span class="counter">4</span> million</h2>
-                            <p>Families have food insecurities</p>
-						</div>                        
-                    </div>
-                </section>
+        <div id="Main" class="main"> <!--for smoothstate.js animation-->
+            <div id="ProgressDots" class="progress-dots" data-progress="0">
+                <div class="progress-dot active"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
             </div>
-        </body>
 
-    </html>
+            <div class="animation-element" data-viewport="0">
+                <div class="body-wrap">
+                    <section class="banner-area relative">
+                        <div class="container">
+                            <div class="container-center flex-horizontal fill-page animation-element">
+                                <div class="container-center flex-responsive fill-medium">
+                                    <img
+                                        src="https://cdn.shopify.com/s/files/1/1706/1307/products/Echinocactus-grusonii-Golden-Barrel-Cactus-Small.jpg?v=1546275616"
+                                        />
+                                    <div class="flex-fill">
+                                        <p class="subheading">Recipe Builder</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        <a class="button" href="ingredients" data-target="1">Add Ingredients</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!--creates border effect-->
+                    <section class="overlay-area pt-40 pb-40">
+                        <div class="overlay overlay-bg"></div>
+                        <div class="container">
+                            <div class="overlay-content">
+                                <div class="overlay-desc">
+                                    <h3 class="h2 text-white text-uppercase">Helping manage Australia's waste epidemic</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <section class="facts-area pt-100 pb-100">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="story-content">
+
+                                        <p class="mt-30">Australians discard up to 20% of the food they purchase. That equates to 1 out of every 5 bags of
+                                            groceries
+                                            and cost $9.6 billion dollars worth in food and drinks annually, equating to $1050 per household. While we waste a
+                                            significant proportion of edible food we purchase, nearly 18% of Australians (or 4 million people) were reported to
+                                            have
+                                            faced food insecurity in 2018. There also seems to be a disparity between the communities who waste food the most
+                                            per
+                                            capita (urban centres) and the communities most vulnerable to food insecurity (regional and remote areas). While
+                                            negligence by the end consumer results in high levels of food wastage, it is not limited to that. Consumer’s high
+                                            cosmetic standards also lead to an estimated 20-40% of fresh product being rejected before they even reach the
+                                            shelves.
+                                            Aside from contributing to food insecurity amongst low income Australians, this excessive level of food waste has a
+                                            detrimental effect on our environment, since the rotting of food in landfills produce Methane, a greenhouse gas
+                                            containing 25 times more carbon dioxide then what comes out of your car.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <img class="img-fluid flex mx-auto"
+                                        src="https://o.aolcdn.com/images/dims3/GLOB/legacy_thumbnail/630x315/format/jpg/quality/85/http%3A%2F%2Fi.huffpost.com%2Fgen%2F4160780%2Fimages%2Fn-HEALTHY-FOOD-628x314.jpg"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="feature-box pt-100 pb-100 relative">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-6 d-flex align-items-stretch">
+                                    <div class="feature">
+                                        ADD ICON HERE
+                                        <div class="desc">
+                                            <h2 class="text-uppercase">Recipe Finder</h2>
+                                            <p>
+                                                Have ingredients near use by or left over? Use our recipe builder to limit your wastage.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 d-flex align-items-stretch">
+                                    <div class="feature">
+                                        ADD ICON HERE
+                                        <div class="desc">
+                                            <h2 class="text-uppercase">Access our contact list for food pickup</h2>
+                                            <p>
+                                                We can pickup your food scraps (No we can't)
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <section class="facts-area pt-100 pb-100">
+                        <div class="container">
+                            <div class="facts">
+                                <h2>$<span class="counter">9.6</span> billion</h2>
+                                <p>dollars worth of food & drinks are thrown out</p>
+                            </div>
+                            <div class="facts">
+                                <h2><span class="counter">40</span>%</h2>
+                                <p>of food doesn't make the shelves</p>
+                            </div>
+                            <div class="facts">
+                                <h2><span class="counter">4</span> million</h2>
+                                <p>Families have food insecurities</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

@@ -13,6 +13,7 @@ button,
 
     cursor: pointer;
     transition: box-shadow 0.15s ease;
+    text-decoration: none;
     text-transform: uppercase;
 
     color: $text-color-accent;
@@ -44,6 +45,9 @@ button,
     }
 
     &:hover {
+        text-decoration: none;
+
+        color: $text-color-accent;
         box-shadow: $button-shadow-raised;
     }
 
