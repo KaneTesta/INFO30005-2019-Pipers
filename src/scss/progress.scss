@@ -33,7 +33,7 @@ $progress-dot-size: 23px;
 
         border: 1px solid $border-color;
         border-radius: 50%;
-        background-color: $background-color;
+        background-color: $foreground-color;
         box-shadow: $progress-dot-shadow;
 
         &::before {
