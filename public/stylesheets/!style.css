@@ -9,7 +9,7 @@ body {
 
 @keyframes page-right {
   from {
-    transform: translateX(36px);
+    transform: translateX(16px);
     opacity: 0; }
   to {
     transform: translateX(0px);
@@ -17,7 +17,7 @@ body {
 
 @keyframes page-left {
   from {
-    transform: translateX(-36px);
+    transform: translateX(-16px);
     opacity: 0; }
   to {
     transform: translateX(0px);
@@ -28,27 +28,27 @@ body {
   .main .animation-element {
     overflow: hidden; }
   .main[data-transition=page-fade] .animation-element {
-    animation: page-fade 0.15s ease-out;
+    animation: page-fade 0.1s ease-out;
     animation-direction: normal;
     animation-fill-mode: both; }
   .main[data-transition=page-fade].is-exiting .animation-element {
-    animation: page-fade 0.15s ease-in;
+    animation: page-fade 0.1s ease-in;
     animation-direction: reverse;
     animation-fill-mode: both; }
   .main[data-transition=page-right] .animation-element {
-    animation: page-right 0.15s ease-out;
+    animation: page-right 0.1s ease-out;
     animation-direction: normal;
     animation-fill-mode: both; }
   .main[data-transition=page-right].is-exiting .animation-element {
-    animation: page-left 0.15s ease-in;
+    animation: page-left 0.1s ease-in;
     animation-direction: reverse;
     animation-fill-mode: both; }
   .main[data-transition=page-left] .animation-element {
-    animation: page-left 0.15s ease-out;
+    animation: page-left 0.1s ease-out;
     animation-direction: normal;
     animation-fill-mode: both; }
   .main[data-transition=page-left].is-exiting .animation-element {
-    animation: page-right 0.15s ease-in;
+    animation: page-right 0.1s ease-in;
     animation-direction: reverse;
     animation-fill-mode: both; }
 
@@ -198,6 +198,69 @@ button,
   .button:active {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); }
 
+@keyframes progress-dot-fade {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+@keyframes progress-dot-border {
+  from {
+    border-color: rgba(0, 0, 0, 0.2); }
+  to {
+    border-color: #34a534; } }
+
+@keyframes progress-dot-right {
+  from {
+    transform: translateX(8px);
+    opacity: 0; }
+  to {
+    transform: translateX(0px);
+    opacity: 1; } }
+
+@keyframes progress-dot-left {
+  from {
+    transform: translateX(-8px);
+    opacity: 0; }
+  to {
+    transform: translateX(0px);
+    opacity: 1; } }
+
+.main {
+  overflow: hidden; }
+  .main .progress-dots .progress-dot.active {
+    animation: progress-dot-border 0.1s ease-out;
+    animation-direction: normal;
+    animation-fill-mode: both; }
+  .main.is-exiting .progress-dots .progress-dot.active {
+    animation: progress-dot-border 0.1s ease-in;
+    animation-direction: reverse;
+    animation-fill-mode: both; }
+  .main[data-transition=page-fade] .progress-dots .progress-dot::after {
+    animation: progress-dot-fade 0.1s ease-out;
+    animation-direction: normal;
+    animation-fill-mode: both; }
+  .main[data-transition=page-fade].is-exiting .progress-dots .progress-dot::after {
+    animation: progress-dot-fade 0.1s ease-in;
+    animation-direction: reverse;
+    animation-fill-mode: both; }
+  .main[data-transition=page-right] .progress-dots .progress-dot::after {
+    animation: progress-dot-left 0.1s ease-out;
+    animation-direction: normal;
+    animation-fill-mode: both; }
+  .main[data-transition=page-right].is-exiting .progress-dots .progress-dot::after {
+    animation: progress-dot-right 0.1s ease-in;
+    animation-direction: reverse;
+    animation-fill-mode: both; }
+  .main[data-transition=page-left] .progress-dots .progress-dot::after {
+    animation: progress-dot-right 0.1s ease-out;
+    animation-direction: normal;
+    animation-fill-mode: both; }
+  .main[data-transition=page-left].is-exiting .progress-dots .progress-dot::after {
+    animation: progress-dot-left 0.1s ease-in;
+    animation-direction: reverse;
+    animation-fill-mode: both; }
+
 .progress-dots {
   position: absolute;
   z-index: 100;
@@ -241,17 +304,15 @@ button,
       right: 2px;
       top: 2px;
       bottom: 2px;
+      visibility: hidden;
       content: "";
-      transition: transform 0.1s ease-in;
-      transform: scale(0);
       pointer-events: none;
       border-radius: 50%;
       background-color: #34a534; }
     .progress-dots .progress-dot.active {
       border-color: #34a534; }
       .progress-dots .progress-dot.active::after {
-        transition: transform 0.1s ease-out;
-        transform: none; }
+        visibility: visible; }
 
 /* KANES CSS */
 select {
@@ -330,17 +391,17 @@ select {
 .story-content h1 {
   margin-top: 20px;
   margin-bottom: 20px;
+  text-align: center;
   font-size: 20px;
-  line-height: 1.2em;
-  text-align: center; }
+  line-height: 1.2em; }
 
 .story-content p {
   margin-top: 20px;
   margin-bottom: 20px;
+  text-align: center;
   font-size: 20px;
   font-weight: 100;
-  line-height: 1.2em;
-  text-align: center; }
+  line-height: 1.2em; }
 
 @media (max-width: 767px) {
   .story-content h1 {
@@ -379,7 +440,7 @@ select {
 
 .overlay-bg,
 .feature-box {
-  background: rgba(52, 165, 52, 0.85); }
+  background: #34a534; }
 
 .banner-area {
   height: 100%; }
@@ -392,10 +453,12 @@ select {
   text-align: center; }
 
 .feature-box .desc {
-  margin-top: 30px; }
+  margin-top: 30px;
+  text-align: center; }
 
 .feature-box .desc h2 {
   margin-bottom: 10px;
+  text-align: center;
   letter-spacing: 2.5px;
   font-size: 18px;
   font-weight: 600; }
@@ -413,23 +476,5 @@ select {
 
 .icon {
   text-align: center;
-  font-size: 40px;
-  color: rgba(52, 165, 52, 0.85); }
-
-#myBtn {
-  display: none;
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  z-index: 99;
-  font-size: 18px;
-  border: none;
-  outline: none;
-  background-color: rgba(52, 165, 52, 0.85);
-  color: white;
-  cursor: pointer;
-  padding: 15px;
-  border-radius: 4px; }
-
-#myBtn:hover {
-  background-color: #555; }
+  color: #34a534;
+  font-size: 40px; }

@@ -1,5 +1,10 @@
-(function ($) {
+/**
+ * Transitions work by looking at the data-target value of links, as well as
+ * the data-viewport value of the #Main element that surrounds the page, to
+ * apply an animation to elements with the .animation-element class
+ */
 
+(function ($) {
     'use strict';
 
     $(document).ready(function () {
