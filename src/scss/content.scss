@@ -1,3 +1,5 @@
+$transition-animation-duration: 0.1s;
+
 body {
     background-color: $background-color;
 }
@@ -14,7 +16,7 @@ body {
 
 @keyframes page-right {
     from {
-        transform: translateX(36px);
+        transform: translateX(16px);
 
         opacity: 0;
     }
@@ -28,7 +30,7 @@ body {
 
 @keyframes page-left {
     from {
-        transform: translateX(-36px);
+        transform: translateX(-16px);
 
         opacity: 0;
     }
@@ -49,13 +51,13 @@ body {
 
     &[data-transition=page-fade] {
         .animation-element {
-            animation: page-fade 0.15s ease-out;
+            animation: page-fade $transition-animation-duration ease-out;
             animation-direction: normal;
             animation-fill-mode: both;
         }
 
         &.is-exiting .animation-element {
-            animation: page-fade 0.15s ease-in;
+            animation: page-fade $transition-animation-duration ease-in;
             animation-direction: reverse;
             animation-fill-mode: both;
         }
@@ -63,13 +65,13 @@ body {
 
     &[data-transition=page-right] {
         .animation-element {
-            animation: page-right 0.15s ease-out;
+            animation: page-right $transition-animation-duration ease-out;
             animation-direction: normal;
             animation-fill-mode: both;
         }
 
         &.is-exiting .animation-element {
-            animation: page-left 0.15s ease-in;
+            animation: page-left $transition-animation-duration ease-in;
             animation-direction: reverse;
             animation-fill-mode: both;
         }
@@ -77,13 +79,13 @@ body {
 
     &[data-transition=page-left] {
         .animation-element {
-            animation: page-left 0.15s ease-out;
+            animation: page-left $transition-animation-duration ease-out;
             animation-direction: normal;
             animation-fill-mode: both;
         }
 
         &.is-exiting .animation-element {
-            animation: page-right 0.15s ease-in;
+            animation: page-right $transition-animation-duration ease-in;
             animation-direction: reverse;
             animation-fill-mode: both;
         }

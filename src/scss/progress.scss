@@ -3,6 +3,126 @@ $progress-dot-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
 $progress-max-dots: 10;
 $progress-dot-spacing: 32px;
 $progress-dot-size: 23px;
+// Animation
+$progress-animation-duration: 0.1s;
+
+@keyframes progress-dot-fade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes progress-dot-border {
+    from {
+        border-color: $border-color;
+    }
+
+    to {
+        border-color: $accent-color;
+    }
+}
+
+@keyframes progress-dot-right {
+    from {
+        transform: translateX(8px);
+
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0px);
+
+        opacity: 1;
+    }
+}
+
+@keyframes progress-dot-left {
+    from {
+        transform: translateX(-8px);
+
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0px);
+
+        opacity: 1;
+    }
+}
+
+.main {
+    overflow: hidden;
+
+    .progress-dots .progress-dot.active {
+        animation: progress-dot-border $progress-animation-duration ease-out;
+        animation-direction: normal;
+        animation-fill-mode: both;
+    }
+
+    &.is-exiting .progress-dots .progress-dot.active {
+        animation: progress-dot-border $progress-animation-duration ease-in;
+        animation-direction: reverse;
+        animation-fill-mode: both;
+    }
+
+    &[data-transition=page-fade] {
+        .progress-dots .progress-dot {
+            &::after {
+                animation: progress-dot-fade $progress-animation-duration ease-out;
+                animation-direction: normal;
+                animation-fill-mode: both;
+            }
+        }
+
+        &.is-exiting .progress-dots .progress-dot {
+            &::after {
+                animation: progress-dot-fade $progress-animation-duration ease-in;
+                animation-direction: reverse;
+                animation-fill-mode: both;
+            }
+        }
+    }
+
+    &[data-transition=page-right] {
+        .progress-dots .progress-dot {
+            &::after {
+                animation: progress-dot-left $progress-animation-duration ease-out;
+                animation-direction: normal;
+                animation-fill-mode: both;
+            }
+        }
+
+        &.is-exiting .progress-dots .progress-dot {
+            &::after {
+                animation: progress-dot-right $progress-animation-duration ease-in;
+                animation-direction: reverse;
+                animation-fill-mode: both;
+            }
+        }
+    }
+
+    &[data-transition=page-left] {
+        .progress-dots .progress-dot {
+            &::after {
+                animation: progress-dot-right $progress-animation-duration ease-out;
+                animation-direction: normal;
+                animation-fill-mode: both;
+            }
+        }
+
+        &.is-exiting .progress-dots .progress-dot {
+            &::after {
+                animation: progress-dot-left $progress-animation-duration ease-in;
+                animation-direction: reverse;
+                animation-fill-mode: both;
+            }
+        }
+    }
+}
 
 .progress-dots {
     position: absolute;
@@ -66,9 +186,9 @@ $progress-dot-size: 23px;
             top: 2px;
             bottom: 2px;
 
+            visibility: hidden;
+
             content: "";
-            transition: transform 0.1s ease-in;
-            transform: scale(0);
             pointer-events: none;
 
             border-radius: 50%;
@@ -79,8 +199,7 @@ $progress-dot-size: 23px;
             border-color: $accent-color;
 
             &::after {
-                transition: transform 0.1s ease-out;
-                transform: none;
+                visibility: visible;
             }
         }
     }
