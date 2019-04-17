@@ -15,6 +15,7 @@ select {
 .mt-30 {
     margin-top: 30px;
 }
+
 .pt-40 {
     padding-top: 40px;
 }
@@ -55,7 +56,6 @@ select {
     bottom: 0;
 }
 
-
 .generic-btn {
     display: inline-block;
 
@@ -89,13 +89,13 @@ select {
     box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width:767px) {
+@media (max-width: 767px) {
     .body-wrap {
         margin: 30px;
     }
 }
 
-@media (max-width:575px) {
+@media (max-width: 575px) {
     .body-wrap {
         margin: 10px;
     }
@@ -105,29 +105,38 @@ select {
     margin-top: 20px;
     margin-bottom: 20px;
 
-    font-size: 48px;
+    text-align: center;
+
+    font-size: 20px;
+    line-height: 1.2em;
+}
+
+.story-content p {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    text-align: center;
+
+    font-size: 20px;
     font-weight: 100;
     line-height: 1.2em;
 }
 
-@media (max-width:767px) {
+@media (max-width: 767px) {
     .story-content h1 {
-        font-size: 40px;
+        font-size: 20px;
+    }
+    .story-content p {
+        font-size: 15px;
     }
 }
-
-.counter {
-    animation-duration: 1s;
-    animation-delay: 0s;
-}
-
 
 .overlay-area {
     position: relative;
 
     padding: 200px 0 60px 0;
 
-    background: url($home-background-image) no-repeat center center/cover;
+    background: url("https://images.unsplash.com/photo-1523293915678-d126868e96f1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2550&q=80") no-repeat center center/cover;
 }
 
 .overlay-area .overlay-content {
@@ -167,14 +176,12 @@ select {
 
 .overlay-bg,
 .feature-box {
-    background: transparentize($color: $accent-color, $amount: 0.15);//rgba(173, 173, 173, 0.85);
+    background: $accent-color;
 }
-
 
 .banner-area {
     height: 100%;
 }
-
 
 .facts-area {
     position: relative;
@@ -186,14 +193,16 @@ select {
     text-align: center;
 }
 
-
 .feature-box .desc {
     margin-top: 30px;
+
+    text-align: center;
 }
 
 .feature-box .desc h2 {
     margin-bottom: 10px;
 
+    text-align: center;
     letter-spacing: 2.5px;
 
     font-size: 18px;
@@ -213,4 +222,12 @@ select {
 
 .white-bg {
     background: $foreground-color;
+}
+
+.icon {
+    text-align: center;
+
+    color: $accent-color;
+
+    font-size: 40px;
 }
