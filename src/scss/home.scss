@@ -176,7 +176,7 @@ select {
 
 .overlay-bg,
 .feature-box {
-    background: $accent-color;
+    background-color: transparentize($color: $accent-color, $amount: 0.15);
 }
 
 .banner-area {
