@@ -93,7 +93,17 @@ $(document).on("transition", function () {
 
     // Setup find recipes button
     $("#IngredientsButtonFindRecipes").on('click', function () {
+        // Get url
         let ingredientsParam = getIngredients().join("+");
-        window.location.assign("./recipe?ingredients=" + ingredientsParam);
+        let url = "./recipe?ingredients=" + ingredientsParam;
+        // Check smoothState
+        let $main = $('#Main');
+        let smoothState = $main.data("smoothState");
+        if (smoothState !== undefined) {
+            $main.attr('data-transition', 'page-right');
+            smoothState.load(url);
+        } else {
+            window.location.assign(url);
+        }
     });
 });
