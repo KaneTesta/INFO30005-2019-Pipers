@@ -6,14 +6,10 @@
 
     <body>
         <div id="Main" class="main">
-            <div id="ProgressDots" class="progress-dots" data-progress="0">
-                <div class="progress-dot"></div>
-                <div class="progress-dot"></div>
-                <div class="progress-dot active"></div>
-            </div>
+            <% include includes/elements/progress %>
 
-            <div class="animation-element" data-viewport="2">
-                <a href="/" data-target="0">Back</a>
+            <div class="animation-element" data-viewport="<%= viewport %>">
+                <a href="/ingredients" data-target="1">Back</a>
                 <div class="body-wrap">
                     <section class="banner-area relative">
                         <div class="container-center flex-horizontal animation-element">
