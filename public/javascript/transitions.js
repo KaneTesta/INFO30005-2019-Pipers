@@ -8,6 +8,7 @@
     'use strict';
 
     $(document).ready(function () {
+        $(document).trigger("transition");
         // Init here.
         let $main = $('#Main');
         let $site = $('html, body');
@@ -43,6 +44,7 @@
                 render: function ($container, $newContent) {
                     $container.html($newContent);
                     $container.removeClass('is-exiting');
+                    $(document).trigger("transition");
                 }
             },
         }).data('smoothState');
