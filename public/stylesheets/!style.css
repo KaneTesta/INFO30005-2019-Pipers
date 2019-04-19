@@ -440,7 +440,7 @@ select {
 
 .overlay-bg,
 .feature-box {
-  background: #34a534; }
+  background-color: rgba(52, 165, 52, 0.85); }
 
 .banner-area {
   height: 100%; }
