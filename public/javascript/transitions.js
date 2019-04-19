@@ -12,7 +12,6 @@
         // Init here.
         let $main = $('#Main');
         let $site = $('html, body');
-        let transition = 'page-fade';
 
         let smoothState = $main.smoothState({
             prefetch: true,
@@ -22,6 +21,8 @@
                     target = $anchor.data('target');
                 current = current ? current : 0;
                 target = target ? target : 0;
+                // Find transition
+                let transition = 'page-fade';
                 if (current === target) {
                     transition = 'page-fade';
                 } else if (current < target) {
@@ -29,11 +30,12 @@
                 } else {
                     transition = 'page-left';
                 }
+
+                $main.attr('data-transition', transition);
             },
             onStart: {
                 duration: 250,
                 render: function (url, $container) {
-                    $main.attr('data-transition', transition);
                     $main.addClass('is-exiting');
                     // Restart your animation
                     smoothState.restartCSSAnimations();
