@@ -153,8 +153,16 @@ body {
     bottom: 0;
 
     box-sizing: border-box;
-    width: calc(50vw - 70px);
     height: 40vh;
+
+    img {
+        height: 67%;
+    }
+}
+
+.fill-middle,
+.fill-medium {
+    width: calc(50vw - 70px);
     margin: auto;
 
     @media screen and (max-width: $breakpoint-large) {
@@ -163,10 +171,6 @@ body {
 
     @media screen and (max-width: $breakpoint-medium) {
         width: calc(90vw - 56px);
-    }
-
-    img {
-        height: 67%;
     }
 }
 
