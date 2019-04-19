@@ -5,17 +5,17 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.sendFile(path.join(__dirname + "/../public/index.html"), { title: "Home" });
+  res.render('index', { title: "Home" });
 });
 
 /* GET ingredients page. */
 router.get('/ingredients', function (req, res, next) {
-  res.sendFile(path.join(__dirname + "/../public/ingredients.html"), { title: "Ingredients" });
+  res.render('ingredients', { title: "Ingredients" });
 });
 
 /* GET recipe page. */
 router.get('/recipe', function (req, res, next) {
-  res.sendFile(path.join(__dirname + "/../public/recipe.html"), { title: "Recipe" });
+  res.render('recipe', { title: "Recipe" });
 });
 
 module.exports = router;
