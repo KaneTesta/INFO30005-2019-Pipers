@@ -7,13 +7,9 @@
     <body>
 
         <div id="Main" class="main"> <!--for smoothstate.js animation-->
-            <div id="ProgressDots" class="progress-dots" data-progress="0">
-                <div class="progress-dot active"></div>
-                <div class="progress-dot"></div>
-                <div class="progress-dot"></div>
-            </div>
+            <% include includes/elements/progress %>
 
-            <div class="animation-element" data-viewport="0">
+            <div class="animation-element" data-viewport="<%= viewport %>">
                 <div class="body-wrap">
 
 
