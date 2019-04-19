@@ -5,7 +5,8 @@ var ingredientSchema = mongoose.Schema({
       require: [true, 'An ingredient needs a name'],
       trim: true,
       lowercase: true,
-      minlength: 1
+      minlength: 1,
+      unique: true
   },
   tip: String,
   fridge: String,
