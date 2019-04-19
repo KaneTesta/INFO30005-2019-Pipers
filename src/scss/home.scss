@@ -213,24 +213,55 @@ select {
 }
 
 .recipes p {
-    padding-top: 5%;
+    width: 75%;
+    padding: 5% 12.5%;
     text-align: center; }
   
 .over-flow {
-    width: 75%;
     padding-top: 5%;
-    padding-left: 12.5%;
-    height: 75%;
+    height: 80%;
     overflow: auto;
     z-index: 50; 
 }
 
 .recipe-idea {
-    width: 100%;
-    margin: 5%;
+    text-align: center;
+    width: 75%;
+    margin: 2.5% 12.5%;
     height: 25%;
-    border: 2px black;
-    background-color: rgba(28, 147, 28, 0.6);
+    background-color: rgba(52,165,52,0.8);
     z-index: 101; 
+
+    box-sizing: content-box;
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    border: 2px solid $accent-color;
+    border-radius: 10px;
+    box-shadow: $button-shadow;
+    font-size: 0.95em;
 }
+
+  /* Control the left side */
+  .left {
+    padding: 5% 0;
+    text-align: center;
+    float: left;
+    width: 45%;
+    position: relative;
+  }
+
+  .left h5{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  /* Control the right side */
+  .right {
+    text-align: center;
+    float: right;
+    width: 45%;
+    position: relative;
+  }
   
