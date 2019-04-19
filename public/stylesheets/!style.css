@@ -98,17 +98,22 @@ body {
   top: 0;
   bottom: 0;
   box-sizing: border-box;
+  height: 40vh; }
+  .fill-medium img {
+    height: 67%; }
+
+.fill-middle,
+.fill-medium {
   width: calc(50vw - 70px);
-  height: 40vh;
   margin: auto; }
   @media screen and (max-width: 1200px) {
+    .fill-middle,
     .fill-medium {
       width: calc(70vw - 56px); } }
   @media screen and (max-width: 800px) {
+    .fill-middle,
     .fill-medium {
       width: calc(90vw - 56px); } }
-  .fill-medium img {
-    height: 67%; }
 
 .fill-page {
   width: 100%;
@@ -292,12 +297,8 @@ input[type="text"] {
     color: rgba(0, 0, 0, 0.95); }
 
 .input-wide {
-  width: 50vw;
-  margin: 1em auto; }
-  @media screen and (max-width: 800px) {
-    .input-wide {
-      min-width: calc(100% - 4em);
-      margin: 1em 2em; } }
+  width: 100%;
+  margin: 1em 0; }
   .input-wide .flex-padding {
     flex: 8px;
     flex-grow: 0; }
@@ -314,9 +315,9 @@ input[type="text"] {
 .ui-widget.ui-widget-content {
   padding: 8px 8px;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  border-top: 0;
   border-radius: 1.2em;
-  background-color: #ffffff; }
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); }
   .ui-widget.ui-widget-content .ui-menu-item .ui-menu-item-wrapper {
     margin: 0;
     padding: 2px 8px;
@@ -595,3 +596,17 @@ select {
   text-align: center;
   color: #34a534;
   font-size: 40px; }
+
+@keyframes ingredient-in {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+.ingredient-element {
+  padding: 16px;
+  transition: border-color 0.1s ease;
+  animation: ingredient-in 0.1s ease-out;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+  .ingredient-element:last-child {
+    border-color: transparent; }

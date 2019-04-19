@@ -15,14 +15,21 @@
 
                     <h1 class="heading">Ingredients</h1>
 
-                    <div class="flex-responsive input-wide">
-                        <input id="IngredientsSearch" type="text" placeholder="Search Ingredients" class="flex-fill">
-                        <div class="flex-padding"></div>
-                        <button id="IngredientsButtonAdd">Add</button>
+                    <div class="fill-middle flex-vertical">
+                        <div class="flex-responsive input-wide">
+                            <input id="IngredientsSearch" type="text"
+                                placeholder="Search Ingredients" class="flex-fill">
+                            <div class="flex-padding"></div>
+                            <button id="IngredientsButtonAdd">Add</button>
+                        </div>
+
+                        <div id="IngredientsList">
+                        </div>
                     </div>
 
                     <div class="container-center flex-horizontal">
-                        <a class="button button-next" href="recipe" data-target="2">Find Recipes</a>
+                        <button id="IngredientsButtonFindRecipes" class="button button-next"
+                            data-target="2">Find Recipes</button>
                     </div>
                 </div>
             </div>

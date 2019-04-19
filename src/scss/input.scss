@@ -1,5 +1,5 @@
 $input-height: 2.4em;
-$input-width-full: 50vw;
+$input-dropdown-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 
 input[type="text"] {
     display: block;
@@ -25,13 +25,8 @@ input[type="text"] {
 }
 
 .input-wide {
-    width: $input-width-full;
-    margin: 1em auto;
-
-    @media screen and (max-width: $breakpoint-medium) {
-        min-width: calc(100% - 4em);
-        margin: 1em 2em;
-    }
+    width: 100%;
+    margin: 1em 0;
 
     .flex-padding {
         flex: 8px;
@@ -56,9 +51,9 @@ input[type="text"] {
     padding: 8px 8px;
 
     border: 1px solid $border-color;
-    border-top: 0;
     border-radius: $input-height / 2;
     background-color: $foreground-color;
+    box-shadow: $input-dropdown-shadow;
 
     .ui-menu-item {
         .ui-menu-item-wrapper {
