@@ -478,23 +478,3 @@ select {
   text-align: center;
   color: #34a534;
   font-size: 40px; }
-
-.recipes p {
-  padding-top: 5%;
-  text-align: center; }
-
-.over-flow {
-  width: 75%;
-  padding-top: 5%;
-  padding-left: 12.5%;
-  height: 75%;
-  overflow: auto;
-  z-index: 50; }
-
-.recipe-idea {
-  width: 100%;
-  margin: 5%;
-  height: 25%;
-  border: 2px black;
-  background-color: rgba(28, 147, 28, 0.6);
-  z-index: 101; }
