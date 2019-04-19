@@ -1,5 +1,15 @@
 $button-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-$button-shadow-raised: 0 1px 4px rgba(0, 0, 0, 0.4);
+$button-shadow-raised: 0 1px 2px rgba(0, 0, 0, 0.4);
+
+@keyframes button-active {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
 
 button,
 .button {
@@ -9,7 +19,7 @@ button,
 
     box-sizing: content-box;
     margin: 24px 0;
-    padding: 12px 36px 12px 24px;
+    padding: 8px 20px;
 
     cursor: pointer;
     transition: box-shadow 0.15s ease;
@@ -17,45 +27,108 @@ button,
     text-transform: uppercase;
 
     color: $text-color-accent;
-    border: none;
+    border: 1px solid $accent-color;
     border-radius: 24px;
     background-color: $accent-color;
     box-shadow: $button-shadow;
 
     font-size: 0.95em;
 
-    &::after {
-        position: absolute;
-        right: 18px;
-        top: 0;
-        bottom: 0;
+    &.button-next,
+    &.button-back {
+        &::after {
+            position: absolute;
+            top: 0;
+            bottom: 0;
 
-        display: inline-block;
+            display: inline-block;
 
-        width: 8px;
-        height: 8px;
-        margin: auto;
+            width: 8px;
+            height: 8px;
+            margin: auto;
 
-        content: "";
-        transition: right 0.15s ease;
-        transform: rotate(45deg);
+            content: "";
 
-        border-top: 3px solid $text-color-accent;
-        border-right: 3px solid $text-color-accent;
+            border-top: 3px solid $text-color-accent;
+            border-right: 3px solid $text-color-accent;
+        }
     }
 
-    &:hover {
-        text-decoration: none;
+    &.button-next {
+        padding-right: 36px;
 
-        color: $text-color-accent;
-        box-shadow: $button-shadow-raised;
+        &::after {
+            right: 18px;
+
+            transition: right 0.15s ease;
+            transform: rotate(45deg);
+        }
+
+        &:hover,
+        &:focus {
+            &::after {
+                right: 12px;
+            }
+        }
+
+        &:active {
+            &::after {
+                right: 6px;
+            }
+        }
+    }
+
+    &.button-back {
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        margin: 24px;
+        padding-left: 36px;
+
+        &::after {
+            left: 18px;
+
+            transition: left 0.15s ease;
+            transform: rotate(-135deg);
+        }
+
+        &:hover,
+        &:focus {
+            &::after {
+                left: 12px;
+            }
+        }
+
+        &:active {
+            &::after {
+                left: 6px;
+            }
+        }
+
+        @media screen and (max-width: $breakpoint-medium) {
+            left: unset;
+            right: 0;
+
+            margin: 20px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        @media screen and (max-width: $breakpoint-small) {
+            margin: 12px;
+        }
     }
 
     &:hover,
     &:focus {
-        &::after {
-            right: 12px;
-        }
+        text-decoration: none;
+
+        color: $text-color-accent;
+        border-color: lighten($accent-color, 2%);
+        outline: none;
+        background-color: lighten($accent-color, 2%);
+        box-shadow: $button-shadow-raised;
     }
 
     &:active {

@@ -34,7 +34,6 @@
                 render: function (url, $container) {
                     $main.attr('data-transition', transition);
                     $main.addClass('is-exiting');
-                    $site.animate({ scrollTop: 0 });
                     // Restart your animation
                     smoothState.restartCSSAnimations();
                 }
