@@ -4,6 +4,23 @@ body {
     background-color: $background-color;
 }
 
+.body-wrap {
+    position: relative;
+
+    margin: 50px;
+
+    background-color: $foreground-color;
+    box-shadow: 0 0 48px 0 rgba(0, 0, 0, 0.2);
+
+    @media screen and (max-width: $breakpoint-medium) {
+        margin: 50px 24px;
+    }
+
+    @media screen and (max-width: $breakpoint-small) {
+        margin: 50px 12px;
+    }
+}
+
 @keyframes page-fade {
     from {
         opacity: 0;
@@ -97,6 +114,8 @@ body {
 }
 
 .container-center {
+    position: relative;
+
     align-items: center;
     justify-content: center;
 }
@@ -134,16 +153,16 @@ body {
     bottom: 0;
 
     box-sizing: border-box;
-    width: 50vw;
+    width: calc(50vw - 70px);
     height: 40vh;
     margin: auto;
 
     @media screen and (max-width: $breakpoint-large) {
-        width: 70vw;
+        width: calc(70vw - 56px);
     }
 
     @media screen and (max-width: $breakpoint-medium) {
-        width: 90vw;
+        width: calc(90vw - 56px);
     }
 
     img {
@@ -152,9 +171,6 @@ body {
 }
 
 .fill-page {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    width: 100%;
+    height: 100vh;
 }

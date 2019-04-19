@@ -2,6 +2,7 @@
 
     <head>
         <% include includes/head %>
+        <script src="/javascript/ingredients.js"></script>
     </head>
 
     <body>
@@ -9,7 +10,22 @@
             <% include includes/elements/progress %>
 
             <div class="animation-element" data-viewport="<%= viewport %>">
-                <a href="/" data-target="0">Back</a>
+                <!--creates border effect-->
+                <div class="body-wrap">
+                    <a class="button button-back" href="/" data-target="0">Back</a>
+
+                    <h1 class="heading">Ingredients</h1>
+
+                    <div class="flex-responsive input-wide">
+                        <input id="IngredientsSearch" type="text" placeholder="Search Ingredients" class="flex-fill">
+                        <div class="flex-padding"></div>
+                        <button>Add</button>
+                    </div>
+
+                    <div class="container-center flex-horizontal">
+                        <a class="button button-next" href="recipe" data-target="2">Find Recipes</a>
+                    </div>
+                </div>
             </div>
         </div>
     </body>

@@ -55,11 +55,38 @@ h6 {
     font-size: 0.8em;
 }
 
-.subheading {
-    margin-bottom: 0.4em;
-
+.subheading,
+.heading {
     color: $accent-color;
 
     font-family: "Noto Serif", "Times New Roman", Times, serif;
+}
+
+.heading {
+    margin: 0;
+    padding: 28px;
+
+    text-align: center;
+
+    font-size: 2.0em;
+
+    @media screen and (max-width: $breakpoint-medium) {
+        padding: 24px;
+
+        text-align: left;
+
+        font-size: 1.6em;
+    }
+
+    @media screen and (max-width: $breakpoint-small) {
+        padding: 20px 16px;
+
+        font-size: 1.2em;
+    }
+}
+
+.subheading {
+    margin-bottom: 0.4em;
+
     font-size: 2.4em;
 }

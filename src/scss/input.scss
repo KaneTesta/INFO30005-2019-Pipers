@@ -1,0 +1,80 @@
+$input-height: 2.4em;
+$input-width-full: 50vw;
+
+input[type="text"] {
+    display: block;
+
+    height: $input-height;
+    padding: 0 16px 1px;
+
+    transition: border-color 0.1s ease;
+
+    color: $text-color;
+    border: 1px solid $border-color;
+    border-radius: $input-height / 2;
+    background-color: $foreground-color;
+
+    &:focus {
+        border-color: $accent-color;
+    }
+
+    &::placeholder {
+        opacity: 0.5;
+        color: $text-color;
+    }
+}
+
+.input-wide {
+    width: $input-width-full;
+    margin: 1em auto;
+
+    @media screen and (max-width: $breakpoint-medium) {
+        min-width: calc(100% - 4em);
+        margin: 1em 2em;
+    }
+
+    .flex-padding {
+        flex: 8px;
+        flex-grow: 0;
+    }
+
+    button,
+    .button {
+        display: flex;
+
+        height: $input-height;
+        margin: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.ui-widget.ui-widget-content {
+    padding: 8px 8px;
+
+    border: 1px solid $border-color;
+    border-top: 0;
+    border-radius: $input-height / 2;
+    background-color: $foreground-color;
+
+    .ui-menu-item {
+        .ui-menu-item-wrapper {
+            margin: 0;
+            padding: 2px 8px;
+
+            transition: background-color 0.1s ease, color 0.1s ease;
+
+            color: $text-color;
+            border-radius: $input-height / 2;
+
+            &.ui-state-active {
+                color: $text-color-accent;
+                border: none;
+                background-color: $accent-color;
+            }
+        }
+    }
+}
