@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const controller = require('../controllers/controllers');
+const ingredientController = require('../controllers/ingredientController');
 
 router.get('/', (req, res) => {
   res.send('The Pied Pipers');
@@ -66,5 +67,7 @@ Note, all of these routes have used different methods of collecting input to int
 we should decide on one single method of passing info around to unify our backend, making it easier to
 incorporate with the frontend
 */
+
+router.get('/api/ingredients', ingredientController.getIngredients);
 
 module.exports = router;
