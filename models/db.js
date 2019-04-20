@@ -6,6 +6,7 @@ const dbURI = `mongodb+srv://endwaste:ENTk912SteNvxW99@cluster0-0uuii.azure.mong
 
 const options = {
   useNewUrlParser: true,
+  useCreateIndex: true,
   dbName: 'test'
 };
 
