@@ -18,6 +18,7 @@
         "http-errors": "^1.7.2",
         "mongodg": "^0.1.0",
         "mongoose": "^5.4.21",
+        "mongoose-unique-validator": "^2.0.3",
         "morgan": "~1.9.0"
     },
     "devDependencies": {

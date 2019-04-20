@@ -1,9 +1,21 @@
 var mongoose = require('mongoose');
 var recipeSchema = mongoose.Schema({
-  title: String,
-  ingredients: [String],
-  method: [String],
+  title: {
+    type: String,
+    required: [true, "Recipe needs a title"],
+    trim: true,
+    minlength: 1
+  },
+  ingredients: [{
+    quantity: Number,
+    unit: String,
+    ingredient: {type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient'}
+  }],
+  method: {
+    type: [String],
+    required: [true, "Recipe needs a method"]
+  },
   author: String,
   serves: Number
 });
-mongoose.model('recipes', recipeSchema);
+mongoose.model('recipes', recipeSchema, 'recipes');
