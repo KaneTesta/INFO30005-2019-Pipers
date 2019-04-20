@@ -273,13 +273,28 @@ button,
   .button:focus {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.95);
-    border-color: #36ad36;
-    outline: none;
-    background-color: #36ad36;
+    border-color: #38b138;
+    background-color: #38b138;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); }
+  button:focus,
+  .button:focus {
+    outline: none;
+    background-color: #5acb5a; }
   button:active,
   .button:active {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); }
+  button.button-error,
+  .button.button-error {
+    border-color: #bb3030;
+    background-color: #bb3030; }
+    button.button-error:hover, button.button-error:focus,
+    .button.button-error:hover,
+    .button.button-error:focus {
+      border-color: #c73333;
+      background-color: #c73333; }
+    button.button-error:focus,
+    .button.button-error:focus {
+      background-color: #d66161; }
 
 input[type="text"] {
   display: block;
@@ -328,6 +343,18 @@ input[type="text"] {
       color: rgba(255, 255, 255, 0.95);
       border: none;
       background-color: #34a534; }
+
+.message {
+  margin-bottom: 8px;
+  padding: 8px 16px;
+  transition: opacity 0.2s ease;
+  color: rgba(0, 0, 0, 0.95);
+  border: 1px solid #34a534;
+  border-radius: 1.2em;
+  background-color: rgba(52, 165, 52, 0.1); }
+  .message.message-error {
+    border-color: #bb3030;
+    background-color: rgba(187, 48, 48, 0.1); }
 
 @keyframes progress-dot-fade {
   from {
@@ -598,35 +625,67 @@ select {
   font-size: 40px; }
 
 .recipes p {
-  padding-top: 5%;
+  width: 75%;
+  padding: 5% 12.5%;
   text-align: center; }
 
 .over-flow {
-  width: 75%;
   padding-top: 5%;
-  padding-left: 12.5%;
-  height: 75%;
+  height: 80%;
   overflow: auto;
   z-index: 50; }
 
 .recipe-idea {
-  width: 100%;
-  margin: 5%;
+  text-align: center;
+  width: 75%;
+  margin: 2.5% 12.5%;
   height: 25%;
-  border: 2px black;
-  background-color: rgba(28, 147, 28, 0.6);
-  z-index: 101; }
+  background-color: rgba(52, 165, 52, 0.8);
+  z-index: 101;
+  box-sizing: content-box;
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  border: 2px solid #34a534;
+  border-radius: 10px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  font-size: 0.95em; }
 
-@keyframes ingredient-in {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
+/* Control the left side */
+.left {
+  padding: 5% 0;
+  text-align: center;
+  float: left;
+  width: 45%;
+  position: relative; }
+
+.left h5 {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center; }
+
+/* Control the right side */
+.right {
+  text-align: center;
+  float: right;
+  width: 45%;
+  position: relative; }
 
 .ingredient-element {
-  padding: 16px;
-  transition: border-color 0.1s ease;
-  animation: ingredient-in 0.1s ease-out;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+  display: flex;
+  flex-direction: horizontal;
+  padding: 16px 0 16px 16px;
+  transition: border-color 0.2s ease, opacity 0.2s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  align-items: center; }
   .ingredient-element:last-child {
     border-color: transparent; }
+  .ingredient-element button,
+  .ingredient-element .button {
+    display: flex;
+    height: 2.0em;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    align-items: center;
+    justify-content: center; }

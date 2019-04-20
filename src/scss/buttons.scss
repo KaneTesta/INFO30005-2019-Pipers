@@ -125,13 +125,32 @@ button,
         text-decoration: none;
 
         color: $text-color-accent;
-        border-color: lighten($accent-color, 2%);
-        outline: none;
-        background-color: lighten($accent-color, 2%);
+        border-color: lighten($accent-color, 3%);
+        background-color: lighten($accent-color, 3%);
         box-shadow: $button-shadow-raised;
+    }
+
+    &:focus {
+        outline: none;
+        background-color: lighten($accent-color, 15%);
     }
 
     &:active {
         box-shadow: $button-shadow;
+    }
+
+    &.button-error {
+        border-color: $error-color;
+        background-color: $error-color;
+
+        &:hover,
+        &:focus {
+            border-color: lighten($error-color, 3%);
+            background-color: lighten($error-color, 3%);
+        }
+
+        &:focus {
+            background-color: lighten($error-color, 15%);
+        }
     }
 }
