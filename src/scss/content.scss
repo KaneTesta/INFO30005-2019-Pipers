@@ -172,6 +172,11 @@ body {
     @media screen and (max-width: $breakpoint-medium) {
         width: calc(90vw - 56px);
     }
+
+    @media screen and (max-width: $breakpoint-small) {
+        width: 100%;
+        padding: 0 12px;
+    }
 }
 
 .fill-page {

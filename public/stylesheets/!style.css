@@ -114,6 +114,11 @@ body {
     .fill-middle,
     .fill-medium {
       width: calc(90vw - 56px); } }
+  @media screen and (max-width: 520px) {
+    .fill-middle,
+    .fill-medium {
+      width: 100%;
+      padding: 0 12px; } }
 
 .fill-page {
   width: 100%;
@@ -179,7 +184,7 @@ h6 {
       font-size: 1.6em; } }
   @media screen and (max-width: 520px) {
     .heading {
-      padding: 20px 16px;
+      padding: 20px 18px;
       font-size: 1.2em; } }
 
 .subheading {
@@ -675,11 +680,16 @@ select {
   position: relative; }
 
 .ingredient-element {
+  position: relative;
   display: flex;
   flex-direction: horizontal;
-  padding: 16px 0 16px 16px;
+  padding: 24px 0 24px 16px;
   transition: border-color 0.2s ease, opacity 0.2s ease;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   align-items: center; }
   .ingredient-element:last-child {
     border-color: transparent; }
+  .ingredient-element button,
+  .ingredient-element .button {
+    position: absolute;
+    right: 0; }
