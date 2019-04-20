@@ -15,7 +15,7 @@ button,
 .button {
     position: relative;
 
-    display: inline-block;
+    display: flex;
 
     box-sizing: content-box;
     margin: 24px 0;
@@ -33,6 +33,22 @@ button,
     box-shadow: $button-shadow;
 
     font-size: 0.95em;
+
+    align-items: center;
+    justify-content: center;
+
+    &.button-inline {
+        display: inline-block;
+    }
+
+    &.button-icon {
+        margin: 0;
+        padding: 0;
+
+        ion-icon {
+            font-size: 2.0em;
+        }
+    }
 
     &.button-next,
     &.button-back {

@@ -195,7 +195,7 @@ h6 {
 button,
 .button {
   position: relative;
-  display: inline-block;
+  display: flex;
   box-sizing: content-box;
   margin: 24px 0;
   padding: 8px 20px;
@@ -208,7 +208,19 @@ button,
   border-radius: 24px;
   background-color: #34a534;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  font-size: 0.95em; }
+  font-size: 0.95em;
+  align-items: center;
+  justify-content: center; }
+  button.button-inline,
+  .button.button-inline {
+    display: inline-block; }
+  button.button-icon,
+  .button.button-icon {
+    margin: 0;
+    padding: 0; }
+    button.button-icon ion-icon,
+    .button.button-icon ion-icon {
+      font-size: 2.0em; }
   button.button-next::after, button.button-back::after,
   .button.button-next::after,
   .button.button-back::after {
@@ -315,17 +327,8 @@ input[type="text"] {
   width: 100%;
   margin: 1em 0; }
   .input-wide .flex-padding {
-    flex: 8px;
+    flex: 1em;
     flex-grow: 0; }
-  .input-wide button,
-  .input-wide .button {
-    display: flex;
-    height: 2.4em;
-    margin: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    align-items: center;
-    justify-content: center; }
 
 .ui-widget.ui-widget-content {
   padding: 8px 8px;
@@ -680,12 +683,3 @@ select {
   align-items: center; }
   .ingredient-element:last-child {
     border-color: transparent; }
-  .ingredient-element button,
-  .ingredient-element .button {
-    display: flex;
-    height: 2.0em;
-    margin: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    align-items: center;
-    justify-content: center; }

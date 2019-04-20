@@ -56,7 +56,7 @@ $(document).on("transition", function () {
                 // Create remove button
                 let $flexFill = $("<div class=\"flex-fill\"></div>");
                 $flexFill.appendTo($ingredientElement);
-                let $ingredientRemoveButton = $("<button class=\"button-error\">Remove</button>");
+                let $ingredientRemoveButton = $("<button class=\"button-error button-icon\"></button>");
                 $ingredientRemoveButton.appendTo($ingredientElement);
                 $ingredientRemoveButton.on('click', function () {
                     $ingredientElement.css("opacity", 0);
@@ -64,6 +64,11 @@ $(document).on("transition", function () {
                         $ingredientElement.remove();
                     });
                 });
+
+                // Add icon for remove button
+                let $ingredientRemoveIcon = $("<ion-icon name=\"remove\"></ion-icon>");
+                $ingredientRemoveIcon.appendTo($ingredientRemoveButton);
+
                 // Add to list
                 $ingredientElement.hide();
                 $ingredientElement.css("opacity", 0);
