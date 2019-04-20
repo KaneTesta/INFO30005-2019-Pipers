@@ -212,56 +212,61 @@ select {
     font-size: 40px;
 }
 
-.recipes p {
-    width: 75%;
-    padding: 5% 12.5%;
-    text-align: center; }
-  
-.over-flow {
-    padding-top: 5%;
-    height: 80%;
-    overflow: auto;
-    z-index: 50; 
+.recipe-area {
+    padding-bottom: 5%;
 }
 
-.recipe-idea {
-    text-align: center;
-    width: 75%;
-    margin: 2.5% 12.5%;
-    height: 25%;
-    background-color: rgba(52,165,52,0.8);
+.recipe-row {
+    width: 85%;
+    margin: 2.5% 7.5%;
+    height: 200px;
+    background-color: rgba(141, 248, 116,0.1);
     z-index: 101; 
-
     box-sizing: content-box;
-    text-decoration: none;
-    color: white;
-    text-transform: uppercase;
-    border: 2px solid $accent-color;
-    border-radius: 10px;
+    border: solid $accent-color;
+    border-radius: 15px;
     box-shadow: $button-shadow;
-    font-size: 0.95em;
 }
 
-  /* Control the left side */
-  .left {
-    padding: 5% 0;
-    text-align: center;
-    float: left;
-    width: 45%;
-    position: relative;
-  }
+.recipe {
+    span {
+        font-size: 1.2vh;
+        display: block;
+        color: #a4a4a4;
+        margin-bottom: 0;
+        margin-top: 7px;
+        padding-left: 5%;
+    }
+    h2 {
+        font-size: 2.5vh;
+        color: black;
+        margin-bottom: 3%;
+        padding-left: 5%;
+    }
+    .recipe-info {
+        border-left: 3px solid  $accent-color;
+        margin-left: 15%;
+        padding-left: 5%;
+        h6 {
+            font-size: 1.5vh;
+            margin-bottom: 5px;
+        }
+    }
+}
 
-  .left h5{
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  /* Control the right side */
-  .right {
-    text-align: center;
-    float: right;
-    width: 45%;
-    position: relative;
-  }
-  
+.column-left {
+    float: left;
+    width: 73%;
+}
+
+.column-right {
+    float: left;
+    width: 23%;
+    .button {
+        width: 70%;
+        padding: 5%;
+        margin-top: 25%;
+        text-align: center;
+        font-size: 1.5vh;
+    }
+}
