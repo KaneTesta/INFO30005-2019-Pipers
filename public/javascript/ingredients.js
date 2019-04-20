@@ -127,7 +127,8 @@ $(document).on("transition", function () {
     let $ingredientsSection = $("#IngredientsSection");
     let $ingredientsLoading = $("#IngredientsLoading");
     // Get ingredients from server
-    $.getJSON("./api/ingredients", function (ingredientList) {
+    $.getJSON("./api/ingredients", function (data) {
+        let ingredientList = data.sort();
         // Setup autocomplete
         let $search = $("#IngredientsSearch");
         $search.autocomplete({
@@ -141,6 +142,21 @@ $(document).on("transition", function () {
                 // Clear value
                 $search.val("");
                 return false;
+            },
+            open: function () {
+                let $searchDropdown = $('ul.ui-autocomplete');
+                if (!$searchDropdown.hasClass("ui-autocomplete-show")) {
+                    $searchDropdown.hide().slideDown(250);
+
+                    window.setTimeout(function () {
+                        $searchDropdown.addClass("ui-autocomplete-show");
+                    }, 100);
+                }
+            },
+            close: function () {
+                let $searchDropdown = $('ul.ui-autocomplete');
+                $searchDropdown.removeClass("ui-autocomplete-show");
+                $searchDropdown.show().slideUp(250);
             }
         });
 

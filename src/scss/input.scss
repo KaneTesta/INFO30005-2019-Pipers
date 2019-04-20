@@ -35,8 +35,14 @@ input[type="text"] {
 }
 
 .ui-widget.ui-widget-content {
+    overflow: hidden;
+
+    max-height: 40vh;
     padding: 8px 8px;
 
+    transition: opacity 0.2s ease;
+
+    opacity: 0;
     border: 1px solid $border-color;
     border-radius: $border-radius;
     background-color: $foreground-color;
@@ -58,5 +64,9 @@ input[type="text"] {
                 background-color: $accent-color;
             }
         }
+    }
+
+    &.ui-autocomplete-show {
+        opacity: 1;
     }
 }
