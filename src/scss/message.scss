@@ -1,0 +1,16 @@
+.message {
+    margin-bottom: 8px;
+    padding: 8px 16px;
+
+    transition: opacity 0.2s ease;
+
+    color: $text-color;
+    border: 1px solid $accent-color;
+    border-radius: $border-radius;
+    background-color: transparentize($accent-color, 0.9);
+
+    &.message-error {
+        border-color: $error-color;
+        background-color: transparentize($error-color, 0.9);
+    }
+}
