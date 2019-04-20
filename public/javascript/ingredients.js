@@ -37,6 +37,7 @@ $(document).on("transition", function () {
      * @param {string[]} ingredientList The full list of ingredients to check against
      */
     function addIngredient(ingredientList) {
+        // Hide errors
         hideIngredientErrors();
         // Check ingredients
         let $search = $("#IngredientsSearch");
@@ -59,6 +60,9 @@ $(document).on("transition", function () {
                 let $ingredientRemoveButton = $("<button class=\"button-error button-icon\"></button>");
                 $ingredientRemoveButton.appendTo($ingredientElement);
                 $ingredientRemoveButton.on('click', function () {
+                    // Hide errors
+                    hideIngredientErrors();
+                    // Animate the element out
                     $ingredientElement.css("opacity", 0);
                     $ingredientElement.slideUp(250, function () {
                         $ingredientElement.remove();
@@ -120,57 +124,51 @@ $(document).on("transition", function () {
         return ingredientElement !== undefined;
     }
 
-    /**
-     * Get the ingredients that can be added
-     * @returns {string[]}
-     */
-    function getAvailableIngredients() {
-        return [
-            "Tomato",
-            "Big Tomato",
-            "Chicken",
-            "Potato",
-            "Rice",
-            "Cactus"
-        ]
-    }
+    let $ingredientsSection = $("#IngredientsSection");
+    let $ingredientsLoading = $("#IngredientsLoading");
+    // Get ingredients from server
+    $.getJSON("./api/ingredients", function (ingredientList) {
+        // Setup autocomplete
+        let $search = $("#IngredientsSearch");
+        $search.autocomplete({
+            autoFocus: true,
+            source: ingredientList,
+            select: function (event, ui) {
+                // Set value
+                $search.val(ui.item.label);
+                // Add ingredient
+                addIngredient(ingredientList);
+                // Clear value
+                $search.val("");
+                return false;
+            }
+        });
 
-    // Find ingredients
-    let ingredientList = getAvailableIngredients();
-    // Setup autocomplete
-    let $search = $("#IngredientsSearch");
-    $search.autocomplete({
-        source: ingredientList,
-        autoFocus: true,
-        select: function (event, ui) {
-            // Set value
-            $search.val(ui.item.label);
-            // Add ingredient
+        // Setup add button
+        $("#IngredientsButtonAdd").on('click', function () {
             addIngredient(ingredientList);
-            // Clear value
-            $search.val("");
-            return false;
-        }
-    });
+        });
 
-    // Setup add button
-    $("#IngredientsButtonAdd").on('click', function () {
-        addIngredient(ingredientList);
-    });
+        // Setup find recipes button
+        $("#IngredientsButtonFindRecipes").on('click', function () {
+            // Get url
+            let ingredientsParam = getIngredients().join("+");
+            let url = "./recipe?ingredients=" + ingredientsParam;
+            // Check smoothState
+            let $main = $('#Main');
+            let smoothState = $main.data("smoothState");
+            if (smoothState !== undefined) {
+                $main.attr('data-transition', 'page-right');
+                smoothState.load(url);
+            } else {
+                window.location.assign(url);
+            }
+        });
 
-    // Setup find recipes button
-    $("#IngredientsButtonFindRecipes").on('click', function () {
-        // Get url
-        let ingredientsParam = getIngredients().join("+");
-        let url = "./recipe?ingredients=" + ingredientsParam;
-        // Check smoothState
-        let $main = $('#Main');
-        let smoothState = $main.data("smoothState");
-        if (smoothState !== undefined) {
-            $main.attr('data-transition', 'page-right');
-            smoothState.load(url);
-        } else {
-            window.location.assign(url);
-        }
+        // Show the ingredients section
+        $ingredientsSection.slideDown(500);
+        $ingredientsLoading.slideUp(250, function () {
+            $ingredientsLoading.remove();
+        });
     });
 });
