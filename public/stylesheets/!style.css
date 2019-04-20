@@ -693,3 +693,27 @@ select {
   .ingredient-element .button {
     position: absolute;
     right: 0; }
+
+@keyframes ingredients-loading {
+  0% {
+    transform: rotate(0deg); }
+  50% {
+    transform: rotate(180deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+.ingredients-loading {
+  padding: 1em;
+  text-align: center;
+  font-size: 1em; }
+  .ingredients-loading::before {
+    display: block;
+    width: 2em;
+    height: 2em;
+    margin: 1em auto;
+    content: "";
+    animation: ingredients-loading 1s ease 0s infinite;
+    border: 4px solid transparent;
+    border-right-color: #34a534;
+    border-left-color: #34a534;
+    border-radius: 1.2em; }
