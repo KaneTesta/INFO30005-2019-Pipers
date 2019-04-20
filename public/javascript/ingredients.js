@@ -136,6 +136,7 @@ $(document).on("transition", function () {
     let $search = $("#IngredientsSearch");
     $search.autocomplete({
         source: ingredientList,
+        autoFocus: true,
         select: function (event, ui) {
             // Set value
             $search.val(ui.item.label);
