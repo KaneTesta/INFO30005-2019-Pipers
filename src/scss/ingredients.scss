@@ -1,8 +1,10 @@
 .ingredient-element {
+    position: relative;
+
     display: flex;
     flex-direction: horizontal;
 
-    padding: 16px 0 16px 16px;
+    padding: 24px 0 24px 16px;
 
     transition: border-color 0.2s ease, opacity 0.2s ease;
 
@@ -12,5 +14,11 @@
 
     &:last-child {
         border-color: transparent;
+    }
+
+    button,
+    .button {
+        position: absolute;
+        right: 0;
     }
 }
