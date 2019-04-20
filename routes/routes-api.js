@@ -68,6 +68,6 @@ we should decide on one single method of passing info around to unify our backen
 incorporate with the frontend
 */
 
-router.get('/api/ingredients', ingredientController.getIngredients);
+router.get('/ingredients', ingredientController.getIngredients);
 
 module.exports = router;
