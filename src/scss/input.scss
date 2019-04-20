@@ -29,21 +29,8 @@ input[type="text"] {
     margin: 1em 0;
 
     .flex-padding {
-        flex: 8px;
+        flex: 1em;
         flex-grow: 0;
-    }
-
-    button,
-    .button {
-        display: flex;
-
-        height: $input-height;
-        margin: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-
-        align-items: center;
-        justify-content: center;
     }
 }
 

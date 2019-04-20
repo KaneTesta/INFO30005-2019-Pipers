@@ -13,17 +13,4 @@
     &:last-child {
         border-color: transparent;
     }
-
-    button,
-    .button {
-        display: flex;
-
-        height: 2.0em;
-        margin: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-
-        align-items: center;
-        justify-content: center;
-    }
 }
