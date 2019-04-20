@@ -9,7 +9,7 @@ var recipeSchema = mongoose.Schema({
   ingredients: [{
     quantity: Number,
     unit: String,
-    ingredient: Schema.ObjectId
+    ingredient: {type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient'}
   }],
   method: {
     type: [String],

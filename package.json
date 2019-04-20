@@ -14,6 +14,7 @@
     "git": "^0.1.5",
     "mongodg": "^0.1.0",
     "mongoose": "^5.4.21",
+    "mongoose-unique-validator": "^2.0.3",
     "node": "^11.12.0"
   }
 }
