@@ -15,7 +15,9 @@
 
                     <h1 class="heading">Ingredients</h1>
 
-                    <div class="fill-middle flex-vertical">
+                    <div id="IngredientsLoading" class="ingredients-loading">Loading Ingredients</div>
+
+                    <div id="IngredientsSection" style="display: none;" class="fill-middle flex-vertical">
                         <div class="flex-horizontal container-center input-wide">
                             <input id="IngredientsSearch" type="text"
                                 placeholder="Search Ingredients" class="flex-fill">
@@ -26,12 +28,11 @@
                         </div>
 
                         <div id="IngredientsErrorList"></div>
-
                         <div id="IngredientsList"></div>
-                    </div>
 
-                    <div class="container-center flex-horizontal">
-                        <button id="IngredientsButtonFindRecipes" class="button button-next">Find Recipes</button>
+                        <div class="container-center flex-horizontal">
+                            <button id="IngredientsButtonFindRecipes" class="button button-next">Find Recipes</button>
+                        </div>
                     </div>
                 </div>
             </div>
