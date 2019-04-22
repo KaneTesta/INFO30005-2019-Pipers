@@ -369,6 +369,8 @@ input[type="text"] {
       color: rgba(255, 255, 255, 0.95);
       border: none;
       background-color: #34a534; }
+    .ui-widget.ui-widget-content .ui-menu-item .ui-menu-item-wrapper .ui-menu-item-accent {
+      font-weight: bold; }
   .ui-widget.ui-widget-content.ui-autocomplete-show {
     opacity: 1; }
 
