@@ -366,6 +366,9 @@ input[type="text"] {
   border: 1px solid #34a534;
   border-radius: 1.2em;
   background-color: rgba(52, 165, 52, 0.1); }
+  .message.message-warning {
+    border-color: #bb8a30;
+    background-color: rgba(187, 138, 48, 0.1); }
   .message.message-error {
     border-color: #bb3030;
     background-color: rgba(187, 48, 48, 0.1); }

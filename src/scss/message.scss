@@ -9,6 +9,11 @@
     border-radius: $border-radius;
     background-color: transparentize($accent-color, 0.9);
 
+    &.message-warning {
+        border-color: $warning-color;
+        background-color: transparentize($warning-color, 0.9);
+    }
+
     &.message-error {
         border-color: $error-color;
         background-color: transparentize($error-color, 0.9);
