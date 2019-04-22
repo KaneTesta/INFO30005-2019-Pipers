@@ -113,6 +113,11 @@ body {
     outline: none;
 }
 
+.container {
+    margin: 0;
+    padding: 0 16px;
+}
+
 .container-center {
     position: relative;
 
@@ -145,7 +150,8 @@ body {
     flex-grow: 1;
 }
 
-.fill-medium {
+.fill-medium,
+.fill-small {
     position: absolute;
     left: 0;
     right: 0;
@@ -155,8 +161,23 @@ body {
     box-sizing: border-box;
     height: 40vh;
 
-    img {
-        height: 67%;
+    .fill-icon {
+        width: 33%;
+        height: auto;
+
+        @media screen and (max-width: $breakpoint-small) {
+            width: 67%;
+        }
+    }
+}
+
+.fill-small {
+    width: calc(70vw - 56px);
+    max-width: 600px;
+    margin: auto;
+
+    @media screen and (max-width: $breakpoint-medium) {
+        width: 100%;
     }
 }
 
@@ -170,12 +191,7 @@ body {
     }
 
     @media screen and (max-width: $breakpoint-medium) {
-        width: calc(90vw - 56px);
-    }
-
-    @media screen and (max-width: $breakpoint-small) {
         width: 100%;
-        padding: 0 12px;
     }
 }
 
