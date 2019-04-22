@@ -68,7 +68,7 @@ body {
   outline: none; }
 
 .container {
-  margin: 0;
+  margin: auto;
   padding: 0 16px; }
 
 .container-center {
