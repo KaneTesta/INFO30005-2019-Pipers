@@ -170,7 +170,9 @@ $(document).on("transition", function () {
         let $search = $("#IngredientsSearch");
         $search.autocomplete({
             autoFocus: true,
-            source: ingredientList,
+            source: function (request, response) {
+                response($.ui.autocomplete.filter(ingredientList, request.term).slice(0, 5));
+            },
             select: function (event, ui) {
                 // Set value
                 $search.val(ui.item.label);
