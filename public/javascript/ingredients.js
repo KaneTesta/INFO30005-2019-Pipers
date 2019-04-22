@@ -1,35 +1,51 @@
 $(document).on("transition", function () {
-    function hideIngredientErrors() {
-        let $ingredientErrorList = $("#IngredientsErrorList");
+    function hideIngredientMessages(maxMessages = 0) {
+        let $ingredientErrorList = $("#IngredientsMessageList");
         // Hide all existing errors
+        let ingredientMessages = 0;
         $ingredientErrorList.children().each(function () {
-            let $element = $(this);
-            if (!$element.hasClass("message-hiding")) {
-                $element.addClass("message-hiding");
-                $element.css("opacity", 0);
-                $element.slideUp(250, function () {
-                    $element.remove();
-                });
+            ++ingredientMessages;
+            if (ingredientMessages >= maxMessages) {
+                hideIngredientMessage($(this));
             }
         });
     }
 
-    function showIngredientError(errorText) {
-        let $ingredientErrorList = $("#IngredientsErrorList");
+    function hideIngredientMessage(ingredientMessage) {
+        let $ingredientMessage = $(ingredientMessage);
+        if (!$ingredientMessage.hasClass("message-hiding")) {
+            $ingredientMessage.addClass("message-hiding");
+            $ingredientMessage.css("opacity", 0);
+            $ingredientMessage.slideUp(250, function () {
+                $ingredientMessage.remove();
+            });
+        }
+    }
+
+    function showIngredientMessage(messageText, messageClass) {
+        let $ingredientMessageList = $("#IngredientsMessageList");
         // Create error element
-        let $ingredientError = $("<div class=\"message message-error\"></div>");
-        $ingredientError.html(errorText);
+        let $ingredientMessage = $("<div class=\"message\"></div>");
+        $ingredientMessage.html(messageText);
+        // Add message class
+        if (messageClass !== undefined) {
+            $ingredientMessage.addClass(messageClass);
+        }
+
         // Add to list
-        $ingredientError.hide();
-        $ingredientError.css("opacity", 0);
-        $ingredientError.prependTo($ingredientErrorList);
+        $ingredientMessage.hide();
+        $ingredientMessage.css("opacity", 0);
+        $ingredientMessage.prependTo($ingredientMessageList);
         // Animate in
+        $ingredientMessage.slideDown({ duration: 250, queue: false });
         window.setTimeout(function () {
-            $ingredientError.slideDown({ duration: 250, queue: false });
-            window.setTimeout(function () {
-                $ingredientError.css("opacity", 1);
-            }, 100);
-        }, 250);
+            $ingredientMessage.css("opacity", 1);
+        }, 100);
+
+        // Automatically hide after
+        window.setTimeout(function () {
+            hideIngredientMessage($ingredientMessage);
+        }, 5000);
     }
 
     /**
@@ -38,7 +54,7 @@ $(document).on("transition", function () {
      */
     function addIngredient(ingredientList) {
         // Hide errors
-        hideIngredientErrors();
+        hideIngredientMessages(3);
         // Check ingredients
         let $search = $("#IngredientsSearch");
         let searchValue = $search.val();
@@ -60,8 +76,6 @@ $(document).on("transition", function () {
                 let $ingredientRemoveButton = $("<button class=\"button-error button-icon\"></button>");
                 $ingredientRemoveButton.appendTo($ingredientElement);
                 $ingredientRemoveButton.on('click', function () {
-                    // Hide errors
-                    hideIngredientErrors();
                     // Animate the element out
                     $ingredientElement.css("opacity", 0);
                     $ingredientElement.slideUp(250, function () {
@@ -102,16 +116,19 @@ $(document).on("transition", function () {
                 window.setTimeout(function () {
                     $ingredientElement.css("opacity", 1);
                 }, 100);
+
+                // Show success message
+                showIngredientMessage("'" + ingredient + "'" + " added to ingredients.");
             } else {
                 // Ingredient already added
-                showIngredientError("'" + ingredient + "'" + " is already added.");
+                showIngredientMessage("'" + ingredient + "'" + " is already added.", "message-error");
             }
         } else {
             // Ingredient not found
             if (searchValue === undefined || searchValue === "") {
-                showIngredientError("Please enter an ingredient into the search box.");
+                showIngredientMessage("Please enter an ingredient into the search box.", "message-warning");
             } else {
-                showIngredientError("'" + searchValue + "'" + " is not a valid ingredient.");
+                showIngredientMessage("'" + searchValue + "'" + " is not a valid ingredient.", "message-error");
             }
         }
     }
