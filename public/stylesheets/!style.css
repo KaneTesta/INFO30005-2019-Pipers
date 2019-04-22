@@ -638,52 +638,72 @@ select {
   color: #34a534;
   font-size: 40px; }
 
-.recipes p {
-  width: 75%;
-  padding: 5% 12.5%;
-  text-align: center; }
+.recipe-area {
+  padding-bottom: 5%; }
 
-.over-flow {
-  padding-top: 5%;
-  height: 80%;
-  overflow: auto;
-  z-index: 50; }
-
-.recipe-idea {
-  text-align: center;
-  width: 75%;
-  margin: 2.5% 12.5%;
-  height: 25%;
-  background-color: rgba(52, 165, 52, 0.8);
+.recipe-row {
+  width: 85%;
+  margin: 2.5% 7.5%;
+  height: 200px;
+  background-color: rgba(141, 248, 116, 0.075);
   z-index: 101;
   box-sizing: content-box;
-  text-decoration: none;
-  color: white;
-  text-transform: uppercase;
-  border: 2px solid #34a534;
-  border-radius: 10px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  font-size: 0.95em; }
+  border: solid 1px #707070; }
+  .recipe-row:hover {
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.5); }
 
-/* Control the left side */
-.left {
-  padding: 5% 0;
-  text-align: center;
+.recipe span {
+  font-size: 0.75em;
+  display: block;
+  color: #a4a4a4;
+  margin-bottom: 0;
+  margin-top: 7px;
+  padding-left: 5%; }
+
+.recipe h2 {
+  font-size: 1.5em;
+  color: #1f1f1f;
+  margin-bottom: 3%;
+  padding-left: 5%; }
+
+.recipe .recipe-info {
+  border-left: 3px solid #34a534;
+  margin-left: 15%;
+  padding-left: 5%; }
+  .recipe .recipe-info h6 {
+    font-size: 1em;
+    margin-bottom: 5px;
+    color: #616161;
+    font-weight: 50; }
+
+.column-left {
   float: left;
-  width: 45%;
-  position: relative; }
+  width: 73%; }
 
-.left h5 {
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center; }
-
-/* Control the right side */
-.right {
-  text-align: center;
-  float: right;
-  width: 45%;
-  position: relative; }
+.column-right {
+  float: left;
+  width: 23%; }
+  .column-right .recipe-button {
+    position: relative;
+    display: flex;
+    box-sizing: content-box;
+    padding: 8px 20px;
+    margin-top: 80px;
+    cursor: pointer;
+    transition: box-shadow 0.15s ease, background-color 0.1s ease, border-color 0.1s ease;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.95);
+    border: 1px solid #34a534;
+    border-radius: 24px;
+    background-color: #34a534;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    font-size: 0.95em;
+    align-items: center;
+    justify-content: center;
+    vertical-align: center;
+    text-align: center;
+    font-size: 0.75em; }
 
 .ingredient-element {
   position: relative;

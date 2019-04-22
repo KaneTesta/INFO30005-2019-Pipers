@@ -22,7 +22,7 @@ $(document).on("transition", function () {
         // Add to list
         $ingredientError.hide();
         $ingredientError.css("opacity", 0);
-        $ingredientError.appendTo($ingredientErrorList);
+        $ingredientError.prependTo($ingredientErrorList);
         // Animate in
         window.setTimeout(function () {
             $ingredientError.slideDown({ duration: 250, queue: false });
@@ -73,10 +73,30 @@ $(document).on("transition", function () {
                 let $ingredientRemoveIcon = $("<ion-icon name=\"remove\"></ion-icon>");
                 $ingredientRemoveIcon.appendTo($ingredientRemoveButton);
 
-                // Add to list
+                // Hide element
                 $ingredientElement.hide();
                 $ingredientElement.css("opacity", 0);
-                $ingredientElement.appendTo($ingredientsList);
+
+                // Add at index
+                let addedIngredient = false;
+                $ingredientsList.children().each(function () {
+                    if (addedIngredient) {
+                        return;
+                    }
+
+                    let $element = $(this);
+                    // Check alphabetically
+                    if ($element.attr("data-ingredient") > ingredient) {
+                        $element.before($ingredientElement);
+                        addedIngredient = true;
+                    }
+                });
+
+                // Add at end if not yet added
+                if (!addedIngredient) {
+                    $ingredientElement.appendTo($ingredientsList);
+                }
+
                 // Animate in
                 $ingredientElement.slideDown(250);
                 window.setTimeout(function () {
