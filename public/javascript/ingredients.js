@@ -165,13 +165,40 @@ $(document).on("transition", function () {
     let $ingredientsLoading = $("#IngredientsLoading");
     // Get ingredients from server
     $.getJSON("./api/ingredients", function (data) {
+        /** @type {string[]} */
         let ingredientList = data.sort();
         // Setup autocomplete
         let $search = $("#IngredientsSearch");
         $search.autocomplete({
             autoFocus: true,
+            /** @param {{term: string}} request @param {function(string[])} response */
             source: function (request, response) {
-                response($.ui.autocomplete.filter(ingredientList, request.term).slice(0, 5));
+                const SEARCH_LENGTH = 5;
+
+                let searchRequest = request.term.toLowerCase();
+                // Add ingredients that start with request
+                let result = ingredientList.filter(
+                    /** @param {string} ingredient */
+                    function (ingredient) {
+                        let searchIngredient = ingredient.toLowerCase();
+                        return searchIngredient.startsWith(searchRequest);
+                    }
+                );
+
+                // Add matches for request
+                if (result.length < SEARCH_LENGTH) {
+                    ingredientList.filter(
+                        /** @param {string} ingredient */
+                        function (ingredient) {
+                            let searchIngredient = ingredient.toLowerCase();
+                            return !searchIngredient.startsWith(searchRequest) && searchIngredient.search(searchRequest) >= 0;
+                        }
+                    ).forEach(function (element) {
+                        result.push(element);
+                    });
+                }
+
+                response(result.slice(0, SEARCH_LENGTH));
             },
             select: function (event, ui) {
                 // Set value
