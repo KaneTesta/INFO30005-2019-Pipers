@@ -63,6 +63,10 @@ input[type="text"] {
                 border: none;
                 background-color: $accent-color;
             }
+
+            .ui-menu-item-accent {
+                font-weight: bold;
+            }
         }
     }
 
