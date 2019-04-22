@@ -67,6 +67,10 @@ body {
 :focus {
   outline: none; }
 
+.container {
+  margin: 0;
+  padding: 0 16px; }
+
 .container-center {
   position: relative;
   align-items: center;
@@ -91,7 +95,8 @@ body {
 .flex-fill {
   flex-grow: 1; }
 
-.fill-medium {
+.fill-medium,
+.fill-small {
   position: absolute;
   left: 0;
   right: 0;
@@ -99,8 +104,22 @@ body {
   bottom: 0;
   box-sizing: border-box;
   height: 40vh; }
-  .fill-medium img {
-    height: 67%; }
+  .fill-medium .fill-icon,
+  .fill-small .fill-icon {
+    width: 33%;
+    height: auto; }
+    @media screen and (max-width: 520px) {
+      .fill-medium .fill-icon,
+      .fill-small .fill-icon {
+        width: 67%; } }
+
+.fill-small {
+  width: calc(70vw - 56px);
+  max-width: 600px;
+  margin: auto; }
+  @media screen and (max-width: 800px) {
+    .fill-small {
+      width: 100%; } }
 
 .fill-middle,
 .fill-medium {
@@ -113,12 +132,7 @@ body {
   @media screen and (max-width: 800px) {
     .fill-middle,
     .fill-medium {
-      width: calc(90vw - 56px); } }
-  @media screen and (max-width: 520px) {
-    .fill-middle,
-    .fill-medium {
-      width: 100%;
-      padding: 0 12px; } }
+      width: 100%; } }
 
 .fill-page {
   width: 100%;
@@ -315,6 +329,7 @@ button,
 
 input[type="text"] {
   display: block;
+  min-width: 100px;
   height: 2.4em;
   padding: 0 16px 1px;
   transition: border-color 0.1s ease;
