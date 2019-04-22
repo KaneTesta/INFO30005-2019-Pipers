@@ -170,6 +170,7 @@ $(document).on("transition", function () {
         // Setup autocomplete
         let $search = $("#IngredientsSearch");
         $search.autocomplete({
+            html: true,
             autoFocus: true,
             /** @param {{term: string}} request @param {function(string[])} response */
             source: function (request, response) {
@@ -177,7 +178,7 @@ $(document).on("transition", function () {
 
                 let searchRequest = request.term.toLowerCase();
                 // Add ingredients that start with request
-                let result = ingredientList.filter(
+                let searchResult = ingredientList.filter(
                     /** @param {string} ingredient */
                     function (ingredient) {
                         let searchIngredient = ingredient.toLowerCase();
@@ -186,7 +187,7 @@ $(document).on("transition", function () {
                 );
 
                 // Add matches for request
-                if (result.length < SEARCH_LENGTH) {
+                if (searchResult.length < SEARCH_LENGTH) {
                     ingredientList.filter(
                         /** @param {string} ingredient */
                         function (ingredient) {
@@ -194,11 +195,12 @@ $(document).on("transition", function () {
                             return !searchIngredient.startsWith(searchRequest) && searchIngredient.search(searchRequest) >= 0;
                         }
                     ).forEach(function (element) {
-                        result.push(element);
+                        searchResult.push(element);
                     });
                 }
 
-                response(result.slice(0, SEARCH_LENGTH));
+                // Send response
+                response(searchResult.slice(0, SEARCH_LENGTH));
             },
             select: function (event, ui) {
                 // Set value
@@ -225,6 +227,31 @@ $(document).on("transition", function () {
                 $searchDropdown.show().slideUp(250);
             }
         });
+
+        /**
+         * @param {{label: string}} item
+         */
+        $.ui.autocomplete.prototype._renderItem = function (ul, item) {
+            let search = this.term.toLowerCase();
+            let text = item.label.toLowerCase().replace(search, "<span class=\"ui-menu-item-accent\">" + search + "</span>");
+            // Set first character to upper case
+            let textSplit = text.split("");
+            if (textSplit[0] !== '<') {
+                textSplit[0] = text.charAt(0).toUpperCase();
+            } else {
+                let index = text.search(">");
+                if (index > 0 && index < textSplit.length - 1) {
+                    textSplit[index + 1] = text.charAt(index + 1).toUpperCase();
+                }
+            }
+
+            text = textSplit.join("");
+
+            return $("<li></li>")
+                .data("item.autocomplete", item)
+                .append("<div>" + text + "</div>")
+                .appendTo(ul);
+        };
 
         // Setup add button
         $("#IngredientsButtonAdd").on('click', function () {
