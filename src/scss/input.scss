@@ -52,7 +52,7 @@ input[type="checkbox"].checkbox-pill {
         padding-left: calc(#{$checkbox-icon-size} + 18px);
 
         cursor: pointer;
-        transition: color 0.1s ease, border-color 0.1s ease, background-color 0.1s ease;
+        transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
 
         color: $text-color;
         border: $border-width solid $border-color;
@@ -67,7 +67,7 @@ input[type="checkbox"].checkbox-pill {
             position: absolute;
             left: 12px;
 
-            transition: opacity 0.1s ease, transform 0.1s ease;
+            transition: opacity 0.15s ease, transform 0.15s ease;
             transform: none;
 
             opacity: 1;
@@ -133,88 +133,7 @@ input[type="checkbox"].checkbox-pill {
     display: inline-block;
 }
 
-$slider-track-height: 12px;
-$slider-thumb-size: 24px;
-
-.ui-slider {
-    &.ui-slider-horizontal {
-        height: $slider-track-height;
-        margin: 9px 0;
-
-        .ui-slider-handle {
-            top: -(($slider-thumb-size - $slider-track-height) / 2) - $border-width;
-
-            width: $slider-thumb-size;
-            height: $slider-thumb-size;
-            margin-left: -$slider-thumb-size / 2;
-        }
-    }
-
-    &.ui-widget.ui-widget-content {
-        box-sizing: border-box;
-
-        border: $border-width solid $border-color;
-        border-radius: $border-radius;
-        background-color: $foreground-color;
-    }
-
-    .ui-slider-range-min {
-        position: absolute;
-        left: -$border-width;
-        right: -$border-width;
-        top: -$border-width;
-        bottom: -$border-width;
-
-        box-sizing: border-box;
-        height: auto;
-
-        border: $border-width solid $border-color;
-        border-radius: $border-radius;
-        background-color: $accent-color;
-    }
-
-    .ui-slider-handle {
-        box-sizing: border-box;
-
-        transition: background-color 0.1s ease;
-
-        border: $border-width solid $border-color;
-        border-radius: $border-radius;
-        background-color: $foreground-color;
-
-        &:hover,
-        &:focus {
-            background-color: lighten($accent-color, 10%);
-        }
-
-        &:active {
-            background-color: $accent-color;
-        }
-    }
-
-    & + label {
-        display: block;
-
-        text-align: left;
-        text-transform: uppercase;
-
-        color: $accent-color;
-
-        font-size: 0.8em;
-        font-weight: 700;
-    }
-}
-
-.slider-container {
-    width: 100%;
-    margin-bottom: 28px;
-
-    align-items: center;
-    justify-content: center;
-}
-
-
-.ui-autocomplete.ui-widget-content {
+.ui-widget.ui-widget-content {
     overflow: hidden;
 
     padding: 8px 8px;
