@@ -142,7 +142,8 @@ body {
   position: relative;
   color: rgba(0, 0, 0, 0.95);
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
-  font-size: 16px; }
+  font-size: 16px;
+  font-weight: 400; }
 
 ul,
 li {
@@ -201,6 +202,14 @@ h6 {
       padding: 20px 18px;
       font-size: 1.2em; } }
 
+.heading-section {
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 0.8em;
+  font-weight: 700; }
+
 .subheading {
   margin-bottom: 0.4em;
   font-size: 2.4em; }
@@ -232,7 +241,7 @@ button,
   justify-content: center; }
   button.button-inline,
   .button.button-inline {
-    display: inline-block; }
+    display: inline-flex; }
   button.button-icon,
   .button.button-icon {
     margin: 0;
@@ -310,7 +319,7 @@ button,
   button:focus,
   .button:focus {
     outline: none;
-    background-color: #5acb5a; }
+    background-color: #47c547; }
   button:active,
   .button:active {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); }
@@ -325,7 +334,7 @@ button,
       background-color: #c73333; }
     button.button-error:focus,
     .button.button-error:focus {
-      background-color: #d66161; }
+      background-color: #d14d4d; }
 
 input[type="text"] {
   display: block;
@@ -349,6 +358,63 @@ input[type="text"] {
   .input-wide .flex-padding {
     flex: 1em;
     flex-grow: 0; }
+
+input[type="checkbox"].checkbox-pill {
+  position: absolute;
+  opacity: 0; }
+  input[type="checkbox"].checkbox-pill + label {
+    position: relative;
+    display: inline-flex;
+    margin: 4px 8px;
+    padding: 6px 12px;
+    padding-left: calc(20px + 18px);
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+    color: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 1.2em;
+    background-color: #ffffff;
+    align-items: center;
+    justify-content: center;
+    user-select: none; }
+    input[type="checkbox"].checkbox-pill + label .checkbox-icon {
+      position: absolute;
+      left: 12px;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      transform: none;
+      opacity: 1;
+      font-size: 20px; }
+    input[type="checkbox"].checkbox-pill + label .checkbox-add {
+      transform: rotate(0deg);
+      opacity: 1; }
+    input[type="checkbox"].checkbox-pill + label .checkbox-checkmark {
+      transform: rotate(-90deg);
+      opacity: 0; }
+  input[type="checkbox"].checkbox-pill:hover + label,
+  input[type="checkbox"].checkbox-pill:focus + label {
+    background-color: #eaeaea; }
+  input[type="checkbox"].checkbox-pill:active + label {
+    background-color: #e0e0e0; }
+  input[type="checkbox"].checkbox-pill:checked + label {
+    color: rgba(255, 255, 255, 0.95);
+    border-color: #34a534;
+    background-color: #34a534; }
+    input[type="checkbox"].checkbox-pill:checked + label .checkbox-add {
+      transform: rotate(90deg);
+      opacity: 0; }
+    input[type="checkbox"].checkbox-pill:checked + label .checkbox-checkmark {
+      transform: rotate(0deg);
+      opacity: 1; }
+  input[type="checkbox"].checkbox-pill:checked:hover + label {
+    background-color: #38b138; }
+  input[type="checkbox"].checkbox-pill:checked:focus + label,
+  input[type="checkbox"].checkbox-pill:checked:active + label {
+    background-color: #47c547; }
+  input[type="checkbox"].checkbox-pill:first-child + label {
+    margin-left: 0; }
+
+.checkbox-container {
+  display: inline-block; }
 
 .ui-widget.ui-widget-content {
   overflow: hidden;
@@ -738,6 +804,10 @@ select {
   .ingredient-element .button {
     position: absolute;
     right: 0; }
+
+.ingredients-cookware {
+  margin-top: 6px;
+  margin-bottom: 12px; }
 
 @keyframes ingredients-loading {
   0% {

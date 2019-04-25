@@ -1,5 +1,7 @@
 $input-height: 2.4em;
 $input-dropdown-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+// Checkbox
+$checkbox-icon-size: 20px;
 
 input[type="text"] {
     display: block;
@@ -11,7 +13,7 @@ input[type="text"] {
     transition: border-color 0.1s ease;
 
     color: $text-color;
-    border: 1px solid $border-color;
+    border: $border-width solid $border-color;
     border-radius: $border-radius;
     background-color: $foreground-color;
 
@@ -33,6 +35,102 @@ input[type="text"] {
         flex: 1em;
         flex-grow: 0;
     }
+}
+
+input[type="checkbox"].checkbox-pill {
+    position: absolute;
+
+    opacity: 0;
+
+    & + label {
+        position: relative;
+
+        display: inline-flex;
+
+        margin: 4px 8px;
+        padding: 6px 12px;
+        padding-left: calc(#{$checkbox-icon-size} + 18px);
+
+        cursor: pointer;
+        transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+
+        color: $text-color;
+        border: $border-width solid $border-color;
+        border-radius: $border-radius;
+        background-color: $foreground-color;
+
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+
+        .checkbox-icon {
+            position: absolute;
+            left: 12px;
+
+            transition: opacity 0.15s ease, transform 0.15s ease;
+            transform: none;
+
+            opacity: 1;
+
+            font-size: $checkbox-icon-size;
+        }
+
+        .checkbox-add {
+            transform: rotate(0deg);
+
+            opacity: 1;
+        }
+
+        .checkbox-checkmark {
+            transform: rotate(-90deg);
+
+            opacity: 0;
+        }
+    }
+
+    &:hover + label,
+    &:focus + label {
+        background-color: $foreground-color-hover;
+    }
+
+    &:active + label {
+        background-color: $foreground-color-active;
+    }
+
+    &:checked + label {
+        color: $text-color-accent;
+        border-color: $accent-color;
+        background-color: $accent-color;
+
+        .checkbox-add {
+            transform: rotate(90deg);
+
+            opacity: 0;
+        }
+
+        .checkbox-checkmark {
+            transform: rotate(0deg);
+
+            opacity: 1;
+        }
+    }
+
+    &:checked:hover + label {
+        background-color: lighten($accent-color, 3%);
+    }
+
+    &:checked:focus + label,
+    &:checked:active + label {
+        background-color: lighten($accent-color, 10%);
+    }
+
+    &:first-child + label {
+        margin-left: 0;
+    }
+}
+
+.checkbox-container {
+    display: inline-block;
 }
 
 .ui-widget.ui-widget-content {
