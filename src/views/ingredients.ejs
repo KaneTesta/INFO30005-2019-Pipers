@@ -18,6 +18,24 @@
                     <div id="IngredientsLoading" class="ingredients-loading">Loading Ingredients</div>
 
                     <div id="IngredientsSection" style="display: none;" class="container fill-middle flex-vertical">
+                        <!-- Cookware input -->
+                        <p class="heading-section">Cookware</p>
+                        <div class="ingredients-cookware" id="IngredientsCookware">
+                            <%- include("includes/elements/checkbox-pill", {label: "Oven", checked: true}); %>
+                            <%- include("includes/elements/checkbox-pill", {label: "Stovetop", checked: true}); %>
+                            <%- include("includes/elements/checkbox-pill", {label: "Microwave", checked: true}); %>
+                            <%- include("includes/elements/checkbox-pill", {label: "Deep Fryer", checked: false}); %>
+                        </div>
+
+                        <!-- Time input -->
+                        <p class="heading-section">Time</p>
+                        <div class="ingredients-time" id="IngredientsTime">
+                            <%- include("includes/elements/input-range", {label: "Minutes", min: 0, max: 50, step: 10, value: 30}); %>
+                            <%- include("includes/elements/input-range", {label: "Hours", min: 0, max: 12, step: 1, value: 1}); %>
+                        </div>
+
+                        <!-- Ingredients input -->
+                        <p class="heading-section">Ingredients</p>
                         <div class="flex-horizontal container-center input-wide">
                             <input id="IngredientsSearch" type="text" placeholder="Search Ingredients" class="flex-fill">
                             <div class="flex-padding"></div>
@@ -26,6 +44,7 @@
                             </button>
                         </div>
 
+                        <!-- Ingredients content -->
                         <div id="IngredientsMessageList"></div>
                         <div id="IngredientsList"></div>
 
