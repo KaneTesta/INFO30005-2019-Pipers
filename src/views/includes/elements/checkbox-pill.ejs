@@ -1,0 +1,12 @@
+<div class="checkbox-container">
+    <% if (checked) {%>
+    <input class="checkbox-pill" type="checkbox" id="Checkbox<%= label %>" value="<%= label %>" checked>
+    <% } else { %>
+    <input class="checkbox-pill" type="checkbox" id="Checkbox<%= label %>" value="<%= label %>">
+    <% } %>
+    <label for="Checkbox<%= label %>">
+        <ion-icon class="checkbox-icon checkbox-add" name="add"></ion-icon>
+        <ion-icon class="checkbox-icon checkbox-checkmark" name="checkmark"></ion-icon>
+        <span><%= label %></span>
+    </label>
+</div>
