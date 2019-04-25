@@ -275,9 +275,12 @@ $(document).on("transition", function () {
         });
 
         // Show the ingredients section
-        $ingredientsSection.slideDown(500);
         $ingredientsLoading.slideUp(250, function () {
             $ingredientsLoading.remove();
         });
+
+        window.setTimeout(function () {
+            $ingredientsSection.slideDown(250);
+        }, 250);
     });
 });
