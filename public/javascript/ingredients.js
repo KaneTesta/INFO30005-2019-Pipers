@@ -161,6 +161,34 @@ $(document).on("transition", function () {
         return ingredientElement !== undefined;
     }
 
+    /**
+     * Get an array of the cookware that the user has marked as 'unavailable'
+     * @returns {string[]}
+     */
+    function getUnavailableCookware() {
+        let unavailableCookware = [];
+        let $ingredientsCookware = $("#IngredientsCookware");
+        $ingredientsCookware.children().each(function () {
+            let $element = $(this);
+            let $checkbox = $element.children("input");
+            if (!$checkbox.is(":checked")) {
+                unavailableCookware.push($checkbox.attr("value"));
+            }
+        });
+
+        return unavailableCookware;
+    }
+
+    /**
+     * Get the maximum minutes for a recipe that the user has entered
+     * @returns {int}
+     */
+    function getMaximumTime() {
+        let $timeMinutes = $("#SliderMinutes");
+        let $timeHours = $("#SliderHours");
+        return $timeMinutes.slider("value") + ($timeHours.slider("value") * 60);
+    }
+
     let $ingredientsSection = $("#IngredientsSection");
     let $ingredientsLoading = $("#IngredientsLoading");
     // Get ingredients from server
@@ -261,8 +289,13 @@ $(document).on("transition", function () {
         // Setup find recipes button
         $("#IngredientsButtonFindRecipes").on('click', function () {
             // Get url
-            let ingredientsParam = getIngredients().join("+");
-            let url = "./recipe?ingredients=" + ingredientsParam;
+            let params = [
+                "ingredients=" + getIngredients().join("+"),
+                "unavailable_cookware=" + getUnavailableCookware().join("+"),
+                "maximum_time=" + getMaximumTime(),
+            ];
+
+            let url = "./recipe?" + params.join("&");
             // Check smoothState
             let $main = $('#Main');
             let smoothState = $main.data("smoothState");
