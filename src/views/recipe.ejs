@@ -14,58 +14,9 @@
                         <a class="button button-back" href="ingredients" data-target="1">Back</a>
                         <h1 class="heading">Recipe Results</h1>
 
-
-                        <div class="recipe-row">
-                            <div class="column-left">
-                                <div class="recipe">
-                                    <span>Idea 1</span>
-                                    <h2>Quick chicken burger</h2>
-                                    <div class="recipe-info">
-                                        <h6>Extra ingredients: Lettuce, Bread</h6>
-                                        <h6>Prep: 50 mins</h6>
-                                        <h6>Servings: 2 servings</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="column-right">
-                                <a href="#" class="recipe-button">See Recipe</a>
-                            </div>
-                        </div>
-
-                        <div class="recipe-row">
-                            <div class="column-left">
-                                <div class="recipe">
-                                    <span>Idea 1</span>
-                                    <h2>Quick chicken burger</h2>
-                                    <div class="recipe-info">
-                                        <h6>Extra ingredients: Lettuce, Bread</h6>
-                                        <h6>Prep: 50 mins</h6>
-                                        <h6>Servings: 2 servings</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="column-right">
-                                <a href="#" class="recipe-button">See Recipe</a>
-                            </div>
-                        </div>
-
-                        <div class="recipe-row">
-                            <div class="column-left">
-                                <div class="recipe">
-                                    <span>Idea 1</span>
-                                    <h2>Quick chicken burger</h2>
-                                    <div class="recipe-info">
-                                        <h6>Extra ingredients: Lettuce, Bread</h6>
-                                        <h6>Prep: 50 mins</h6>
-                                        <h6>Servings: 2 servings</h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="column-right">
-                                <a href="#" class="recipe-button">See Recipe</a>
-                            </div>
-                        </div>
-
+                        <% for (let index = 0; index < recipes.length; ++index) { %>
+                        <%- include("includes/elements/recipe", {recipe: recipes[index], index: index + 1}); %>
+                        <% } %>
 
                     </section>
                 </div>

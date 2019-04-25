@@ -1,0 +1,27 @@
+<div class="recipe-row">
+    <div class="recipe">
+        <span>Idea <%= index %></span>
+        <h2><%= recipe.title %></h2>
+        <div class="recipe-info">
+            <% if (recipe.time) { %>
+            <h6>Time: <%= recipe.time %></h6>
+            <% } %>
+
+            <% if (recipe.serves) { %>
+            <h6>Serves: <%= recipe.serves %></h6>
+            <% } %>
+
+            <% if (recipe.serves) { %>
+            <h6>Ingredients: <%= recipe.ingredients.join(", ") %></h6>
+            <% } %>
+        </div>
+        <div class="recipe-steps">
+            <ul>
+                <% for (let step = 0; step < recipe.method.length; ++step) { %>
+                <li><%= recipe.method[step] %></li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+    <a href="#" class="button">See Recipe</a>
+</div>
