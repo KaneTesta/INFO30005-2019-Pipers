@@ -1,11 +1,24 @@
 const express = require('express');
 const router = express.Router();
 
-const controller = require('../controllers/controllers');
+const controller = require('../controllers/recipeController');
 const ingredientController = require('../controllers/ingredientController');
 
+/**
+ * 
+ * @param {{error, result}} msg 
+ * @param {Response} res 
+ */
+function sendResponse(msg, res) {
+    if (msg.error) {
+        res.status(500).send(msg.error);
+    } else {
+        res.json(msg.result);
+    }
+}
+
 router.get('/', (req, res) => {
-  res.send('The Pied Pipers');
+    res.send('The Pied Pipers');
 });
 
 /*
@@ -15,14 +28,19 @@ router.get('/', (req, res) => {
   /api/recipes/Chicken+Tomato
  */
 
-router.get('/recipes/:ingredients', controller.findRecipeByIngredient);
+router.get('/recipes/:ingredients', function (req, res) {
+    let query = req.params.ingredients.split('+');
+    controller.findRecipeByIngredient(query, function (msg) { sendResponse(msg, res); });
+});
 
 /*
   Adds a recipe to the collection, accepts json object in the format defined in
   ../models/recipe
 */
 
-router.post('/recipes', controller.insertRecipe);
+router.post('/recipes', function (req, res) {
+    controller.insertRecipe(req.body, function (msg) { sendResponse(msg, res); });
+});
 
 /*
   Returns how to store a given ingredient
@@ -55,11 +73,11 @@ router.get('/storage/:ingredient', controller.findStorageInfo);
 */
 
 router
-  .route('/contacts')
+    .route('/contacts')
 
-  .get(controller.findContact)
+    .get(controller.findContact)
 
-  .post(controller.insertContact);
+    .post(controller.insertContact);
 
 /*
 TODO

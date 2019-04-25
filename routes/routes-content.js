@@ -1,5 +1,5 @@
 var express = require('express');
-var path = require('path');
+var recipeController = require("../controllers/recipeController");
 
 var router = express.Router();
 
@@ -7,17 +7,24 @@ const THEME_COLOR = "#34a534";
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: "Home", theme_color: THEME_COLOR, viewport: 0 });
+    res.render('index', { title: "Home", theme_color: THEME_COLOR, viewport: 0 });
 });
 
 /* GET ingredients page. */
 router.get('/ingredients', function (req, res, next) {
-  res.render('ingredients', { title: "Ingredients", theme_color: THEME_COLOR, viewport: 1 });
+    res.render('ingredients', { title: "Ingredients", theme_color: THEME_COLOR, viewport: 1 });
 });
 
 /* GET recipe page. */
 router.get('/recipe', function (req, res, next) {
-  res.render('recipe', { title: "Recipe", theme_color: THEME_COLOR, viewport: 2 });
+    // GET recipes from ingredients
+    recipeController.findRecipeByIngredient(req.query.ingredients.split('+'), function (msg) {
+        if (msg.error) {
+            res.status(500).send(msg.error);
+        } else {
+            res.render('recipe', { title: "Recipe", theme_color: THEME_COLOR, viewport: 2, recipes: msg.result });
+        }
+    });
 });
 
 module.exports = router;
