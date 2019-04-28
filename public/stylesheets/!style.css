@@ -185,14 +185,20 @@ body {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   height: 40vh; }
-  .fill-medium .fill-icon,
-  .fill-small .fill-icon {
+  .fill-medium .fill-logo,
+  .fill-small .fill-logo {
     width: 33%;
-    height: auto; }
+    height: auto;
+    margin-right: 5%; }
+    .fill-medium .fill-logo svg,
+    .fill-small .fill-logo svg {
+      fill: rgba(0, 0, 0, 0.95); }
     @media screen and (max-width: 520px) {
-      .fill-medium .fill-icon,
-      .fill-small .fill-icon {
-        width: 67%; } }
+      .fill-medium .fill-logo,
+      .fill-small .fill-logo {
+        width: 50%;
+        margin-right: 0;
+        margin-bottom: 2em; } }
 
 .fill-small {
   width: -webkit-calc(70vw - 56px);
