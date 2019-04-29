@@ -1,6 +1,7 @@
 var express = require('express');
 var recipeController = require("../controllers/recipeController");
 
+
 var router = express.Router();
 
 const THEME_COLOR = "#34a534";
@@ -28,8 +29,8 @@ router.get('/recipe', function (req, res, next) {
 });
 
 /* GET contacts page. */
-router.get('/contacts', function (req, res, next) {
-    res.render('contacts', { title: "Contacts", theme_color: THEME_COLOR, viewport: 3 });
+router.get('/contacts', function (req, res) {
+    res.render('contacts', { title: "Contacts", theme_color: THEME_COLOR, viewport: 1, users : [ {name: "Kane", number: "1234"}, {name: "Joel", number: "1234"}, {name: "Yousha", number: "1234"},{name: "John", number: "1234"}, {name: "James", number: "1234"}] });
 });
 
 module.exports = router;

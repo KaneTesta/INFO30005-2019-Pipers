@@ -45,6 +45,7 @@ var findStorageInfo = (req, res) => {
     });
 };
 
+
 // Find contacts by name
 var findContact = (req, res) => {
     Contact.find(req.query, (err, info) => {
