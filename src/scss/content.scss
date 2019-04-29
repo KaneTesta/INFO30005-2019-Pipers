@@ -8,6 +8,7 @@ body {
     position: relative;
 
     margin: 50px;
+    padding: 16px 0;
 
     background-color: $foreground-color;
     box-shadow: 0 0 48px 0 rgba(0, 0, 0, 0.2);
@@ -114,6 +115,8 @@ body {
 }
 
 .container {
+    position: relative;
+
     margin: auto;
     padding: 0 16px;
 }
@@ -150,6 +153,7 @@ body {
     flex-grow: 1;
 }
 
+.fill-large,
 .fill-medium,
 .fill-small {
     position: absolute;
@@ -178,6 +182,7 @@ body {
     }
 }
 
+.fill-middle-small,
 .fill-small {
     width: calc(70vw - 56px);
     max-width: 600px;
@@ -188,13 +193,27 @@ body {
     }
 }
 
-.fill-middle,
+.fill-middle-medium,
 .fill-medium {
     width: calc(50vw - 70px);
     margin: auto;
 
     @media screen and (max-width: $breakpoint-large) {
         width: calc(70vw - 56px);
+    }
+
+    @media screen and (max-width: $breakpoint-medium) {
+        width: 100%;
+    }
+}
+
+.fill-middle-large,
+.fill-large {
+    width: calc(80vw - 70px);
+    margin: auto;
+
+    @media screen and (max-width: $breakpoint-large) {
+        width: calc(90vw - 56px);
     }
 
     @media screen and (max-width: $breakpoint-medium) {
