@@ -6,11 +6,7 @@ var recipeSchema = mongoose.Schema({
     trim: true,
     minlength: 1
   },
-  ingredients: [{
-    quantity: Number,
-    unit: String,
-    ingredient: {type: mongoose.Schema.Types.ObjectId, ref: 'Ingredient'}
-  }],
+  ingredients: [String],
   method: {
     type: [String],
     required: [true, "Recipe needs a method"]
