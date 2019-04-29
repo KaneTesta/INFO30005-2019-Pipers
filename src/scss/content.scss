@@ -161,12 +161,19 @@ body {
     box-sizing: border-box;
     height: 40vh;
 
-    .fill-icon {
+    .fill-logo {
         width: 33%;
         height: auto;
+        margin-right: 5%;
+
+        svg {
+            fill: $text-color;
+        }
 
         @media screen and (max-width: $breakpoint-small) {
-            width: 67%;
+            width: 50%;
+            margin-right: 0;
+            margin-bottom: 2em;
         }
     }
 }
