@@ -13,36 +13,31 @@
         span {
             display: block;
 
-            margin-top: 7px;
-            margin-bottom: 0;
+            margin-top: 12px;
 
-            color: #a4a4a4;
+            color: $text-color-detail;
 
             font-size: 0.75em;
-        }
-
-        h2 {
-            margin-bottom: 3%;
-
-            color: rgb(31, 31, 31);
-
-            font-size: 1.5em;
+            font-weight: 700;
         }
 
         .recipe-info {
             margin-left: 12px;
-            padding: 8px 24px;
+            padding: 0 24px;
 
             border-left: 3px solid  $accent-color;
 
-            h6 {
-                color: #616161;
+            p {
+                padding: 4px 0;
 
-                font-size: 1em;
-                font-weight: 50;
+                color: $text-color-detail;
 
-                &:not(:last-child) {
-                    padding-bottom: 12px;
+                &:first-child {
+                    margin-top: 0;
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
                 }
             }
         }

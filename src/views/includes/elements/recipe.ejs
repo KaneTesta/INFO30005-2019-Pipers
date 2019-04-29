@@ -4,15 +4,15 @@
         <h2><%= recipe.title %></h2>
         <div class="recipe-info">
             <% if (recipe.time) { %>
-            <h6>Time: <%= recipe.time %></h6>
+            <p>Time: <%= recipe.time %></p>
             <% } %>
 
             <% if (recipe.serves) { %>
-            <h6>Serves: <%= recipe.serves %></h6>
+            <p>Serves: <%= recipe.serves %></p>
             <% } %>
 
             <% if (recipe.serves) { %>
-            <h6>Ingredients: <%= recipe.ingredients.join(", ") %></h6>
+            <p>Ingredients: <%= recipe.ingredients.join(", ") %></p>
             <% } %>
         </div>
         <div class="recipe-steps">
