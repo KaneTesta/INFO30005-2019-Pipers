@@ -1,5 +1,5 @@
 .recipe-row {
-    margin: 16px;
+    margin: 16px 0;
     padding: 16px 48px 0;
 
     border: solid 1px rgb(112, 112, 112);
@@ -8,54 +8,54 @@
     &:hover {
         box-shadow: 0 0 10px 1px rgba(0,0,0,0.5);
     }
-}
 
-.recipe {
-    span {
-        display: block;
+    .recipe {
+        span {
+            display: block;
 
-        margin-top: 7px;
-        margin-bottom: 0;
+            margin-top: 7px;
+            margin-bottom: 0;
 
-        color: #a4a4a4;
+            color: #a4a4a4;
 
-        font-size: 0.75em;
-    }
+            font-size: 0.75em;
+        }
 
-    h2 {
-        margin-bottom: 3%;
+        h2 {
+            margin-bottom: 3%;
 
-        color: rgb(31, 31, 31);
+            color: rgb(31, 31, 31);
 
-        font-size: 1.5em;
-    }
+            font-size: 1.5em;
+        }
 
-    .recipe-info {
-        margin-left: 12px;
-        padding: 8px 24px;
+        .recipe-info {
+            margin-left: 12px;
+            padding: 8px 24px;
 
-        border-left: 3px solid  $accent-color;
+            border-left: 3px solid  $accent-color;
 
-        h6 {
-            color: #616161;
+            h6 {
+                color: #616161;
 
-            font-size: 1em;
-            font-weight: 50;
+                font-size: 1em;
+                font-weight: 50;
 
-            &:not(:last-child) {
-                padding-bottom: 12px;
+                &:not(:last-child) {
+                    padding-bottom: 12px;
+                }
             }
         }
-    }
 
-    .recipe-steps {
-        margin: 36px 0;
-        padding: 0 24px;
+        .recipe-steps {
+            margin: 36px 0;
+            padding: 0 24px;
 
-        ul li {
-            margin-bottom: 1em;
+            ul li {
+                margin-bottom: 1em;
 
-            list-style: decimal;
+                list-style: decimal;
+            }
         }
     }
 }
