@@ -39,7 +39,7 @@ recipeSchema.virtual('parsedIngredients').get(function() {
 });
 
 recipeSchema.virtual('url').get(function() {
-  return "something" + this._id;
+  return "/recipe/" + this._id;
 });
 
 recipeSchema.query.byIngredient = function(ingredients) {
