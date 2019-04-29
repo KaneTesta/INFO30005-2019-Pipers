@@ -10,14 +10,35 @@
                 <div class="body-wrap">
                     <section class="container fill-middle-large">
 
-                        <a class="button button-back" href="ingredients" data-target="1">Back</a>
-                        <h1 class="heading">Recipe Results</h1>
-
-                        <% for (let index = 0; index < recipes.length; ++index) { %>
-                        <%- include("includes/elements/recipe", {recipe: recipes[index], index: index + 1}); %>
-                        <% } %>
-
+                        <a class="button button-back" href="/" data-target="0">Back</a>
+                        <h1 class="heading">Contact List</h1>
+                    
                     </section>
+
+                    <section>
+                        <div class="container">
+                            <% for (let index = 0; index < users.length; index++) { %>
+                            <div class="row">
+                                <div class="contact">
+                                    <div class="name">
+                                        <%- users[index].name; %>
+                                    </div>
+                                    <div class="number">
+                                        Contact Number:
+                                        <%- users[index].number; %>
+                                    </div>
+                                    <div class="address">
+                                        Address:
+                                    </div>
+                                    <div class="about">
+                                        About the organisation:
+                                    </div>
+                                </div>
+                            </div>
+                            <% }%>
+                        </div>
+                    </section>
+
                 </div>
             </div>
         </div>
