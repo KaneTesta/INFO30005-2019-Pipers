@@ -2,8 +2,12 @@ var mongoose = require('mongoose');
 var Recipe = mongoose.model('recipes');
 var Contact = mongoose.model('contacts');
 var Storage = mongoose.model('storage');
+var Ingredient = mongoose.model('ingredient');
 
 // Find recipes containing one or multiple ingredients
+/*
+TODO: Modify to query by new ingredient model
+*/
 var findRecipeByIngredient = (req, res) => {
   var query = req.params.ingredients.split('+');
   Recipe.find({ ingredients: { $all: query } }, (err, recipe) => {
