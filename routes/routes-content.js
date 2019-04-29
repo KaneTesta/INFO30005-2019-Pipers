@@ -27,4 +27,9 @@ router.get('/recipe', function (req, res, next) {
     });
 });
 
+/* GET contacts page. */
+router.get('/contacts', function (req, res, next) {
+    res.render('contacts', { title: "Contacts", theme_color: THEME_COLOR, viewport: 3 });
+});
+
 module.exports = router;
