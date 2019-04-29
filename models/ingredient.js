@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
 
 var ingredientSchema = mongoose.Schema({
-  ingredient: {
+  name: {
     type: String,
     require: [true, 'Can\'t have an empty ingredient'],
     trim: true,
