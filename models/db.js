@@ -20,6 +20,6 @@ mongoose.connect(dbURI, options).then(
 );
 
 require('./recipe');
-require('./contacts');
+require('./contact');
 require('./storage');
 require('./ingredient');
