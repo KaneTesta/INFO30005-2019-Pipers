@@ -15,28 +15,41 @@ var recipeSchema = mongoose.Schema({
     trim: true,
     minlength: 1
   },
-  ingredients: {
-    type: [String],
-    required: [true, "Recipe needs ingredients"]
-  },
   method: {
     type: [String],
     required: [true, "Recipe needs a method"]
   },
-  author: String,
   serves: Number,
-  cookware: {
-    type: Map,
-    of: Boolean
+  tags: [String],
+  description: String,
+  author: String,
+  source: String,
+  image: String,
+  notes: String,
+  prepTime: String, // ISO 8601 Duration
+  cookTime: String, // ISO 8601 Duration
+  totalTime: String, // ISO 8601 Duration
+  nutrition: {
+    calories: String,
+    fatContent: String,
+    saturatedFatContent: String,
+    carbohydrateContent: String,
+    sugarContent: String,
+    fibreContent: String,
+    proteinContent: String,
+    cholestrolContent: String,
+    sodiumContent: String
   },
-  cooktime: Number // Minutes
+  aggregateRating: {
+    ratingCount: Number,
+    ratingValue: Number
+  },
+  ingredients: {
+    type: Array,
+    required: [true, "Recipe needs ingredients"]
+  }
 });
 
-recipeSchema.virtual('parsedIngredients').get(function() {
-  return this.ingredients.map((i) => {
-    return parser.parse(i);
-  });
-});
 
 recipeSchema.virtual('url').get(function() {
   return "/recipe/" + this._id;
