@@ -6,13 +6,28 @@ var Storage = mongoose.model('storage');
 // Find recipes containing one or multiple ingredients
 var findRecipeByIngredient = (query, callback) => {
     //Recipe.find({ ingredients: { $in: query } }, function (err, recipes) {
-    Recipe.find({}, function (err, recipes) {
+    Recipe
+        .find()
+        .byIngredient(query)
+        .sortByRating()
+        .exec(function (err, recipes) {
         callback({
             error: err,
             result: recipes
         });
     });
 };
+
+var findRecipeByID = (req, res, next) => {
+    Recipe.findById(req.params.id, function(err, result) {
+        if (!err) {
+            res.json(result.toJSON());
+        }
+        else {
+            console.log(err);
+        }
+    })
+}
 
 // Insert one recipe
 var insertRecipe = (recipe, callback) => {
@@ -75,6 +90,7 @@ var insertContact = (req, res) => {
 // Exporting callbacks
 module.exports = {
     findRecipeByIngredient,
+    findRecipeByID,
     insertRecipe,
     findStorageInfo,
     findContact,
