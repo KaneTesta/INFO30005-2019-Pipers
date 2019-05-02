@@ -4,7 +4,7 @@
         <h2><%= recipe.title %></h2>
         <div class="recipe-info">
             <% if (recipe.prepTime) { %>
-            <p>Prep Time: <%= recipe.prepTime %> minutes</p>
+            <p>Prep time: <%= recipe.prepTime %> minutes</p>
             <% } %>
             <% if (recipe.cookTime) { %>
                 <p>Cook time: <%= recipe.cookTime %> minutes</p>
@@ -20,8 +20,8 @@
         </div>
         <div class="recipe-description">
             <p> <%= recipe.description %> </p>
-            <p> <img src=<%= recipe.image%> class="thumbnail"> </p>
-        </div>
+<!--             <p> <img src=<%= recipe.image%> class="thumbnail"> </p>
+ -->        </div>
         <!-- <div class="recipe-steps">
             <ul>
                 <% for (let step = 0; step < recipe.method.length; ++step) { %>
@@ -30,5 +30,5 @@
             </ul>
         </div> -->
     </div>
-    <a href=<%= recipe.url %> class="button">See Recipe</a>
+    <a href=<%= recipe.source %> class="button">See Recipe</a>
 </div>

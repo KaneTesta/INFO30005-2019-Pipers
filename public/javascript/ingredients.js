@@ -289,11 +289,9 @@ $(document).on("transition", function () {
         // Setup find recipes button
         $("#IngredientsButtonFindRecipes").on('click', function () {
             // Get url
-            let params = [
-                "ingredients=" + getIngredients().join("+"),
-                "unavailable_cookware=" + getUnavailableCookware().join("+"),
-                "maximum_time=" + getMaximumTime(),
-            ];
+            let params = getIngredients().map(i => {
+                    return "ingredients[]=" + i.toLowerCase();
+                })
 
             let url = "./recipe?" + params.join("&");
             // Check smoothState
