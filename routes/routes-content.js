@@ -27,4 +27,6 @@ router.get('/recipe', function (req, res, next) {
     });
 });
 
+router.get('/recipe/:id', recipeController.findRecipeByID);
+
 module.exports = router;
