@@ -58,11 +58,23 @@ h4 {
 }
 
 h5 {
+    text-transform: uppercase;
+
+    color: $text-color-info;
+
     font-size: 1.0em;
+    font-weight: 700;
 }
 
 h6 {
+    margin-left: 0.14em;
+
+    text-transform: uppercase;
+
+    color: $text-color-detail;
+
     font-size: 0.8em;
+    font-weight: 700;
 }
 
 .subheading,
@@ -111,4 +123,14 @@ h6 {
     margin-bottom: 0.4em;
 
     font-size: 2.4em;
+}
+
+.text-detail {
+    margin-top: 12px;
+    margin-left: 0.14em;
+
+    color: $text-color-detail;
+
+    font-size: 0.75em;
+    font-weight: 700;
 }

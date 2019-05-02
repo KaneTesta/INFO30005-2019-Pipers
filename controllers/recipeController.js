@@ -3,17 +3,64 @@ var Recipe = mongoose.model('recipe');
 var Contact = mongoose.model('contact');
 var Storage = mongoose.model('storage');
 
-// Find recipes containing one or multiple ingredients
-var findRecipeByIngredient = (query, callback) => {
-    //Recipe.find({ ingredients: { $in: query } }, function (err, recipes) {
-    Recipe
-        .byIngredient(query)
-        .exec(function (err, recipes) {
-        callback({
-            error: err,
-            result: recipes
+/**
+ * 
+ * @param {[{ingredient: String, quantity: number}]} ingredients
+ * @param {{ingredients: [{ingredient: String, quantity: number}]}} recipe 
+ */
+function getRecipeScore(ingredients, recipe) {
+    let score = 0;
+    //console.log(ingredients);
+    ingredients.forEach(function (el1) {
+        recipe.ingredients.forEach(function (el2) {
+            if (el1.ingredient.toLowerCase() === el2.ingredient.toLowerCase()) {
+                score += 1;
+            }
         });
     });
+
+    return score;
+}
+
+/**
+ * Find recipes containing one or multiple ingredients
+ * @param {{ingredients: [String], maxTime: [Number]}} query 
+ * @param {Function} callback 
+ */
+var findRecipeByIngredient = (query, callback) => {
+    let ingredients = query.ingredients || [];
+    let maxTime = query.maxTime || null;
+
+    Recipe.find()
+        .sort("title")
+        .exec(function (err, recipes) {
+            for (let i = 0; i < recipes.length; ++i) {
+                recipes[i].score = getRecipeScore(ingredients, recipes[i]);
+            }
+
+            recipes = recipes.filter(function (el) {
+                // Check score
+                if (el.score <= 0) {
+                    return false;
+                }
+
+                // Check time
+                if (maxTime !== null && el.totalTime > maxTime) {
+                    return false;
+                }
+
+                return true;
+            });
+
+            recipes.sort(function (recipe1, recipe2) {
+                return recipe2.score - recipe1.score;
+            });
+
+            callback({
+                error: err,
+                result: recipes.slice(0, 40)
+            });
+        });
 };
 
 var findRecipeByID = (req, res, next) => {

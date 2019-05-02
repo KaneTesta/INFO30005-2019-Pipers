@@ -10,15 +10,15 @@ const ingredientController = require('../controllers/ingredientController');
  * @param {Response} res 
  */
 function sendResponse(msg, res) {
-    if (msg.error) {
-        res.status(500).send(msg.error);
-    } else {
-        res.json(msg.result);
-    }
+  if (msg.error) {
+    res.status(500).send(msg.error);
+  } else {
+    res.json(msg.result);
+  }
 }
 
 router.get('/', (req, res) => {
-    res.send('The Pied Pipers');
+  res.send('The Pied Pipers');
 });
 
 /*
@@ -29,8 +29,14 @@ router.get('/', (req, res) => {
  */
 
 router.get('/recipes/:ingredients', function (req, res) {
-    let query = req.params.ingredients.split('+');
-    controller.findRecipeByIngredient(query, function (msg) { sendResponse(msg, res); });
+  let query = {
+    ingredients: req.params.ingredients.split(',').map((el) => {
+      return { ingredient: el };
+    })
+  };
+
+  console.log(query);
+  controller.findRecipeByIngredient(query, function (msg) { sendResponse(msg, res); });
 });
 
 /*
@@ -39,7 +45,7 @@ router.get('/recipes/:ingredients', function (req, res) {
 */
 
 router.post('/recipes', function (req, res) {
-    controller.insertRecipe(req.body, function (msg) { sendResponse(msg, res); });
+  controller.insertRecipe(req.body, function (msg) { sendResponse(msg, res); });
 });
 
 /*
@@ -73,11 +79,11 @@ router.get('/storage/:ingredient', controller.findStorageInfo);
 */
 
 router
-    .route('/contacts')
+  .route('/contacts')
 
-    .get(controller.findContact)
+  .get(controller.findContact)
 
-    .post(controller.insertContact);
+  .post(controller.insertContact);
 
 /*
 TODO

@@ -17,8 +17,19 @@ router.get('/ingredients', function (req, res, next) {
 
 /* GET recipe page. */
 router.get('/recipe', function (req, res, next) {
+    let query = {
+        ingredients: req.query.ingredients.split(',').map((el) => {
+            let ingredientParts = el.split('^');
+            return {
+                ingredient: ingredientParts[0].replace("%20", " "),
+                quantity: ingredientParts[1]
+            }
+        }),
+        maxTime: parseInt(req.query.maximum_time)
+    };
+
     // GET recipes from ingredients
-    recipeController.findRecipeByIngredient(req.query.ingredients, function (msg) {
+    recipeController.findRecipeByIngredient(query, function (msg) {
         if (msg.error) {
             res.status(500).send(msg.error);
         } else {

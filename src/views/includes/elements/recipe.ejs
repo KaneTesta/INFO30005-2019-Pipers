@@ -1,10 +1,14 @@
 <div class="recipe-row">
     <div class="recipe">
-        <span>Idea <%= index %></span>
+        <p class="text-detail">Idea <%= index %></p>
+
+        <img src="<%= recipe.image %>" class="recipe-image">
         <h2><%= recipe.title %></h2>
+
+        <h6>Info</h6>
         <div class="recipe-info">
-            <% if (recipe.prepTime) { %>
-            <p>Prep time: <%= recipe.prepTime %> minutes</p>
+            <% if (recipe.totalTime) { %>
+            <p>Time: <%= recipe.totalTime %> minutes</p>
             <% } %>
             <% if (recipe.cookTime) { %>
                 <p>Cook time: <%= recipe.cookTime %> minutes</p>
@@ -13,22 +17,16 @@
             <% if (recipe.serves) { %>
             <p>Serves: <%= recipe.serves %></p>
             <% } %>
-
-           <!--  <% if (recipe.serves) { %>
-            <p>Ingredients: <%= recipe.ingredients.map((i) => {return i.ingredient}).join(', ') %></p>
-            <% } %> -->
         </div>
-        <div class="recipe-description">
-            <p> <%= recipe.description %> </p>
-<!--             <p> <img src=<%= recipe.image%> class="thumbnail"> </p>
- -->        </div>
-        <!-- <div class="recipe-steps">
-            <ul>
-                <% for (let step = 0; step < recipe.method.length; ++step) { %>
-                <li><%= recipe.method[step] %></li>
-                <% } %>
-            </ul>
-        </div> -->
+
+        <h6>Ingredients</h6>
+        <div class="recipe-info recipe-ingredients">
+            <% if (recipe.ingredients) { %>
+            <% for (let i = 0; i < recipe.ingredients.length; ++i) { %>
+            <p><%= recipe.ingredients[i].text %></p>
+            <% } %>
+            <% } %>
+        </div>
     </div>
-    <a href=<%= recipe.source %> class="button">See Recipe</a>
+    <a href="<%= recipe.source %>" class="button button-next">See Recipe</a>
 </div>

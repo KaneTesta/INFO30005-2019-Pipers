@@ -289,10 +289,13 @@ $(document).on("transition", function () {
         // Setup find recipes button
         $("#IngredientsButtonFindRecipes").on('click', function () {
             // Get url
-            params = {
-                'ingredients': getIngredients()
-            }
-            let url = "./recipe?" + jQuery.param(params);
+            let params = [
+                "ingredients=" + getIngredients().join(","),
+                "unavailable_cookware=" + getUnavailableCookware().join(","),
+                "maximum_time=" + getMaximumTime(),
+            ];
+
+            let url = "./recipe?" + params.join("&");
             // Check smoothState
             let $main = $('#Main');
             let smoothState = $main.data("smoothState");
