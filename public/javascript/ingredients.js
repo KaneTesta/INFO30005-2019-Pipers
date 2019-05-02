@@ -142,7 +142,7 @@ $(document).on("transition", function () {
         let $ingredientsList = $("#IngredientsList");
         $ingredientsList.children().each(function () {
             let $element = $(this);
-            ingredients.push($element.attr("data-ingredient"));
+            ingredients.push($element.attr("data-ingredient").toLowerCase());
         });
 
         return ingredients;
@@ -289,13 +289,10 @@ $(document).on("transition", function () {
         // Setup find recipes button
         $("#IngredientsButtonFindRecipes").on('click', function () {
             // Get url
-            let params = [
-                "ingredients=" + getIngredients().join("+"),
-                "unavailable_cookware=" + getUnavailableCookware().join("+"),
-                "maximum_time=" + getMaximumTime(),
-            ];
-
-            let url = "./recipe?" + params.join("&");
+            params = {
+                'ingredients': getIngredients()
+            }
+            let url = "./recipe?" + jQuery.param(params);
             // Check smoothState
             let $main = $('#Main');
             let smoothState = $main.data("smoothState");

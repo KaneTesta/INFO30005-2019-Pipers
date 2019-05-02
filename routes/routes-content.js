@@ -18,7 +18,7 @@ router.get('/ingredients', function (req, res, next) {
 /* GET recipe page. */
 router.get('/recipe', function (req, res, next) {
     // GET recipes from ingredients
-    recipeController.findRecipeByIngredient(req.query.ingredients.split('+'), function (msg) {
+    recipeController.findRecipeByIngredient(req.query.ingredients, function (msg) {
         if (msg.error) {
             res.status(500).send(msg.error);
         } else {
@@ -26,5 +26,7 @@ router.get('/recipe', function (req, res, next) {
         }
     });
 });
+
+router.get('/recipe/:id', recipeController.findRecipeByID);
 
 module.exports = router;

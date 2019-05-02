@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var parser = require('recipe-ingredient-parser-v2');
+var pluralize = require('pluralize');
 
 //TODO
 // Search by quantities of ingredients
@@ -15,45 +16,95 @@ var recipeSchema = mongoose.Schema({
     trim: true,
     minlength: 1
   },
-  ingredients: {
-    type: [String],
-    required: [true, "Recipe needs ingredients"]
-  },
   method: {
     type: [String],
     required: [true, "Recipe needs a method"]
   },
-  author: String,
   serves: Number,
-  cookware: {
-    type: Map,
-    of: Boolean
+  tags: [String],
+  description: String,
+  author: String,
+  source: String,
+  image: String,
+  notes: String,
+  prepTime: Number,
+  cookTime: Number,
+  totalTime: Number,
+  nutrition: {
+    calories: String,
+    fatContent: String,
+    saturatedFatContent: String,
+    carbohydrateContent: String,
+    sugarContent: String,
+    fibreContent: String,
+    proteinContent: String,
+    cholestrolContent: String,
+    sodiumContent: String
   },
-  cooktime: Number // Minutes
+  aggregateRating: {
+    ratingCount: Number,
+    ratingValue: Number
+  },
+  ingredients: {
+    type: Array,
+    required: [true, "Recipe needs ingredients"]
+  }
 });
 
-recipeSchema.virtual('parsedIngredients').get(function() {
-  return this.ingredients.map((i) => {
-    return parser.parse(i);
-  });
+
+recipeSchema.virtual('url').get(function () {
+  return "/recipe/" + this._id;
 });
 
-recipeSchema.virtual('url').get(function() {
-  return "something" + this._id;
-});
 
-recipeSchema.query.byIngredient = function(ingredients) {
-  return this.where('ingredients').all(ingredients.map((i) => {
-    return new RegExp(i, 'i');
-  }));
-};
+recipeSchema.statics.byIngredient = function (i) {
+  return this.aggregate([
+    {
+        $addFields: {
+            totalMatch: {
+                $size: {
+                    $setIntersection: [i, { $map: { input: "$ingredients", as: "ingredient", in: "$$ingredient.ingredient" } }]
+                }
+            }
+        }
+    },
+    {
+        $sort: {
+            totalMatch: -1
+        }
+    },
+    {
+        $project: {
+            totalMatch: 0
+        }
+    }
+  ])}
 
-recipeSchema.query.byServes = function(min, max) {
+/* recipeSchema.query.byIngredient = function (ingredients) {
+  return this
+    .where('ingredients')
+    .and(ingredients.map((ing) => {
+      cleanedIngredient = ing.toLowerCase().trim();
+      return {
+        ingredients: {
+          $elemMatch: {
+            ingredient: cleanedIngredient
+          }
+        }
+      }
+    }));
+} */
+
+recipeSchema.query.sortByRating = function () {
+  return this.sort({ 'aggregateRating.ratingValue': -1 });
+}
+
+recipeSchema.query.byServes = function (min, max) {
   return this.where('serves').gte(min).lte(max);
 }
 
-recipeSchema.query.byMaximumTime = function(max) {
-  return this.where('cooktime').lte(max);
+recipeSchema.query.byMaximumTime = function (max) {
+  return this.where('totalTime').lte(max);
 }
 
 mongoose.model('recipe', recipeSchema, 'recipes');
