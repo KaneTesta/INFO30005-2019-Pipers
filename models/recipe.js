@@ -1,6 +1,4 @@
 var mongoose = require('mongoose');
-var parser = require('recipe-ingredient-parser-v2');
-var pluralize = require('pluralize');
 
 //TODO
 // Search by quantities of ingredients
