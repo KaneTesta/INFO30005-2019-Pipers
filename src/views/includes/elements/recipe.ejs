@@ -18,6 +18,10 @@
             <p>Ingredients: <%= recipe.ingredients.map((i) => {return i.ingredient}).join(', ') %></p>
             <% } %> -->
         </div>
+        <div class="recipe-description">
+            <p> <%= recipe.description %> </p>
+            <p> <img src=<%= recipe.image%> class="thumbnail"> </p>
+        </div>
         <!-- <div class="recipe-steps">
             <ul>
                 <% for (let step = 0; step < recipe.method.length; ++step) { %>
