@@ -4,6 +4,46 @@ var Recipe = mongoose.model('recipe');
 var Ingredient = mongoose.model('ingredient');
 var fs = require("fs");
 var parser = require('recipe-ingredient-parser-v2');
+var moment = require('moment');
+var pluralize = require('pluralize');
+
+
+
+/* Recipe
+    .find()
+    .exec(
+        function (err, res) {
+            if (!err) {
+                res.map(recipe => {
+                    recipe.ingredients.map(i => {
+                        console.log(i.ingredient)
+                    })
+                })
+            }
+            else {
+                console.log(err);
+            }
+            process.exit();
+        }
+    ) */
+
+/* Ingredient.find().exec(function (err, res) {
+    if (!err) {
+        res.forEach ((i) => {
+            p = i.name;
+            s = pluralize.singular(i.name);
+            if (p !== s) {
+                console.log(p);
+                console.log(s);
+            }
+        })
+    }
+    else {
+        console.log(err);
+    }
+    process.exit();
+}) */
+
 
 var content = fs.readFileSync('data/recipes/taste-300-main-recipes.json');
 recipes = JSON.parse(content);
@@ -16,9 +56,24 @@ recipes.forEach(recipe => {
         try {
             parsed = parser.parse(a.ingredient);
         }
-        catch(e){
+        catch (e) {
             console.log(e);
         }
+        iregex = new RegExp('^' + a.parsedIngredient, 'i');
+        Ingredient.findOne({ name: {$regex: iregex} }, function (err, res) {
+            if (!err) {
+                if (!res) {
+                    newIngredient = new Ingredient({
+                        name: a.parsedIngredient
+                    });
+                    newIngredient.save();
+                    console.log(newIngredient);
+                }
+            }
+            else {
+                console.log(err);
+            }
+        });
         return {
             ingredient: a.parsedIngredient,
             text: a.ingredient,
@@ -39,9 +94,9 @@ recipes.forEach(recipe => {
         source: 'https:' + rec.mainEntityOfPage,
         image: rec.image.url,
         notes: notes,
-        prepTime: rec.prepTime, // ISO 8601 Duration
-        cookTime: rec.cookTime, // ISO 8601 Duration
-        totalTime: rec.totalTime, // ISO 8601 Duration
+        prepTime: moment.duration(rec.prepTime).asMinutes(),
+        cookTime: moment.duration(rec.cookTime).asMinutes(),
+        totalTime: moment.duration(rec.totalTime).asMinutes(),
         nutrition: {
             calories: rec.nutrition.calories,
             fatContent: rec.nutrition.fatContent,
@@ -62,7 +117,11 @@ recipes.forEach(recipe => {
     recipeDocs.push(r);
 });
 
-
-
-
-process.exit();
+Recipe.insertMany((recipeDocs), function (err, docs) {
+    if (!err) {
+        console.log("done");
+    }
+    else {
+        console.log(err);
+    }
+});
