@@ -56,7 +56,31 @@ recipeSchema.virtual('url').get(function () {
   return "/recipe/" + this._id;
 });
 
-recipeSchema.query.byIngredient = function (ingredients) {
+
+recipeSchema.statics.byIngredient = function (i) {
+  return this.aggregate([
+    {
+        $addFields: {
+            totalMatch: {
+                $size: {
+                    $setIntersection: [i, { $map: { input: "$ingredients", as: "ingredient", in: "$$ingredient.ingredient" } }]
+                }
+            }
+        }
+    },
+    {
+        $sort: {
+            totalMatch: -1
+        }
+    },
+    {
+        $project: {
+            totalMatch: 0
+        }
+    }
+  ])}
+
+/* recipeSchema.query.byIngredient = function (ingredients) {
   return this
     .where('ingredients')
     .and(ingredients.map((ing) => {
@@ -69,7 +93,7 @@ recipeSchema.query.byIngredient = function (ingredients) {
         }
       }
     }));
-}
+} */
 
 recipeSchema.query.sortByRating = function () {
   return this.sort({ 'aggregateRating.ratingValue': -1 });
