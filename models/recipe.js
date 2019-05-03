@@ -56,29 +56,42 @@ recipeSchema.virtual('url').get(function () {
   return "/recipe/" + this._id;
 });
 
-
-recipeSchema.statics.byIngredient = function (i) {
+/**
+ * Search recipes including given ingredients
+ * Yields the recipes containing those ingredients, sorted by matches
+ * 
+ * TODO: paginate (https://www.npmjs.com/package/mongoose-aggregate-paginate)
+ * 
+ * @param {string[]} i Array of ingredients
+ */
+recipeSchema.statics.byIngredients = function (i) {
   return this.aggregate([
     {
-        $addFields: {
-            totalMatch: {
-                $size: {
-                    $setIntersection: [i, { $map: { input: "$ingredients", as: "ingredient", in: "$$ingredient.ingredient" } }]
-                }
-            }
+      $addFields: {
+        matches: {
+          $setIntersection: [i, { $map: { input: "$ingredients", as: "ingredient", in: "$$ingredient.ingredient" } }]
         }
+      }
     },
     {
-        $sort: {
-            totalMatch: -1
+      $addFields: {
+        totalMatch: {
+          $size: "$matches"
         }
+      }
     },
     {
-        $project: {
-            totalMatch: 0
-        }
+      $sort: {
+        totalMatch: -1
+      }
+    },
+    {
+      $project: {
+        totalMatch: 0
+      }
     }
-  ])}
+  ])
+}
 
 /* recipeSchema.query.byIngredient = function (ingredients) {
   return this

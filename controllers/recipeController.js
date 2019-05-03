@@ -4,10 +4,10 @@ var Contact = mongoose.model('contact');
 var Storage = mongoose.model('storage');
 
 // Find recipes containing one or multiple ingredients
-var findRecipeByIngredient = (query, callback) => {
+var findRecipeByIngredients = (query, callback) => {
     //Recipe.find({ ingredients: { $in: query } }, function (err, recipes) {
     Recipe
-        .byIngredient(query)
+        .byIngredients(query)
         .exec(function (err, recipes) {
         callback({
             error: err,
@@ -87,7 +87,7 @@ var insertContact = (req, res) => {
 
 // Exporting callbacks
 module.exports = {
-    findRecipeByIngredient,
+    findRecipeByIngredients,
     findRecipeByID,
     insertRecipe,
     findStorageInfo,

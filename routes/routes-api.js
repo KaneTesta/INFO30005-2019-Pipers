@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
 
 router.get('/recipes/:ingredients', function (req, res) {
     let query = req.params.ingredients.split('+');
-    controller.findRecipeByIngredient(query, function (msg) { sendResponse(msg, res); });
+    controller.findRecipeByIngredients(query, function (msg) { sendResponse(msg, res); });
 });
 
 /*
