@@ -29,7 +29,7 @@ router.get('/recipe', function (req, res, next) {
     };
 
     // GET recipes from ingredients
-    recipeController.findRecipeByIngredient(query, function (msg) {
+    recipeController.findRecipeByIngredients(req.query.ingredients, function (msg) {
         if (msg.error) {
             res.status(500).send(msg.error);
         } else {

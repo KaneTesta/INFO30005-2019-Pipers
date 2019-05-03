@@ -3,36 +3,11 @@ var Recipe = mongoose.model('recipe');
 var Contact = mongoose.model('contact');
 var Storage = mongoose.model('storage');
 
-/**
- * 
- * @param {[{ingredient: String, quantity: number}]} ingredients
- * @param {{ingredients: [{ingredient: String, quantity: number}]}} recipe 
- */
-function getRecipeScore(ingredients, recipe) {
-    let score = 0;
-    //console.log(ingredients);
-    ingredients.forEach(function (el1) {
-        recipe.ingredients.forEach(function (el2) {
-            if (el1.ingredient.toLowerCase() === el2.ingredient.toLowerCase()) {
-                score += 1;
-            }
-        });
-    });
-
-    return score;
-}
-
-/**
- * Find recipes containing one or multiple ingredients
- * @param {{ingredients: [String], maxTime: [Number]}} query 
- * @param {Function} callback 
- */
-var findRecipeByIngredient = (query, callback) => {
-    let ingredients = query.ingredients || [];
-    let maxTime = query.maxTime || null;
-
-    Recipe.find()
-        .sort("title")
+// Find recipes containing one or multiple ingredients
+var findRecipeByIngredients = (query, callback) => {
+    //Recipe.find({ ingredients: { $in: query } }, function (err, recipes) {
+    Recipe
+        .byIngredients(query)
         .exec(function (err, recipes) {
             for (let i = 0; i < recipes.length; ++i) {
                 recipes[i].score = getRecipeScore(ingredients, recipes[i]);
@@ -134,7 +109,7 @@ var insertContact = (req, res) => {
 
 // Exporting callbacks
 module.exports = {
-    findRecipeByIngredient,
+    findRecipeByIngredients,
     findRecipeByID,
     insertRecipe,
     findStorageInfo,

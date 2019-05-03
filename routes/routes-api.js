@@ -29,14 +29,8 @@ router.get('/', (req, res) => {
  */
 
 router.get('/recipes/:ingredients', function (req, res) {
-  let query = {
-    ingredients: req.params.ingredients.split(',').map((el) => {
-      return { ingredient: el };
-    })
-  };
-
-  console.log(query);
-  controller.findRecipeByIngredient(query, function (msg) { sendResponse(msg, res); });
+    let query = req.params.ingredients.split('+');
+    controller.findRecipeByIngredients(query, function (msg) { sendResponse(msg, res); });
 });
 
 /*
