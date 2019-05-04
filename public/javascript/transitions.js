@@ -24,6 +24,7 @@
             }
         });
 
+        $main.attr('data-progress-extra', "false");
         let smoothState = $main.smoothState({
             prefetch: true,
             cacheLength: 2,
@@ -43,7 +44,7 @@
                 }
 
                 $main.attr('data-transition', transition);
-                $main.attr('data-progress-extra', "false");
+                $main.attr('data-progress-extra', target >= 3 ? "true" : "false");
             },
             onStart: {
                 duration: 250,

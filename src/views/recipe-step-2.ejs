@@ -11,18 +11,18 @@
                 <div class="body-wrap">
                     <section class="container fill-middle-large">
 
-                        <a class="button button-back" href="<%= url_back %>" data-target="2">Back</a>
+                        <a class="button button-back" href="<%= url_back %>" data-target="3">Back</a>
                         <h1 class="heading"><%= recipe.title %></h1>
                         <ol class="recipe-steps">
-                            <% for (let i = 0; i < recipe.ingredients.length; ++i) { %>
+                            <% for (let i = 0; i < recipe.method.length; ++i) { %>
                             <li>
-                                <%- include("includes/elements/checkbox-pill", {label: recipe.ingredients[i].text, checked: false}); %>
+                                <%= recipe.method[i] %>
                             </li>
                             <% } %>
                         </ol>
 
                         <a href="#" class="button button-inline button-next button-recipe" data-id="<%= recipe._id %>"
-                            data-step="2">Method</a>
+                            data-step="3">Method</a>
 
                     </section>
                 </div>

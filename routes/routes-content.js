@@ -38,7 +38,7 @@ router.get('/recipe', function (req, res, next) {
     });
 });
 
-/* GET recipe page. */
+/* GET recipe step 1 page. */
 router.get('/result/1/', function (req, res, next) {
     // GET recipe from id
     recipeController.findRecipeByID(req.query.id, function (msg) {
@@ -46,9 +46,45 @@ router.get('/result/1/', function (req, res, next) {
             res.status(500).send(msg.error);
         } else {
             res.render('recipe-step-1', {
-                title: "Recipe",
+                title: msg.result.title,
                 theme_color: THEME_COLOR,
                 viewport: 3,
+                recipe: msg.result,
+                url_back: req.query.q
+            });
+        }
+    });
+});
+
+/* GET recipe step 2 page. */
+router.get('/result/2/', function (req, res, next) {
+    // GET recipe from id
+    recipeController.findRecipeByID(req.query.id, function (msg) {
+        if (msg.error) {
+            res.status(500).send(msg.error);
+        } else {
+            res.render('recipe-step-2', {
+                title: msg.result.title,
+                theme_color: THEME_COLOR,
+                viewport: 4,
+                recipe: msg.result,
+                url_back: req.query.q
+            });
+        }
+    });
+});
+
+/* GET recipe step 3 page. */
+router.get('/result/3/', function (req, res, next) {
+    // GET recipe from id
+    recipeController.findRecipeByID(req.query.id, function (msg) {
+        if (msg.error) {
+            res.status(500).send(msg.error);
+        } else {
+            res.render('recipe-step-3', {
+                title: msg.result.title,
+                theme_color: THEME_COLOR,
+                viewport: 5,
                 recipe: msg.result,
                 url_back: req.query.q
             });

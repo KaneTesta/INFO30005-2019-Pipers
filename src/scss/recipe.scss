@@ -69,12 +69,13 @@
     }
 }
 
-.recipe-steps-ingredients {
+.recipe-steps {
     .checkbox-container {
         display: block;
     }
 
     li {
+        margin-bottom: 12px;
         margin-left: 36px;
         padding-left: 12px;
     }
