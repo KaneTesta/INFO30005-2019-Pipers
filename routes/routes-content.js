@@ -38,6 +38,24 @@ router.get('/recipe', function (req, res, next) {
     });
 });
 
+/* GET recipe page. */
+router.get('/result/1/', function (req, res, next) {
+    // GET recipe from id
+    recipeController.findRecipeByID(req.query.id, function (msg) {
+        if (msg.error) {
+            res.status(500).send(msg.error);
+        } else {
+            res.render('recipe-step-1', {
+                title: "Recipe",
+                theme_color: THEME_COLOR,
+                viewport: 3,
+                recipe: msg.result,
+                url_back: req.query.q
+            });
+        }
+    });
+});
+
 router.get('/recipe/:id', recipeController.findRecipeByID);
 
 module.exports = router;

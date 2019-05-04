@@ -41,6 +41,11 @@ button,
         display: inline-flex;
     }
 
+    &.button-right {
+        display: inline-flex;
+        float: right;
+    }
+
     &.button-icon {
         margin: 0;
         padding: 0;

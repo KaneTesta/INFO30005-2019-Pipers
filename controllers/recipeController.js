@@ -38,14 +38,12 @@ var findRecipeByIngredients = (query, callback) => {
         });
 };
 
-var findRecipeByID = (req, res, next) => {
-    Recipe.findById(req.params.id, function(err, result) {
-        if (!err) {
-            res.json(result.toJSON());
-        }
-        else {
-            console.log(err);
-        }
+var findRecipeByID = (id, callback) => {
+    Recipe.findById(id, function (err, result) {
+        callback({
+            error: err,
+            result: result
+        });
     })
 }
 

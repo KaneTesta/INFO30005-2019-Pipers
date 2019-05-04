@@ -31,9 +31,9 @@ input[type="text"] {
     width: 100%;
     margin: 1em 0;
 
-    .flex-padding {
-        flex: 1em;
-        flex-grow: 0;
+    button,
+    .button {
+        margin-left: 16px;
     }
 }
 

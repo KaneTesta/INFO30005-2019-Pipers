@@ -1,4 +1,25 @@
 $(document).on("transition", function () {
+    let $search = $("#IngredientsSearch");
+    if (!$search.length) {
+        return;
+    }
+
+    const EJS_INGREDIENT = `
+    <div class="ingredient-element" data-ingredient="<%= ingredient %>">
+        <p><%= ingredient%></p>
+        <div class="flex-fill"></div>
+        <input type="checkbox" id="CheckboxPriority<%= ingredient %>" class="checkbox-pill button-priority button-icon">
+        <label for="CheckboxPriority<%= ingredient %>">
+            <ion-icon class="checkbox-icon checkbox-add" name="star-outline"></ion-icon>
+            <ion-icon class="checkbox-icon checkbox-checkmark" name="star"></ion-icon>
+            <span>Priority</span>
+        </label>
+        <button id="IngredientRemove<%=ingredient%>" class="button-error button-icon">
+            <ion-icon name="remove"></ion-icon>
+        </button>
+    </div>
+    `;
+
     function hideIngredientMessages(maxMessages = 0) {
         let $ingredientErrorList = $("#IngredientsMessageList");
         // Hide all existing errors
@@ -67,14 +88,10 @@ $(document).on("transition", function () {
             if (!hasIngredient(ingredient)) {
                 // Create ingredient element
                 let $ingredientsList = $("#IngredientsList");
-                let $ingredientElement = $("<div class=\"ingredient-element\"></div>");
-                $ingredientElement.attr("data-ingredient", ingredient);
-                $ingredientElement.html(ingredient);
-                // Create remove button
-                let $flexFill = $("<div class=\"flex-fill\"></div>");
-                $flexFill.appendTo($ingredientElement);
-                let $ingredientRemoveButton = $("<button class=\"button-error button-icon\"></button>");
-                $ingredientRemoveButton.appendTo($ingredientElement);
+
+                let $ingredientElement = $(ejs.render(EJS_INGREDIENT, { ingredient: ingredient }));
+                // Setup remove button
+                let $ingredientRemoveButton = $ingredientElement.children("#IngredientRemove" + ingredient);
                 $ingredientRemoveButton.on('click', function () {
                     // Animate the element out
                     $ingredientElement.css("opacity", 0);
@@ -83,14 +100,9 @@ $(document).on("transition", function () {
                     });
                 });
 
-                // Add icon for remove button
-                let $ingredientRemoveIcon = $("<ion-icon name=\"remove\"></ion-icon>");
-                $ingredientRemoveIcon.appendTo($ingredientRemoveButton);
-
                 // Hide element
                 $ingredientElement.hide();
                 $ingredientElement.css("opacity", 0);
-
                 // Add at index
                 let addedIngredient = false;
                 $ingredientsList.children().each(function () {
@@ -137,12 +149,22 @@ $(document).on("transition", function () {
      * Get an array of the ingredients that have been added
      * @returns {string[]}
      */
-    function getIngredients() {
+    function getIngredients(priority = false) {
         let ingredients = [];
         let $ingredientsList = $("#IngredientsList");
         $ingredientsList.children().each(function () {
             let $element = $(this);
-            ingredients.push($element.attr("data-ingredient").toLowerCase());
+            // Get ingredient name
+            let ingredientName = $element.attr("data-ingredient");
+            // Check priority
+            if (priority) {
+                let $priorityCheckbox = $element.children("CheckboxPriority" + ingredientName);
+                if ($priorityCheckbox.attr("checked")) {
+                    ingredients.push(ingredientName.toLowerCase());
+                }
+            } else {
+                ingredients.push(ingredientName.toLowerCase());
+            }
         });
 
         return ingredients;
@@ -192,11 +214,10 @@ $(document).on("transition", function () {
     let $ingredientsSection = $("#IngredientsSection");
     let $ingredientsLoading = $("#IngredientsLoading");
     // Get ingredients from server
-    $.getJSON("./api/ingredients", function (data) {
+    $.getJSON("/api/ingredients", function (data) {
         /** @type {string[]} */
         let ingredientList = data.sort();
         // Setup autocomplete
-        let $search = $("#IngredientsSearch");
         $search.autocomplete({
             html: true,
             autoFocus: true,
@@ -289,11 +310,14 @@ $(document).on("transition", function () {
         // Setup find recipes button
         $("#IngredientsButtonFindRecipes").on('click', function () {
             // Get url
-            let params = [
-                "ingredients=" + getIngredients().join(","),
-                "unavailable_cookware=" + getUnavailableCookware().join(","),
-                "maximum_time=" + getMaximumTime(),
-            ];
+            params = {
+                "ingredients": getIngredients(),
+                "priority_ingredients": getIngredients(true),
+                "unavailable_cookware": getUnavailableCookware(),
+                "maximum_time": getMaximumTime()
+            }
+
+            let url = "/recipe?" + jQuery.param(params);
 
             let url = "./recipe?" + params.join("&");
             // Check smoothState

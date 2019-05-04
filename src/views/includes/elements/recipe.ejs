@@ -27,18 +27,13 @@
             <% } %>
             <% } %>
         </div>
-        <div class="recipe-description">
-            <p> Has: <%= recipe.matches.join(', ') %> </p>
-            <p> <%= recipe.description %> </p>
-<!--             <p> <img src=<%= recipe.image%> class="thumbnail"> </p>
- -->        </div>
-        <!-- <div class="recipe-steps">
-            <ul>
-                <% for (let step = 0; step < recipe.method.length; ++step) { %>
-                <li><%= recipe.method[step] %></li>
-                <% } %>
-            </ul>
-        </div> -->
+        <% } %>
+
+        <% if (recipe.description) { %>
+        <p class="recipe-description"><%= recipe.description %></p>
+        <% } %>
+
+        <a href="#" class="button button-inline button-next button-recipe" data-id="<%= recipe._id %>" data-step="1">See
+            Recipe</a>
     </div>
-    <a href="<%= recipe.source %>" class="button button-next">See Recipe</a>
 </div>

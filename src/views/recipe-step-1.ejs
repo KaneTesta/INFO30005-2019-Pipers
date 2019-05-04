@@ -1,0 +1,37 @@
+<html>
+
+    <head>
+        <% include includes/head %>
+    </head>
+
+    <body>
+        <div id="Main" class="main">
+            <% include includes/elements/progress %>
+
+            <div class="animation-element" data-viewport="<%= viewport %>">
+                <div class="body-wrap">
+                    <section class="container fill-middle-large">
+
+                        <a class="button button-back" href="<%= url_back %>" data-target="3">Back</a>
+                        <h1 class="heading"><%= recipe.title %></h1>
+
+                        <ol class="recipe-steps-ingredients">
+                            <% for (let i = 0; i < recipe.ingredients.length; ++i) { %>
+                            <li>
+                                <%- include("includes/elements/checkbox-pill", {label: recipe.ingredients[i].text, checked: false}); %>
+                            </li>
+                            <% } %>
+                        </ol>
+
+                        <a href="#" class="button button-inline button-next button-recipe" data-id="<%= recipe._id %>"
+                            data-step="2">Method</a>
+
+                    </section>
+                </div>
+            </div>
+        </div>
+    </body>
+    <footer>
+    </footer>
+
+</html>
