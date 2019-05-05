@@ -3,25 +3,33 @@
         <span>Idea <%= index %></span>
         <h2><%= recipe.title %></h2>
         <div class="recipe-info">
-            <% if (recipe.time) { %>
-            <p>Time: <%= recipe.time %></p>
+            <% if (recipe.prepTime) { %>
+            <p>Prep time: <%= recipe.prepTime %> minutes</p>
             <% } %>
+            <% if (recipe.cookTime) { %>
+                <p>Cook time: <%= recipe.cookTime %> minutes</p>
+                <% } %>
 
             <% if (recipe.serves) { %>
             <p>Serves: <%= recipe.serves %></p>
             <% } %>
 
-            <% if (recipe.serves) { %>
-            <p>Ingredients: <%= recipe.ingredients.join(", ") %></p>
-            <% } %>
+           <!--  <% if (recipe.serves) { %>
+            <p>Ingredients: <%= recipe.ingredients.map((i) => {return i.ingredient}).join(', ') %></p>
+            <% } %> -->
         </div>
-        <div class="recipe-steps">
+        <div class="recipe-description">
+            <p> Has: <%= recipe.matches.join(', ') %> </p>
+            <p> <%= recipe.description %> </p>
+<!--             <p> <img src=<%= recipe.image%> class="thumbnail"> </p>
+ -->        </div>
+        <!-- <div class="recipe-steps">
             <ul>
                 <% for (let step = 0; step < recipe.method.length; ++step) { %>
                 <li><%= recipe.method[step] %></li>
                 <% } %>
             </ul>
-        </div>
+        </div> -->
     </div>
-    <a href="#" class="button">See Recipe</a>
+    <a href=<%= recipe.source %> class="button">See Recipe</a>
 </div>
