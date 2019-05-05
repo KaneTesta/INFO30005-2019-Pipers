@@ -23,6 +23,11 @@
         <div class="recipe-info recipe-ingredients">
             <% if (recipe.ingredients) { %>
             <% for (let i = 0; i < recipe.ingredients.length; ++i) { %>
+            <% if (recipe.matches_priority.find((el) => el === recipe.ingredients[i].ingredient)) { %>
+            <p class="ingredient-match-priority"><%= recipe.ingredients[i].text %></p>
+            <% } else if (recipe.matches.find((el) => el === recipe.ingredients[i].ingredient)) { %>
+            <p class="ingredient-match"><%= recipe.ingredients[i].text %></p>
+            <% } else { %>
             <p><%= recipe.ingredients[i].text %></p>
             <% } %>
             <% } %>
