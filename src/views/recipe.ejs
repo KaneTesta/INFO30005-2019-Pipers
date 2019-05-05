@@ -15,8 +15,14 @@
                         <a class="button button-back" href="ingredients" data-target="1">Back</a>
                         <h1 class="heading">Recipe Results</h1>
 
-                        <% for (let index = 0; index < recipes.length; ++index) { %>
-                        <%- include("includes/elements/recipe", {recipe: recipes[index], index: index + 1}); %>
+                        <% if (recipes && recipes.length > 0) { %>
+                        <div class="recipe-list">
+                            <% for (let index = 0; index < recipes.length; ++index) { %>
+                            <%- include("includes/elements/recipe", {recipe: recipes[index], index: index + 1}); %>
+                            <% } %>
+                        </div>
+                        <% } else { %>
+                        <div class="message message-error">No recipes found</div>
                         <% } %>
 
                     </section>

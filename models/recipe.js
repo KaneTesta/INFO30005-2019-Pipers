@@ -54,6 +54,11 @@ recipeSchema.statics.byQuery = function (query) {
           $setIntersection: [query.ingredients, {
             $map: { input: "$ingredients", as: "ingredient", in: "$$ingredient.ingredient" }
           }]
+        },
+        matches_priority: {
+          $setIntersection: [query.priority_ingredients, {
+            $map: { input: "$ingredients", as: "ingredient", in: "$$ingredient.ingredient" }
+          }]
         }
       }
     },
@@ -62,6 +67,11 @@ recipeSchema.statics.byQuery = function (query) {
         totalMatch: {
           $size: "$matches"
         }
+      }
+    },
+    {
+      $match: {
+        "totalMatch": { $gte: 1 }
       }
     },
     {
