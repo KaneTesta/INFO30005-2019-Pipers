@@ -9,10 +9,13 @@
             <% include includes/elements/progress %>
             <div class="animation-element" data-viewport="<%= viewport %>">
                 <div class="body-wrap">
-                    <section class="container fill-middle-large">
+                    <section class="container fill-middle-medium">
+                        <% if (url_back) { %>
+                        <a class="button button-back button-left" href="<%= url_back %>" data-target="2">Back</a>
+                        <% } %>
 
-                        <a class="button button-back" href="<%= url_back %>" data-target="2">Back</a>
                         <h1 class="heading"><%= recipe.title %></h1>
+                        <h3>Ingredients</h3>
                         <ol class="recipe-steps">
                             <% for (let i = 0; i < recipe.ingredients.length; ++i) { %>
                             <li>

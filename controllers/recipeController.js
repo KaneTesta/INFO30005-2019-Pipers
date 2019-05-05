@@ -7,7 +7,7 @@ var Storage = mongoose.model('storage');
 var findRecipeByIngredients = (query, callback) => {
     //Recipe.find({ ingredients: { $in: query } }, function (err, recipes) {
     Recipe
-        .byIngredients(query)
+        .byQuery(query)
         .exec(function (err, recipes) {
             for (let i = 0; i < recipes.length; ++i) {
                 recipes[i].score = getRecipeScore(ingredients, recipes[i]);

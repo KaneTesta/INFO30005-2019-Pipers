@@ -47,7 +47,8 @@ h3,
 h4,
 h5,
 h6 {
-    margin-bottom: 0.5em;
+    margin-top: calc(0.2em + 12px);
+    margin-bottom: calc(0.6em + 12px);
 }
 
 h1 {
@@ -59,25 +60,28 @@ h2 {
 }
 
 h3 {
-    font-size: 1.5em;
+    font-size: 1.4em;
 }
 
 h4 {
+    letter-spacing: 2;
+    text-transform: uppercase;
+
     font-size: 1.2em;
+    font-weight: 700;
 }
 
 h5 {
+    letter-spacing: 1;
     text-transform: uppercase;
 
     color: $text-color-info;
 
-    font-size: 1.0em;
+    font-size: 0.9em;
     font-weight: 700;
 }
 
 h6 {
-    margin-left: 0.14em;
-
     text-transform: uppercase;
 
     color: $text-color-detail;
@@ -116,15 +120,16 @@ h6 {
     }
 }
 
+.overlay-desc {
+    color: $text-color-accent;
+}
+
 .heading-section {
     margin: 0;
     padding: 0;
 
     text-transform: uppercase;
 
-    color: transparentize($text-color, 0.5);
-
-    font-size: 0.8em;
     font-weight: 700;
 }
 

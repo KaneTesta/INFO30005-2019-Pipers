@@ -1,4 +1,5 @@
 $(document).on("transition", function () {
+    // Setup recipe buttons
     $(".button-recipe").on("click", function (e) {
         e.preventDefault();
 
@@ -20,4 +21,27 @@ $(document).on("transition", function () {
             window.location.assign(url);
         }
     });
+
+    // Handle ingredient lists
+    let recipeCleanup = $("#RecipeCleanup");
+    if (recipeCleanup) {
+        $.getJSON("/api/ingredients",
+            /**
+             * Get ingredients from server
+             * @param {[string]} data
+             */
+            function (data) {
+                function findIngredient(ingredient) {
+                    return data.find((el) => el.name.toLowerCase() === ingredient)
+                }
+
+                // Set ingredients
+                recipeCleanup.children().each(function () {
+                    let $el = $(this);
+                    let ingredient = $el.attr("data-ingredient");
+                    $el.html(ingredient);
+                });
+            }
+        );
+    }
 });

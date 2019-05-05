@@ -24,6 +24,7 @@ button,
     cursor: pointer;
     transition: box-shadow 0.15s ease, background-color 0.1s ease, border-color 0.1s ease;
     text-decoration: none;
+    letter-spacing: 1;
     text-transform: uppercase;
 
     color: $text-color-accent;
@@ -100,10 +101,22 @@ button,
     }
 
     &.button-back {
-        float: left;
+        position: absolute;
+        left: 0;
+        top: 0;
 
-        margin: 26px 16px 0;
+        margin: 26px 16px 0 0;
         padding-left: 36px;
+
+        &.button-left {
+            position: relative;
+
+            float: left;
+
+            & + .heading {
+                text-align: left;
+            }
+        }
 
         &::after {
             left: 18px;
@@ -126,6 +139,8 @@ button,
         }
 
         @media screen and (max-width: $breakpoint-medium) {
+            position: relative;
+
             float: right;
 
             margin: 19px 16px 0;

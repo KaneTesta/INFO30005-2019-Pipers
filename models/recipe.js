@@ -25,14 +25,35 @@ var recipeSchema = mongoose.Schema({
  * 
  * TODO: paginate (https://www.npmjs.com/package/mongoose-aggregate-paginate)
  * 
- * @param {string[]} i Array of ingredients
+ * @param {{ingredients: [String], priority_ingredients: [String], unavailable_cookware: [String], maximum_time: number}} query Array of ingredients
  */
-recipeSchema.statics.byIngredients = function (i) {
+recipeSchema.statics.byQuery = function (query) {
   return this.aggregate([
+    {
+      $match: {
+        "totalTime": { $lte: query.maximum_time }
+      }
+    },
+    {
+      $addFields: {
+        hasPriorityIngredients: {
+          $setIsSubset: [query.priority_ingredients, {
+            $map: { input: "$ingredients", as: "ingredient", in: "$$ingredient.ingredient" }
+          }]
+        }
+      }
+    },
+    {
+      $match: {
+        "hasPriorityIngredients": true
+      }
+    },
     {
       $addFields: {
         matches: {
-          $setIntersection: [i, { $map: { input: "$ingredients", as: "ingredient", in: "$$ingredient.ingredient" } }]
+          $setIntersection: [query.ingredients, {
+            $map: { input: "$ingredients", as: "ingredient", in: "$$ingredient.ingredient" }
+          }]
         }
       }
     },
@@ -46,10 +67,11 @@ recipeSchema.statics.byIngredients = function (i) {
     {
       $sort: {
         totalMatch: -1
-      }
+      },
     },
     {
       $project: {
+        hasPriorityIngredients: 0,
         totalMatch: 0
       }
     }

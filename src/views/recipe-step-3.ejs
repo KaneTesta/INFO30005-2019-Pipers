@@ -11,21 +11,21 @@
                 <div class="body-wrap">
                     <section class="container fill-middle-medium">
                         <% if (url_back) { %>
-                        <a class="button button-back button-left" href="<%= url_back %>" data-target="3">Back</a>
+                        <a class="button button-back button-left" href="<%= url_back %>" data-target="4">Back</a>
                         <% } %>
 
                         <h1 class="heading"><%= recipe.title %></h1>
-                        <h3>Method</h3>
-                        <ol class="recipe-steps">
-                            <% for (let i = 0; i < recipe.method.length; ++i) { %>
-                            <li>
-                                <%= recipe.method[i] %>
+                        <h3>Cleanup</h3>
+                        <ol id="RecipeCleanup" class="recipe-steps">
+                            <% for (let i = 0; i < recipe.ingredients.length; ++i) { %>
+                            <li data-ingredient="<%= recipe.ingredients[i].ingredient %>">
                             </li>
                             <% } %>
                         </ol>
 
-                        <a href="#" class="button button-inline button-next button-recipe" data-id="<%= recipe._id %>"
-                            data-step="3">Cleanup</a>
+                        <h5>Conatacts</h5>
+                        <p>Have extra food? See who you can contact to make sure that your food doesn't go to waste.</p>
+                        <a href="/contacts" class="button button-inline button-next">See Contacts</a>
 
                     </section>
                 </div>

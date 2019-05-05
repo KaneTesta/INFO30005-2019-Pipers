@@ -158,8 +158,8 @@ $(document).on("transition", function () {
             let ingredientName = $element.attr("data-ingredient");
             // Check priority
             if (priority) {
-                let $priorityCheckbox = $element.children("CheckboxPriority" + ingredientName);
-                if ($priorityCheckbox.attr("checked")) {
+                let $priorityCheckbox = $element.children("#CheckboxPriority" + ingredientName);
+                if ($priorityCheckbox.is(":checked")) {
                     ingredients.push(ingredientName.toLowerCase());
                 }
             } else {
