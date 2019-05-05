@@ -74,7 +74,9 @@ var insertContact = (req, res) => {
     var contact = new Contact({
         name: req.body.name,
         phone: req.body.phone,
-        address: req.body.address
+        address: req.body.address,
+        description: req.body.description,
+        url: req.body.url
     });
     contact.save((err, newContact) => {
         if (!err) {
