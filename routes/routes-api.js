@@ -3,6 +3,7 @@ const router = express.Router();
 
 const controller = require('../controllers/recipeController');
 const ingredientController = require('../controllers/ingredientController');
+const contactController = require('../controllers/contactController');
 
 /**
  * 
@@ -30,7 +31,7 @@ router.get('/', (req, res) => {
 
 router.get('/recipes/:ingredients', function (req, res) {
     let query = req.params.ingredients.split('+');
-    controller.findRecipeByIngredient(query, function (msg) { sendResponse(msg, res); });
+    controller.findRecipeByIngredients(query, function (msg) { sendResponse(msg, res); });
 });
 
 /*
@@ -75,9 +76,12 @@ router.get('/storage/:ingredient', controller.findStorageInfo);
 router
     .route('/contacts')
 
-    .get(controller.findContact)
+    .get(contactController.findContact)
 
-    .post(controller.insertContact);
+    .post(contactController.insertContact);
+
+router.get('/contacts/all', contactController.allContacts);
+router.delete('/contacts/:id',contactController.deleteContact);
 
 /*
 TODO
