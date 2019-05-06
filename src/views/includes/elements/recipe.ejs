@@ -9,6 +9,8 @@
         <div class="recipe-info">
             <% if (recipe.totalTime) { %>
             <p>Time: <%= recipe.totalTime %> minutes</p>
+            <% if (recipe.prepTime) { %>
+            <p>Prep time: <%= recipe.prepTime %> minutes</p>
             <% } %>
             <% if (recipe.cookTime) { %>
                 <p>Cook time: <%= recipe.cookTime %> minutes</p>

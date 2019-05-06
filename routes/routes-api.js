@@ -3,6 +3,7 @@ const router = express.Router();
 
 const controller = require('../controllers/recipeController');
 const ingredientController = require('../controllers/ingredientController');
+const contactController = require('../controllers/contactController');
 
 /**
  * 
@@ -78,9 +79,12 @@ router.get('/storage/:ingredient', controller.findStorageInfo);
 router
   .route('/contacts')
 
-  .get(controller.findContact)
+  .get(contactController.findContact)
 
-  .post(controller.insertContact);
+  .post(contactController.insertContact);
+
+router.get('/contacts/all', contactController.allContacts);
+router.delete('/contacts/:id', contactController.deleteContact);
 
 /*
 TODO

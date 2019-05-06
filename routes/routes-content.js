@@ -1,5 +1,7 @@
 var express = require('express');
 var recipeController = require("../controllers/recipeController");
+var contactController = require("../controllers/contactController");
+
 
 var router = express.Router();
 
@@ -86,6 +88,17 @@ router.get('/result/3/', function (req, res, next) {
             });
         }
     });
+});
+
+/* GET contacts page. */
+router.get('/contacts', function (req, res) {
+    contactController.allContacts(function (msg) {
+        if (msg.error) {
+            res.status(500).send(msg.error);
+        } else {
+            res.render('contacts', { title: "Contacts", theme_color: THEME_COLOR, viewport: 1, users: msg.result });
+        }
+    }
 });
 
 router.get('/recipe/:id', recipeController.findRecipeByID);

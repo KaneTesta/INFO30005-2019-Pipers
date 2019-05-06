@@ -318,8 +318,6 @@ $(document).on("transition", function () {
             }
 
             let url = "/recipe?" + jQuery.param(params);
-
-            let url = "./recipe?" + params.join("&");
             // Check smoothState
             let $main = $('#Main');
             let smoothState = $main.data("smoothState");

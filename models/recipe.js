@@ -1,4 +1,14 @@
 var mongoose = require('mongoose');
+var parser = require('recipe-ingredient-parser-v2');
+var pluralize = require('pluralize');
+
+//TODO
+// Search by quantities of ingredients
+// Search by recipe time
+// Search by cookware
+// Search by serves
+// Combine ingredients from multiple recipes
+
 var recipeSchema = mongoose.Schema({
   title: {
     type: String,
@@ -16,7 +26,32 @@ var recipeSchema = mongoose.Schema({
     required: [true, "Recipe needs a method"]
   },
   author: String,
-  serves: Number
+  serves: Number,
+  source: String,
+  image: String,
+  notes: String,
+  prepTime: Number,
+  cookTime: Number,
+  totalTime: Number,
+  nutrition: {
+    calories: String,
+    fatContent: String,
+    saturatedFatContent: String,
+    carbohydrateContent: String,
+    sugarContent: String,
+    fibreContent: String,
+    proteinContent: String,
+    cholestrolContent: String,
+    sodiumContent: String
+  },
+  aggregateRating: {
+    ratingCount: Number,
+    ratingValue: Number
+  },
+  ingredients: {
+    type: Array,
+    required: [true, "Recipe needs ingredients"]
+  }
 });
 
 /**
@@ -87,21 +122,6 @@ recipeSchema.statics.byQuery = function (query) {
     }
   ])
 }
-
-/* recipeSchema.query.byIngredient = function (ingredients) {
-  return this
-    .where('ingredients')
-    .and(ingredients.map((ing) => {
-      cleanedIngredient = ing.toLowerCase().trim();
-      return {
-        ingredients: {
-          $elemMatch: {
-            ingredient: cleanedIngredient
-          }
-        }
-      }
-    }));
-} */
 
 recipeSchema.query.sortByRating = function () {
   return this.sort({ 'aggregateRating.ratingValue': -1 });

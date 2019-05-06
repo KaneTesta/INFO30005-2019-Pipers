@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Recipe = mongoose.model('recipe');
-var Contact = mongoose.model('contact');
 var Storage = mongoose.model('storage');
 
 // Find recipes containing one or multiple ingredients
@@ -47,6 +46,17 @@ var findRecipeByID = (id, callback) => {
     })
 }
 
+var findRecipeByID = (req, res, next) => {
+    Recipe.findById(req.params.id, function (err, result) {
+        if (!err) {
+            res.json(result.toJSON());
+        }
+        else {
+            console.log(err);
+        }
+    })
+}
+
 // Insert one recipe
 var insertRecipe = (recipe, callback) => {
     var recipe = new Recipe({
@@ -78,32 +88,8 @@ var findStorageInfo = (req, res) => {
     });
 };
 
-// Find contacts by name
-var findContact = (req, res) => {
-    Contact.find(req.query, (err, info) => {
-        if (!err) {
-            res.send(info);
-        } else {
-            res.sendStatus(404);
-        }
-    });
-};
 
-// Insert one contact
-var insertContact = (req, res) => {
-    var contact = new Contact({
-        name: req.body.name,
-        phone: req.body.phone,
-        address: req.body.address
-    });
-    contact.save((err, newContact) => {
-        if (!err) {
-            res.send(newContact.name + ' added!');
-        } else {
-            res.status(500).send({ error: err });
-        }
-    });
-};
+
 
 // Exporting callbacks
 module.exports = {
@@ -111,6 +97,4 @@ module.exports = {
     findRecipeByID,
     insertRecipe,
     findStorageInfo,
-    findContact,
-    insertContact
 };
