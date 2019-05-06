@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-
-// TODO: whitelist heroku on atlas
+if (process.env.NODE_ENV !== 'production') require('dotenv').config()
+const ATLAS_USER = process.env.ATLAS_USER || '';
 const ATLAS_PASS = process.env.ATLAS_PASS || '';
-const dbURI = `mongodb+srv://endwaste:${ATLAS_PASS}@cluster0-0uuii.azure.mongodb.net/test?retryWrites=true`;
+const dbURI = `mongodb+srv://${ATLAS_USER}:${ATLAS_PASS}@cluster0-0uuii.azure.mongodb.net/test?retryWrites=true`;
 
 const options = {
   useNewUrlParser: true,
