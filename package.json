@@ -12,6 +12,7 @@
   "dependencies": {
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
+    "dotenv": "^8.0.0",
     "ejs": "^2.6.1",
     "express": "~4.16.0",
     "gulp": "^4.0.1",
