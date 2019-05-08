@@ -98,7 +98,7 @@ router.get('/contacts', function (req, res) {
         } else {
             res.render('contacts', { title: "Contacts", theme_color: THEME_COLOR, viewport: 1, users: msg.result });
         }
-    }
+    });
 });
 
 router.get('/recipe/:id', recipeController.findRecipeByID);

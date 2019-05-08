@@ -8,28 +8,6 @@ var findRecipeByIngredients = (query, callback) => {
     Recipe
         .byQuery(query)
         .exec(function (err, recipes) {
-            for (let i = 0; i < recipes.length; ++i) {
-                recipes[i].score = getRecipeScore(ingredients, recipes[i]);
-            }
-
-            recipes = recipes.filter(function (el) {
-                // Check score
-                if (el.score <= 0) {
-                    return false;
-                }
-
-                // Check time
-                if (maxTime !== null && el.totalTime > maxTime) {
-                    return false;
-                }
-
-                return true;
-            });
-
-            recipes.sort(function (recipe1, recipe2) {
-                return recipe2.score - recipe1.score;
-            });
-
             callback({
                 error: err,
                 result: recipes.slice(0, 40)
@@ -43,17 +21,6 @@ var findRecipeByID = (id, callback) => {
             error: err,
             result: result
         });
-    })
-}
-
-var findRecipeByID = (req, res, next) => {
-    Recipe.findById(req.params.id, function (err, result) {
-        if (!err) {
-            res.json(result.toJSON());
-        }
-        else {
-            console.log(err);
-        }
     })
 }
 

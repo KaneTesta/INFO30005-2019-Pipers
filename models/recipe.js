@@ -19,7 +19,7 @@ var recipeSchema = mongoose.Schema({
   ingredients: [{
     quantity: Number,
     unit: String,
-    ingredient: Schema.ObjectId
+    ingredient: mongoose.Schema.ObjectId
   }],
   method: {
     type: [String],

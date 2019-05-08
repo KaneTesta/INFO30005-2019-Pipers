@@ -10,6 +10,7 @@
     $(document).ready(function () {
         // Init here.
         let $main = $('#Main');
+        let $body = $('body');
 
         $(document).on("transition", function () {
             let current = $('[data-viewport]').first().data('viewport');
@@ -58,6 +59,7 @@
                         $progressExtra.removeClass("visible");
                     }
 
+                    $body.stop().animate({ scrollTop: 0 }, 200);
                     // Restart your animation
                     smoothState.restartCSSAnimations();
                 }

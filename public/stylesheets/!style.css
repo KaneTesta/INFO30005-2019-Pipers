@@ -256,13 +256,20 @@ body {
   color: rgba(0, 0, 0, 0.95);
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-size: 16px;
-  font-weight: 400; }
+  font-weight: 400;
+  line-height: 1.5; }
 
 ul,
-li {
+ul li {
   margin: 0;
   padding: 0;
-  list-style: none; }
+  list-style: disc; }
+
+ol,
+ol li {
+  margin: 0;
+  padding: 0;
+  list-style: decimal; }
 
 a,
 p,
@@ -283,7 +290,10 @@ h3,
 h4,
 h5,
 h6 {
-  margin-bottom: 0.5em; }
+  margin-top: -webkit-calc(0.2em + 12px);
+  margin-top: calc(0.2em + 12px);
+  margin-bottom: -webkit-calc(0.6em + 12px);
+  margin-bottom: calc(0.6em + 12px); }
 
 h1 {
   font-size: 2.0em; }
@@ -292,16 +302,26 @@ h2 {
   font-size: 1.8em; }
 
 h3 {
-  font-size: 1.5em; }
+  font-size: 1.4em; }
 
 h4 {
-  font-size: 1.2em; }
+  letter-spacing: 2;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  font-weight: 700; }
 
 h5 {
-  font-size: 1.0em; }
+  letter-spacing: 1;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 0.9em;
+  font-weight: 700; }
 
 h6 {
-  font-size: 0.8em; }
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 0.8em;
+  font-weight: 700; }
 
 .subheading,
 .heading {
@@ -323,17 +343,25 @@ h6 {
       padding: 20px 18px;
       font-size: 1.2em; } }
 
+.overlay-desc {
+  color: rgba(255, 255, 255, 0.95); }
+
 .heading-section {
   margin: 0;
   padding: 0;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.45);
-  font-size: 0.8em;
   font-weight: 700; }
 
 .subheading {
   margin-bottom: 0.4em;
   font-size: 2.4em; }
+
+.text-detail {
+  margin-top: 12px;
+  margin-left: 0.14em;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 0.75em;
+  font-weight: 700; }
 
 @-webkit-keyframes button-active {
   from {
@@ -369,6 +397,7 @@ button,
   transition: box-shadow 0.15s ease, background-color 0.1s ease, border-color 0.1s ease;
   transition: box-shadow 0.15s ease, background-color 0.1s ease, border-color 0.1s ease, -webkit-box-shadow 0.15s ease;
   text-decoration: none;
+  letter-spacing: 1;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.95);
   border: 1px solid #34a534;
@@ -392,6 +421,13 @@ button,
     display: -webkit-inline-flex;
     display: -ms-inline-flexbox;
     display: inline-flex; }
+  button.button-right,
+  .button.button-right {
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    float: right; }
   button.button-icon,
   .button.button-icon {
     margin: 0;
@@ -436,8 +472,15 @@ button,
     position: absolute;
     left: 0;
     top: 0;
-    margin: 24px 16px;
+    margin: 26px 16px 0 0;
     padding-left: 36px; }
+    button.button-back.button-left,
+    .button.button-back.button-left {
+      position: relative;
+      float: left; }
+      button.button-back.button-left + .heading,
+      .button.button-back.button-left + .heading {
+        text-align: left; }
     button.button-back::after,
     .button.button-back::after {
       left: 18px;
@@ -457,15 +500,15 @@ button,
     @media screen and (max-width: 800px) {
       button.button-back,
       .button.button-back {
-        left: unset;
-        right: 0;
-        margin: 20px 16px;
+        position: relative;
+        float: right;
+        margin: 19px 16px 0;
         padding-top: 8px;
         padding-bottom: 8px; } }
     @media screen and (max-width: 520px) {
       button.button-back,
       .button.button-back {
-        margin: 12px 16px; } }
+        margin: 12px 16px 0; } }
   button:hover, button:focus,
   .button:hover,
   .button:focus {
@@ -530,15 +573,9 @@ input[type="text"] {
 .input-wide {
   width: 100%;
   margin: 1em 0; }
-  .input-wide .flex-padding {
-    -webkit-box-flex: 1em;
-    -webkit-flex: 1em;
-    -ms-flex: 1em;
-    flex: 1em;
-    -webkit-box-flex: 0;
-    -webkit-flex-grow: 0;
-    -ms-flex-positive: 0;
-    flex-grow: 0; }
+  .input-wide button,
+  .input-wide .button {
+    margin-left: 16px; }
 
 input[type="checkbox"].checkbox-pill {
   position: absolute;
@@ -736,8 +773,8 @@ input[type="checkbox"].checkbox-pill {
   border-radius: 1.2em;
   background-color: rgba(52, 165, 52, 0.1); }
   .message.message-warning {
-    border-color: #bb8a30;
-    background-color: rgba(187, 138, 48, 0.1); }
+    border-color: #bb6f30;
+    background-color: rgba(187, 111, 48, 0.1); }
   .message.message-error {
     border-color: #bb3030;
     background-color: rgba(187, 48, 48, 0.1); }
@@ -765,6 +802,18 @@ input[type="checkbox"].checkbox-pill {
     border-color: rgba(0, 0, 0, 0.2); }
   to {
     border-color: #34a534; } }
+
+@-webkit-keyframes progress-dot-border-alt {
+  from {
+    border-color: rgba(0, 0, 0, 0.2); }
+  to {
+    border-color: #526db9; } }
+
+@keyframes progress-dot-border-alt {
+  from {
+    border-color: rgba(0, 0, 0, 0.2); }
+  to {
+    border-color: #526db9; } }
 
 @-webkit-keyframes progress-dot-right {
   from {
@@ -818,6 +867,19 @@ input[type="checkbox"].checkbox-pill {
   .main.is-exiting .progress-dots .progress-dot.active {
     -webkit-animation: progress-dot-border 0.1s ease-in;
     animation: progress-dot-border 0.1s ease-in;
+    animation-direction: reverse;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both; }
+  .main .progress-dots-extra .progress-dot.active {
+    -webkit-animation: progress-dot-border-alt 0.1s ease-out;
+    animation: progress-dot-border-alt 0.1s ease-out;
+    -webkit-animation-direction: normal;
+    animation-direction: normal;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both; }
+  .main.is-exiting .progress-dots-extra .progress-dot.active {
+    -webkit-animation: progress-dot-border-alt 0.1s ease-in;
+    animation: progress-dot-border-alt 0.1s ease-in;
     animation-direction: reverse;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both; }
@@ -932,6 +994,34 @@ input[type="checkbox"].checkbox-pill {
       border-color: #34a534; }
       .progress-dots .progress-dot.active::after {
         visibility: visible; }
+
+.progress-dots.progress-dots-extra {
+  top: 32px;
+  height: 0;
+  margin-top: 20px;
+  -webkit-transition: opacity 0.25s ease, -webkit-transform 0.25s ease;
+  transition: opacity 0.25s ease, -webkit-transform 0.25s ease;
+  -o-transition: transform 0.25s ease, opacity 0.25s ease;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transition: transform 0.25s ease, opacity 0.25s ease, -webkit-transform 0.25s ease;
+  -webkit-transform: translateY(-1rem);
+  -ms-transform: translateY(-1rem);
+  transform: translateY(-1rem);
+  opacity: 0; }
+  .progress-dots.progress-dots-extra .progress-dot {
+    width: 17px;
+    height: 17px; }
+    .progress-dots.progress-dots-extra .progress-dot::after {
+      background-color: #526db9; }
+    .progress-dots.progress-dots-extra .progress-dot.active {
+      border-color: #526db9; }
+  .progress-dots.progress-dots-extra.visible {
+    -webkit-transform: none;
+    -ms-transform: none;
+    transform: none;
+    opacity: 1; }
+  .progress-dots.progress-dots-extra.progress-extra-layout {
+    position: relative; }
 
 /* KANES CSS */
 select {
@@ -1138,8 +1228,7 @@ select {
     border-color: transparent; }
   .ingredient-element button,
   .ingredient-element .button {
-    position: absolute;
-    right: 0; }
+    margin-left: 8px; }
 
 .ingredients-cookware {
   margin-top: 6px;
@@ -1187,37 +1276,52 @@ select {
 
 .recipe-row {
   margin: 16px 0;
-  padding: 16px 48px 0;
-  border: solid 1px #707070;
-  background-color: rgba(141, 248, 116, 0.075); }
-  .recipe-row:hover {
-    -webkit-box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.5); }
-  .recipe-row .recipe span {
-    display: block;
-    margin-top: 12px;
-    color: rgba(0, 0, 0, 0.6);
-    font-size: 0.75em;
-    font-weight: 700; }
-  .recipe-row .recipe .recipe-info {
-    margin-left: 12px;
-    padding: 0 24px;
-    border-left: 3px solid #34a534; }
-    .recipe-row .recipe .recipe-info p {
-      padding: 4px 0;
-      color: rgba(0, 0, 0, 0.6); }
-      .recipe-row .recipe .recipe-info p:first-child {
-        margin-top: 0; }
-      .recipe-row .recipe .recipe-info p:last-child {
-        margin-bottom: 0; }
-  .recipe-row .recipe .recipe-description {
-    margin: 36px 0;
-    padding: 0 24px; }
-    .recipe-row .recipe .recipe-description ul li {
-      margin-bottom: 1em;
-      list-style: decimal; }
-  .recipe-row .recipe img.thumbnail {
-    max-width: 50%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto; }
+  padding: 8px 48px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 1.2em;
+  border-radius: 1.2em;
+  background-color: #eff8ef; }
+  .recipe-row .recipe {
+    position: relative; }
+    .recipe-row .recipe .recipe-info {
+      margin: 12px 0 24px 12px;
+      padding: 0 24px;
+      border-left: 3px solid #34a534; }
+      .recipe-row .recipe .recipe-info p {
+        padding: 4px 0;
+        color: rgba(0, 0, 0, 0.65); }
+        .recipe-row .recipe .recipe-info p:first-child {
+          margin-top: 0; }
+        .recipe-row .recipe .recipe-info p:last-child {
+          margin-bottom: 0; }
+      .recipe-row .recipe .recipe-info.recipe-ingredients {
+        border-color: #526db9; }
+        .recipe-row .recipe .recipe-info.recipe-ingredients .ingredient-match {
+          font-weight: 700; }
+        .recipe-row .recipe .recipe-info.recipe-ingredients .ingredient-match-priority {
+          color: #526db9;
+          font-weight: 700; }
+        .recipe-row .recipe .recipe-info.recipe-ingredients .ingredient-match-partial {
+          color: #bb6f30;
+          font-weight: 700; }
+    .recipe-row .recipe .recipe-image {
+      max-width: 100%;
+      margin: 24px 0;
+      border: none;
+      -webkit-border-radius: 1.2em;
+      border-radius: 1.2em; }
+      @media screen and (min-width: 800px) {
+        .recipe-row .recipe .recipe-image {
+          float: right;
+          max-width: 50%;
+          margin-top: 0;
+          margin-left: 24px; } }
+
+.recipe-steps {
+  margin-bottom: 12px; }
+  .recipe-steps .checkbox-container {
+    display: block; }
+  .recipe-steps li {
+    margin-bottom: 12px;
+    margin-left: 36px;
+    padding-left: 12px; }

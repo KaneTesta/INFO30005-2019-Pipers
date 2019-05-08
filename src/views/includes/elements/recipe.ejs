@@ -8,36 +8,37 @@
         <h6>Info</h6>
         <div class="recipe-info">
             <% if (recipe.totalTime) { %>
-            <p>Time: <%= recipe.totalTime %> minutes</p>
+                <p>Time: <%= recipe.totalTime %> minutes</p>
+            <% } %>
             <% if (recipe.prepTime) { %>
-            <p>Prep time: <%= recipe.prepTime %> minutes</p>
+                <p>Prep time: <%= recipe.prepTime %> minutes</p>
             <% } %>
             <% if (recipe.cookTime) { %>
                 <p>Cook time: <%= recipe.cookTime %> minutes</p>
-                <% } %>
+            <% } %>
 
             <% if (recipe.serves) { %>
-            <p>Serves: <%= recipe.serves %></p>
+                <p>Serves: <%= recipe.serves %></p>
             <% } %>
         </div>
 
         <h6>Ingredients</h6>
         <div class="recipe-info recipe-ingredients">
             <% if (recipe.ingredients) { %>
-            <% for (let i = 0; i < recipe.ingredients.length; ++i) { %>
-            <% if (recipe.matches_priority.find((el) => el === recipe.ingredients[i].ingredient)) { %>
-            <p class="ingredient-match-priority"><%= recipe.ingredients[i].text %></p>
-            <% } else if (recipe.matches.find((el) => el === recipe.ingredients[i].ingredient)) { %>
-            <p class="ingredient-match"><%= recipe.ingredients[i].text %></p>
-            <% } else { %>
-            <p><%= recipe.ingredients[i].text %></p>
-            <% } %>
+                <% for (let i = 0; i < recipe.ingredients.length; ++i) { %>
+                    <% if (recipe.matches_priority.find((el) => el === recipe.ingredients[i].ingredient)) { %>
+                        <p class="ingredient-match-priority"><%= recipe.ingredients[i].text %></p>
+                    <% } else if (recipe.matches.find((el) => el === recipe.ingredients[i].ingredient)) { %>
+                        <p class="ingredient-match"><%= recipe.ingredients[i].text %></p>
+                    <% } else { %>
+                        <p><%= recipe.ingredients[i].text %></p>
+                    <% } %>
+                <% } %>
             <% } %>
         </div>
-        <% } %>
 
         <% if (recipe.description) { %>
-        <p class="recipe-description"><%= recipe.description %></p>
+            <p class="recipe-description"><%= recipe.description %></p>
         <% } %>
 
         <a href="#" class="button button-inline button-next button-recipe" data-id="<%= recipe._id %>" data-step="1">See
