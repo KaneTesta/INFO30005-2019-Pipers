@@ -1,0 +1,9 @@
+<% if (user && user.display_name) { %>
+<div class="user-login">
+    <p><%= user.display_name %></p>
+</div>
+<% } else { %>
+<div class="user-login">
+    <p><%= user %></p>
+</div>
+<% } %>

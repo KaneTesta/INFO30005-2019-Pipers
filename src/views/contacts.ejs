@@ -6,38 +6,41 @@
 
     <body>
         <div id="Main" class="main">
+            <% include includes/elements/progress %>
+            <% include includes/elements/user-login %>
+
             <div class="animation-element" data-viewport="<%= viewport %>">
                 <div class="body-wrap">
                     <section class="container fill-middle-large">
 
                         <a class="button button-back" href="/" data-target="0">Back</a>
                         <h1 class="heading">Contact List</h1>
-                    
+
                     </section>
 
                     <section>
                         <div class="container">
-                            <% for (let index = 0; index < users.length; index++) { %>
+                            <% for (let index = 0; index < data.users.length; index++) { %>
                             <div class="row">
                                 <div class="contact">
                                     <div class="name">
-                                        <%- users[index].name; %>
+                                        <%- data.users[index].name; %>
                                     </div>
                                     <div class="number">
                                         Contact Number:
-                                        <%- users[index].phone; %>
+                                        <%- data.users[index].phone; %>
                                     </div>
                                     <div class="address">
                                         Address:
-                                        <%- users[index].address; %>
+                                        <%- data.users[index].address; %>
                                     </div>
                                     <div class="about">
                                         About the organisation:
-                                        <%- users[index].description; %>
+                                        <%- data.users[index].description; %>
                                     </div>
                                     <div class="url">
                                         About the organisation:
-                                        <%- users[index].url; %>
+                                        <%- data.users[index].url; %>
                                     </div>
                                 </div>
                             </div>

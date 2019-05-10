@@ -4,6 +4,7 @@ var userSchema = mongoose.Schema({
         type: String,
         require: [true, 'An user needs an id']
     },
+    display_name: String,
     ingredients: [String]
 });
 

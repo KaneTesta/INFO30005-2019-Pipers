@@ -7,6 +7,8 @@
     <body>
         <div id="Main" class="main">
             <% include includes/elements/progress %>
+            <% include includes/elements/user-login %>
+
 
             <div class="animation-element" data-viewport="<%= viewport %>">
                 <!--creates border effect-->
@@ -48,25 +50,27 @@
 
                             <!-- Ingredients content -->
                             <div id="IngredientsMessageList"></div>
-                            <% if (data.user_exists && data.ingredients) { %>
-                            <div id="IngredientsList" data-ingredients="<%= data.ingredients.join('+') %>"></div>
+                            <% if (user && user.ingredients) { %>
+                            <div id="IngredientsList" data-ingredients="<%= user.ingredients.join('+') %>"></div>
                             <% } else { %>
                             <div id="IngredientsList" data-ingredients=""></div>
                             <% } %>
 
                             <div class="container-center flex-horizontal">
-                                <% if (data.user_exists) { %>
-                                <button id="IngredientsButtonSaveIngredients" class="button button-loadable">Save Ingredients</button>
+                                <% if (user) { %>
+                                <button id="IngredientsButtonSaveIngredients" class="button button-loadable">Save
+                                    Ingredients</button>
                                 <% } %>
-                                <button id="IngredientsButtonFindRecipes" class="button button-next">Find Recipes</button>
+                                <button id="IngredientsButtonFindRecipes" class="button button-next">Find
+                                    Recipes</button>
                             </div>
 
-                            
-                            <% if (!data.user_exists) { %>
+
+                            <% if (!user) { %>
                             <h3>Sign In</h3>
                             <p>Want to save your ingredient list across your devices?
-                            Sign in with Google so that you don't need to re-enter your ingredients each time
-                            that you want to find a recipe</p>
+                                Sign in with Google so that you don't need to re-enter your ingredients each time
+                                that you want to find a recipe</p>
                             <div class="container-center flex-horizontal">
                                 <a class="button button-inline" href="/auth/google">Sign In with Google</a>
                             </div>

@@ -2,9 +2,10 @@ var mongoose = require('mongoose');
 var User = mongoose.model('user');
 
 // Insert one contact
-var insertUser = (id, callback) => {
+var insertUser = (profile, callback) => {
     var user = new User({
-        user_id: id
+        user_id: profile.id,
+        display_name: profile.displayName
     });
 
     user.save((err, user) => {
@@ -27,10 +28,10 @@ var findUser = (id, callback) => {
 };
 
 // Find user or create if doesn't exist
-var findOrCreateUser = (id, callback) => {
-    findUser(id, function (msg) {
+var findOrCreateUser = (profile, callback) => {
+    findUser(profile.id, function (msg) {
         if (msg.error || msg.result.length === 0) {
-            insertUser(id, callback);
+            insertUser(profile, callback);
         } else {
             callback(msg);
         }
@@ -38,7 +39,7 @@ var findOrCreateUser = (id, callback) => {
 }
 
 var updateUser = (id, user, callback) => {
-    User.update({ user_id: id }, user, (err, result) => {
+    User.updateOne({ user_id: id }, user, (err, result) => {
         callback({
             error: err,
             result: result

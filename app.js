@@ -15,6 +15,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
@@ -45,8 +46,22 @@ passport.use(new GoogleStrategy(
     callbackURL: process.env.GOOGLE_CALLBACK_URL
   },
   function (accessToken, refreshToken, profile, done) {
-    userController.findOrCreateUser(profile.id, function (msg) {
-      return done(msg.error, msg.result);
+    console.log(JSON.stringify(profile));
+    userController.findOrCreateUser(profile, function (msg) {
+      let user = undefined;
+      if (msg.result && msg.result.length > 0) {
+        user = msg.result[0];
+      }
+
+      // Update display name
+      if (user && user.display_name !== profile.displayName) {
+        user.display_name = profile.displayName;
+        userController.updateUser(user.user_id, user, (msg_update) => {
+          return done(msg.error, [user]);
+        });
+      } else {
+        return done(msg.error, msg.result);
+      }
     });
   }
 ));

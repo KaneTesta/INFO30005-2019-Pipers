@@ -97,7 +97,20 @@ incorporate with the frontend
 router.get('/ingredients', ingredientController.getIngredients);
 
 router.post('/user/saveingredients', function (req, res) {
-  userController.saveIngredients(req, function (msg) { sendResponse(msg, res); });
+  if (req.session && req.session.passport && req.session.passport.user) {
+    userController.saveIngredients(req, function (msg) { sendResponse(msg, res); });
+  } else {
+    res.status(500).send("User not logged in");
+  }
+});
+
+router.post('/user/delete', function (req, res) {
+  if (req.session && req.session.passport && req.session.passport.user) {
+    let user_id = req.session.passport.user;
+    userController.deleteUser(user_id, function (msg) { sendResponse(msg, res); });
+  } else {
+    res.status(500).send("User not logged in");
+  }
 });
 
 module.exports = router;
