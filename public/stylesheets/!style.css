@@ -1200,6 +1200,10 @@ select {
   padding: 30px;
   background-color: #ffffff; }
 
+a .feature {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.95); }
+
 .white-bg {
   background: #ffffff; }
 
@@ -1209,22 +1213,22 @@ select {
   font-size: 40px; }
 
 .contact {
+  display: block;
   width: 75%;
   height: 300px;
   margin: 30px 12.5%;
   padding: 30px;
-  display: block;
+  border: solid 1px #707070;
   -webkit-border-radius: 1.2em;
   border-radius: 1.2em;
-  background-color: rgba(141, 248, 116, 0.075);
-  border: solid 1px #707070; }
+  background-color: rgba(141, 248, 116, 0.075); }
   .contact:hover {
     -webkit-box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.5); }
   .contact .name {
+    text-align: center;
     text-transform: capitalize;
-    font-weight: bold;
-    text-align: center; }
+    font-weight: bold; }
   .contact .number .address .about {
     text-align: left; }
 

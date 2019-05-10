@@ -200,6 +200,12 @@ select {
     background-color: $foreground-color;
 }
 
+a .feature {
+    text-decoration: none;
+
+    color: $text-color;
+}
+
 .white-bg {
     background: $foreground-color;
 }
@@ -214,24 +220,26 @@ select {
 
 
 .contact {
+    display: block;
+
     width: 75%;
     height: 300px;
     margin: 30px 12.5%;
     padding: 30px;
-    display: block;
-    border-radius: $border-radius;
 
-    background-color: rgba(141, 248, 116,0.075);
     border: solid 1px rgb(112, 112, 112);
+    border-radius: $border-radius;
+    background-color: rgba(141, 248, 116,0.075);
 
     &:hover {
         box-shadow: 0 0 10px 1px rgba(0,0,0,0.5);
     }
 
     .name {
-        text-transform: capitalize;
-        font-weight: bold;
         text-align: center;
+        text-transform: capitalize;
+
+        font-weight: bold;
     }
 
     .number .address .about {

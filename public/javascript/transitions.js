@@ -16,7 +16,7 @@
             let current = $('[data-viewport]').first().data('viewport');
 
             let $progressExtra = $('.progress-dots-extra');
-            if (current >= 3) {
+            if (current >= 3 && current < 6) {
                 $progressExtra.addClass("visible");
                 $progressExtra.addClass("progress-extra-layout");
             } else {
@@ -45,7 +45,7 @@
                 }
 
                 $main.attr('data-transition', transition);
-                $main.attr('data-progress-extra', target >= 3 ? "true" : "false");
+                $main.attr('data-progress-extra', (target >= 3 && target < 6) ? "true" : "false");
             },
             onStart: {
                 duration: 250,
