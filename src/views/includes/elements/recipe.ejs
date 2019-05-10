@@ -31,7 +31,7 @@
                     <% } else if (recipe.matches.find((el) => el === recipe.ingredients[i].ingredient)) { %>
                         <p class="ingredient-match"><%= recipe.ingredients[i].text %></p>
                     <% } else { %>
-                        <p><%= recipe.ingredients[i].text %></p>
+                        <p><%= JSON.stringify(recipe.ingredients[i]) %></p>
                     <% } %>
                 <% } %>
             <% } %>

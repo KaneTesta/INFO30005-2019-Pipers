@@ -4,6 +4,7 @@ const router = express.Router();
 const controller = require('../controllers/recipeController');
 const ingredientController = require('../controllers/ingredientController');
 const contactController = require('../controllers/contactController');
+const userController = require('../controllers/userController');
 
 /**
  * 
@@ -94,5 +95,9 @@ incorporate with the frontend
 */
 
 router.get('/ingredients', ingredientController.getIngredients);
+
+router.post('/user/saveingredients', function (req, res) {
+  userController.saveIngredients(req, function (msg) { sendResponse(msg, res); });
+});
 
 module.exports = router;

@@ -18,7 +18,7 @@ button,
     display: flex;
 
     box-sizing: content-box;
-    margin: 24px 0;
+    margin: 24px 12px;
     padding: 8px 20px;
 
     cursor: pointer;
@@ -185,5 +185,21 @@ button,
         &:focus {
             background-color: lighten($error-color, 10%);
         }
+    }
+
+    &.button-loadable {
+        transition: opacity 0.15s ease;
+
+        &.loading {
+            opacity: 0.5;
+        }
+    }
+}
+
+.flex-fill {
+    button,
+    .button {
+        margin-right: 0;
+        margin-left: 0;
     }
 }

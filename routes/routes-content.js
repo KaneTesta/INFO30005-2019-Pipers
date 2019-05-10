@@ -1,7 +1,7 @@
 var express = require('express');
 var recipeController = require("../controllers/recipeController");
 var contactController = require("../controllers/contactController");
-
+var userController = require("../controllers/userController");
 
 var router = express.Router();
 
@@ -14,7 +14,38 @@ router.get('/', function (req, res, next) {
 
 /* GET ingredients page. */
 router.get('/ingredients', function (req, res, next) {
-    res.render('ingredients', { title: "Ingredients", theme_color: THEME_COLOR, viewport: 1 });
+    let data = {
+        user_exists: false,
+        ingredients: []
+    };
+
+    if (req.session && req.session.passport && req.session.passport.user) {
+        userController.findUser(req.session.passport.user, (msg) => {
+            if (!msg.error && msg.result.length > 0) {
+                let user = msg.result[0];
+
+                if (user && user.ingredients) {
+                    data.user_exists = true;
+                    data.ingredients = user.ingredients;
+                }
+
+                res.render('ingredients', {
+                    title: "Ingredients", theme_color: THEME_COLOR,
+                    data: data, viewport: 1
+                });
+            } else {
+                res.render('ingredients', {
+                    title: "Ingredients", theme_color: THEME_COLOR,
+                    data: data, viewport: 1
+                });
+            }
+        });
+    } else {
+        res.render('ingredients', {
+            title: "Ingredients", theme_color: THEME_COLOR,
+            data: data, viewport: 1
+        });
+    }
 });
 
 /* GET recipe page. */

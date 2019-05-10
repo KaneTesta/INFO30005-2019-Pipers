@@ -3,30 +3,27 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session')
+var passport = require('passport');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var app = express();
 var bodyParser = require('body-parser');
+app.use(session({
+  secret: 'z78hcbp89ycha89zygco87tq',
+  maxAge: null,
+  resave: false,
+  saveUninitialized: true
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use(passport.session());
 
 if (process.env.NODE_ENV !== 'production') require('dotenv').config()
 require('./models/db');
 
-var passport = require('passport');
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-
-passport.use(new GoogleStrategy(
-  {
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK_URL
-  },
-  function (accessToken, refreshToken, profile, done) {
-    /*User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      return done(err, user);
-    });*/
-  }
-));
+var userController = require('./controllers/userController');
 
 var contentRouter = require('./routes/routes-content');
 var apiRouter = require('./routes/routes-api');
@@ -40,6 +37,31 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+passport.use(new GoogleStrategy(
+  {
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK_URL
+  },
+  function (accessToken, refreshToken, profile, done) {
+    userController.findOrCreateUser(profile.id, function (msg) {
+      return done(msg.error, msg.result);
+    });
+  }
+));
+
+passport.serializeUser(function (user, next) {
+  if (user !== undefined && user[0] !== undefined) {
+    next(null, user[0].user_id);
+  }
+});
+
+passport.deserializeUser(function (id, next) {
+  userController.findUser(id, function (msg) {
+    next(msg.error, msg.result);
+  })
+});
 
 app.use('/', contentRouter);
 app.use('/api/', apiRouter);
@@ -58,7 +80,7 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['https://www.g
 //   which, in this example, will redirect the user to the home page.
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }),
   function (req, res) {
-    res.redirect('/');
+    res.redirect('/ingredients');
   }
 );
 

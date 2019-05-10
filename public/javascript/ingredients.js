@@ -73,7 +73,7 @@ $(document).on("transition", function () {
      * Add an ingredient to the list of ingredients
      * @param {string[]} ingredientList The full list of ingredients to check against
      */
-    function addIngredient(ingredientList) {
+    function addIngredientFromSearch(ingredientList) {
         // Hide errors
         hideIngredientMessages(3);
         // Check ingredients
@@ -84,7 +84,24 @@ $(document).on("transition", function () {
                 element.toLowerCase() === searchValue.toLowerCase();
         });
 
+        addIngredient(ingredient, ingredientList, true);
+    }
+
+    function addIngredient(ingredient, ingredientList, showMessage) {
         if (ingredient !== undefined) {
+            // Capitalize first letter
+            ingredient = ingredient.charAt(0).toUpperCase() + ingredient.slice(1).toLowerCase();
+
+            // Check ingredient list
+            let findResult = ingredientList.find(function (element) {
+                return element !== undefined && element.toLowerCase() === ingredient.toLowerCase();
+            });
+
+            if (!findResult) {
+                return;
+            }
+
+            // Check if the ingredient already exists
             if (!hasIngredient(ingredient)) {
                 // Create ingredient element
                 let $ingredientsList = $("#IngredientsList");
@@ -130,12 +147,16 @@ $(document).on("transition", function () {
                 }, 100);
 
                 // Show success message
-                showIngredientMessage("'" + ingredient + "'" + " added to ingredients.");
+                if (showMessage) {
+                    showIngredientMessage("'" + ingredient + "'" + " added to ingredients.");
+                }
             } else {
                 // Ingredient already added
-                showIngredientMessage("'" + ingredient + "'" + " is already added.", "message-error");
+                if (showMessage) {
+                    showIngredientMessage("'" + ingredient + "'" + " is already added.", "message-error");
+                }
             }
-        } else {
+        } else if (showMessage) {
             // Ingredient not found
             if (searchValue === undefined || searchValue === "") {
                 showIngredientMessage("Please enter an ingredient into the search box.", "message-warning");
@@ -181,6 +202,30 @@ $(document).on("transition", function () {
         });
 
         return ingredientElement !== undefined;
+    }
+
+    /**
+     * Save the current ingredients for the user
+     */
+    function saveIngredients($button) {
+        $button.addClass("loading");
+
+        let params = {
+            ingredients: getIngredients()
+        };
+
+        let url = "/api/user/saveingredients";
+        $.post(url, params, function (data) {
+            $button.removeClass("loading");
+
+            if (data.error) {
+                showIngredientMessage("Error saving ingredients: " + data.error, "message-error");
+            } else {
+                showIngredientMessage("Ingredients saved")
+            }
+        }).fail(function (data) {
+            showIngredientMessage("Error saving ingredients", "message-error");
+        });
     }
 
     /**
@@ -255,7 +300,7 @@ $(document).on("transition", function () {
                 // Set value
                 $search.val(ui.item.label);
                 // Add ingredient
-                addIngredient(ingredientList);
+                addIngredientFromSearch(ingredientList);
                 // Clear value
                 $search.val("");
                 return false;
@@ -304,11 +349,19 @@ $(document).on("transition", function () {
 
         // Setup add button
         $("#IngredientsButtonAdd").on('click', function () {
-            addIngredient(ingredientList);
+            addIngredientFromSearch(ingredientList);
+        });
+
+        // Setup save ingredients button
+        let $saveIngredientsButton = $("#IngredientsButtonSaveIngredients");
+        $saveIngredientsButton.on('click', function () {
+            saveIngredients($saveIngredientsButton);
         });
 
         // Setup find recipes button
         $("#IngredientsButtonFindRecipes").on('click', function () {
+            // Save ingredients
+            saveIngredients($saveIngredientsButton);
             // Get url
             params = {
                 "ingredients": getIngredients(),
@@ -328,6 +381,17 @@ $(document).on("transition", function () {
                 window.location.assign(url);
             }
         });
+
+        let $ingredientsList = $("#IngredientsList");
+        if ($ingredientsList) {
+            let userIngredientsData = $ingredientsList.attr("data-ingredients");
+            if (userIngredientsData) {
+                let userIngredients = userIngredientsData.split("+");
+                userIngredients.forEach(function (el) {
+                    addIngredient(el, ingredientList, false);
+                });
+            }
+        }
 
         // Show the ingredients section
         $ingredientsLoading.slideUp(250, function () {
