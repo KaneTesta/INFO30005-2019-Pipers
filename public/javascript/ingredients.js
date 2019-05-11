@@ -203,7 +203,7 @@ $(document).on("transition", function () {
      */
     function hasIngredient(ingredientName) {
         let ingredientElement = getIngredients().find(function (element) {
-            return ingredientName === element;
+            return ingredientName.toLowerCase() === element.toLowerCase();
         });
 
         return ingredientElement !== undefined;
