@@ -24,3 +24,7 @@ require('./contact');
 require('./storage');
 require('./ingredient');
 require('./user');
+
+module.exports = {
+  databaseUrl: dbURI
+};

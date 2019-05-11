@@ -10,6 +10,7 @@
     "build:run": "nodemon ./bin/www"
   },
   "dependencies": {
+    "connect-mongodb-session": "^2.1.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "dotenv": "^8.0.0",
@@ -20,15 +21,15 @@
     "gulp-autoprefixer": "^6.1.0",
     "gulp-sass": "^4.0.2",
     "http-errors": "^1.7.2",
+    "moment": "^2.24.0",
     "mongodg": "^0.1.0",
     "mongoose": "^5.5.3",
     "mongoose-unique-validator": "^2.0.3",
-    "moment": "^2.24.0",
     "morgan": "~1.9.0",
     "passport": "^0.4.0",
     "passport-google-oauth": "^2.0.0",
-    "recipe-ingredient-parser-v2": "^1.0.1",
     "pluralize": "^7.0.0",
+    "recipe-ingredient-parser-v2": "^1.0.1",
     "request": "^2.88.0"
   },
   "devDependencies": {

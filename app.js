@@ -4,25 +4,40 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session')
+const MongoDBStore = require('connect-mongodb-session')(session);
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var app = express();
 var bodyParser = require('body-parser');
-app.use(session({
-  secret: 'z78hcbp89ycha89zygco87tq',
-  maxAge: null,
-  resave: false,
-  saveUninitialized: true
-}));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-if (process.env.NODE_ENV !== 'production') require('dotenv').config()
-require('./models/db');
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
+var db = require('./models/db');
+var store = new MongoDBStore({
+  uri: db.databaseUrl,
+  collection: 'applicationSessions'
+});
+
+app.use(require('express-session')({
+  secret: 'z78hcbp89ycha89zygco87tq',
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+  },
+  store: store,
+  // Boilerplate options, see:
+  // * https://www.npmjs.com/package/express-session#resave
+  // * https://www.npmjs.com/package/express-session#saveuninitialized
+  resave: true,
+  saveUninitialized: true
+}));
 
 var userController = require('./controllers/userController');
 
