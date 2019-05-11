@@ -87,7 +87,7 @@ $(document).on("transition", function () {
         addIngredient(ingredient, ingredientList, true);
     }
 
-    function addIngredient(ingredient, ingredientList, showMessage) {
+    function addIngredient(ingredient, ingredientList, fromUserInput) {
         if (ingredient !== undefined) {
             // Capitalize first letter
             ingredient = ingredient.charAt(0).toUpperCase() + ingredient.slice(1).toLowerCase();
@@ -118,8 +118,11 @@ $(document).on("transition", function () {
                 });
 
                 // Hide element
-                $ingredientElement.hide();
-                $ingredientElement.css("opacity", 0);
+                if (fromUserInput) {
+                    $ingredientElement.hide();
+                    $ingredientElement.css("opacity", 0);
+                }
+
                 // Add at index
                 let addedIngredient = false;
                 $ingredientsList.children().each(function () {
@@ -141,22 +144,24 @@ $(document).on("transition", function () {
                 }
 
                 // Animate in
-                $ingredientElement.slideDown(250);
-                window.setTimeout(function () {
-                    $ingredientElement.css("opacity", 1);
-                }, 100);
+                if (fromUserInput) {
+                    $ingredientElement.slideDown(250);
+                    window.setTimeout(function () {
+                        $ingredientElement.css("opacity", 1);
+                    }, 100);
+                }
 
                 // Show success message
-                if (showMessage) {
+                if (fromUserInput) {
                     showIngredientMessage("'" + ingredient + "'" + " added to ingredients.");
                 }
             } else {
                 // Ingredient already added
-                if (showMessage) {
+                if (fromUserInput) {
                     showIngredientMessage("'" + ingredient + "'" + " is already added.", "message-error");
                 }
             }
-        } else if (showMessage) {
+        } else if (fromUserInput) {
             // Ingredient not found
             if (searchValue === undefined || searchValue === "") {
                 showIngredientMessage("Please enter an ingredient into the search box.", "message-warning");
