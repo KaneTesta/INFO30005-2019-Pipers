@@ -58,9 +58,12 @@ var deleteUser = (id, callback) => {
 
 var saveIngredients = (req, callback) => {
     let ingredients = req.body.ingredients;
+
     if (!ingredients) {
-        callback({ error: "No ingredients sent as parameter", result: null });
-    } else if (req.session && req.session.passport && req.session.passport.user) {
+        ingredients = [];
+    }
+
+    if (req.session && req.session.passport && req.session.passport.user) {
         findUser(req.session.passport.user, (msg) => {
             if (!msg.error && msg.result.length > 0) {
                 let user = msg.result[0];
