@@ -63,6 +63,10 @@ var recipeSchema = mongoose.Schema({
  * @param {{ingredients: [String], priority_ingredients: [String], unavailable_cookware: [String], maximum_time: number}} query Array of ingredients
  */
 recipeSchema.statics.byQuery = function (query) {
+  if (!query.maximum_time) {
+    query.maximum_time = Number.MAX_SAFE_INTEGER;
+  }
+
   return this.aggregate([
     {
       $match: {

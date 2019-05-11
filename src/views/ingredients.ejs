@@ -32,10 +32,9 @@
                             </div>
 
                             <!-- Time input -->
-                            <h6 class="heading-section">Time</h6>
+                            <h6 class="heading-section">Maximum Time</h6>
                             <div class="ingredients-time" id="IngredientsTime">
-                                <%- include("includes/elements/input-range", {label: "Minutes", min: 0, max: 50, step: 10, value: 30}); %>
-                                <%- include("includes/elements/input-range", {label: "Hours", min: 0, max: 12, step: 1, value: 1}); %>
+                                <%- include("includes/elements/input-range", {label: "Minutes", map: [15, 30, 45, 60, 90, 120, 180, "Don't use maximum"], value: 3}); %>
                             </div>
 
                             <!-- Ingredients input -->
