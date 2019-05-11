@@ -174,15 +174,14 @@ $progress-animation-duration: 0.1s;
 }
 
 .progress-dots {
-    position: absolute;
+    position: relative;
     z-index: 100;
-    left: 0;
-    right: 0;
-    top: 12px;
+    top: 24px;
 
     display: flex;
     flex-direction: row;
 
+    height: 0;
     margin: auto;
 
     pointer-events: none;
@@ -255,10 +254,9 @@ $progress-animation-duration: 0.1s;
 }
 
 .progress-dots.progress-dots-extra {
-    top: 32px;
+    top: 56px;
 
     height: 0;
-    margin-top: 20px;
 
     transition: transform 0.25s ease, opacity 0.25s ease;
     transform: translateY(-1rem);
@@ -285,7 +283,9 @@ $progress-animation-duration: 0.1s;
     }
 
     &.progress-extra-layout {
-        position: relative;
+        top: 24px;
+
+        margin-top: 32px;
     }
 }
 
