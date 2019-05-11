@@ -8,11 +8,10 @@ var insertUser = (profile, callback) => {
         display_name: profile.displayName
     });
 
-    user.save((err, user) => {
-        console.log(user);
+    user.save((err, result) => {
         callback({
             err: err,
-            result: user
+            result: [result]
         });
     });
 };

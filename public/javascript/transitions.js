@@ -30,10 +30,10 @@
             prefetch: true,
             cacheLength: 2,
             onBefore: function ($anchor, $container) {
-                let current = $('[data-viewport]').first().data('viewport');
+                let current = $('[data-viewport]').attr('data-viewport');
                 let target = $anchor.data('target');
                 current = current ? current : 0;
-                target = target ? target : 0;
+                target = target ? target : current;
                 // Find transition
                 let transition = 'page-fade';
                 if (current === target) {

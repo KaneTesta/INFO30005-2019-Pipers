@@ -113,4 +113,15 @@ router.post('/user/delete', function (req, res) {
   }
 });
 
+router.post('/user/logout', function (req, res) {
+  req.logout();
+  req.session.destroy(function (err) {
+    if (err) {
+      res.status(500).send("Error logging out");
+    } else {
+      res.send("Logged out");
+    }
+  });
+});
+
 module.exports = router;

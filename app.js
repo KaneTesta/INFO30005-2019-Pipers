@@ -61,7 +61,6 @@ passport.use(new GoogleStrategy(
     callbackURL: process.env.GOOGLE_CALLBACK_URL
   },
   function (accessToken, refreshToken, profile, done) {
-    console.log(JSON.stringify(profile));
     userController.findOrCreateUser(profile, function (msg) {
       let user = undefined;
       if (msg.result && msg.result.length > 0) {

@@ -262,3 +262,32 @@ $progress-animation-duration: 0.1s;
         position: relative;
     }
 }
+
+.user-login {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+
+    padding: 6px 16px 6px 12px;
+
+    border-right: $border-width solid $border-color;
+    border-bottom: $border-width solid $border-color;
+    border-radius: 0 0 $border-radius 0;
+    background-color: $foreground-color;
+
+    @media screen and (max-width: $breakpoint-medium) {
+        position: relative;
+
+        border-right: none;
+        border-radius: 0;
+    }
+
+    .user-login-name {
+        padding-right: 12px;
+    }
+
+    .button-icon {
+        font-size: 12px;
+    }
+}

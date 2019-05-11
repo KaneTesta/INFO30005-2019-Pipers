@@ -1,5 +1,10 @@
 <% if (user && user.display_name) { %>
 <div class="user-login">
-    <p><%= user.display_name %></p>
+    <div class="container-center flex-horizontal">
+        <span class="user-login-name"><%= user.display_name %></span>
+        <a class="button button-inline button-icon" href="/user">
+            <ion-icon name="settings"></ion-icon>
+        </a>
+    </div>
 </div>
 <% } %>

@@ -138,6 +138,19 @@ router.get('/contacts', function (req, res) {
     });
 });
 
+/* GET contacts page. */
+router.get('/user', function (req, res) {
+    contactController.allContacts(function (msg) {
+        if (msg.error) {
+            res.status(500).send(msg.error);
+        } else {
+            getOptions(req, "User", 6, { users: msg.result }, (options) => {
+                res.render('user', options);
+            });
+        }
+    });
+});
+
 router.get('/recipe/:id', recipeController.findRecipeByID);
 
 module.exports = router;

@@ -6,76 +6,79 @@
 
     <body>
         <div id="Main" class="main">
-            <% include includes/elements/progress %>
+
             <% include includes/elements/user-login %>
+            <div class="relative">
+                <% include includes/elements/progress %>
 
 
-            <div class="animation-element" data-viewport="<%= viewport %>">
-                <!--creates border effect-->
-                <div class="body-wrap">
-                    <section class="container fill-middle-large">
-                        <a class="button button-back" href="/" data-target="0">Back</a>
+                <div class="animation-element" data-viewport="<%= viewport %>">
+                    <!--creates border effect-->
+                    <div class="body-wrap">
+                        <section class="container fill-middle-large">
+                            <a class="button button-back" href="/" data-target="0">Back</a>
 
-                        <h1 class="heading">Ingredients</h1>
+                            <h1 class="heading">Ingredients</h1>
 
-                        <div id="IngredientsLoading" class="progress-loading">Loading Ingredients</div>
+                            <div id="IngredientsLoading" class="progress-loading">Loading Ingredients</div>
 
-                        <div id="IngredientsSection" style="display: none;"
-                            class="container fill-middle-medium flex-vertical">
-                            <!-- Cookware input -->
-                            <h6 class="heading-section">Cookware</h6>
-                            <div class="ingredients-cookware" id="IngredientsCookware">
-                                <%- include("includes/elements/checkbox-pill", {label: "Oven", checked: true}); %>
-                                <%- include("includes/elements/checkbox-pill", {label: "Stovetop", checked: true}); %>
-                                <%- include("includes/elements/checkbox-pill", {label: "Microwave", checked: true}); %>
-                                <%- include("includes/elements/checkbox-pill", {label: "Deep Fryer", checked: false}); %>
-                            </div>
+                            <div id="IngredientsSection" style="display: none;"
+                                class="container fill-middle-medium flex-vertical">
+                                <!-- Cookware input -->
+                                <h6 class="heading-section">Cookware</h6>
+                                <div class="ingredients-cookware" id="IngredientsCookware">
+                                    <%- include("includes/elements/checkbox-pill", {label: "Oven", checked: true}); %>
+                                    <%- include("includes/elements/checkbox-pill", {label: "Stovetop", checked: true}); %>
+                                    <%- include("includes/elements/checkbox-pill", {label: "Microwave", checked: true}); %>
+                                    <%- include("includes/elements/checkbox-pill", {label: "Deep Fryer", checked: false}); %>
+                                </div>
 
-                            <!-- Time input -->
-                            <h6 class="heading-section">Maximum Time</h6>
-                            <div class="ingredients-time" id="IngredientsTime">
-                                <%- include("includes/elements/input-range", {label: "Minutes", map: [15, 30, 45, 60, 90, 120, 180, "Don't use maximum"], value: 3}); %>
-                            </div>
+                                <!-- Time input -->
+                                <h6 class="heading-section">Maximum Time</h6>
+                                <div class="ingredients-time" id="IngredientsTime">
+                                    <%- include("includes/elements/input-range", {label: "Minutes", map: [15, 30, 45, 60, 90, 120, 180, "Don't use maximum"], value: 3}); %>
+                                </div>
 
-                            <!-- Ingredients input -->
-                            <h6 class="heading-section">Ingredients</h6>
-                            <div class="flex-horizontal container-center input-wide">
-                                <input id="IngredientsSearch" type="text" placeholder="Search Ingredients"
-                                    class="flex-fill">
-                                <button id="IngredientsButtonAdd" class="button-icon">
-                                    <ion-icon name="add"></ion-icon>
-                                </button>
-                            </div>
+                                <!-- Ingredients input -->
+                                <h6 class="heading-section">Ingredients</h6>
+                                <div class="flex-horizontal container-center input-wide">
+                                    <input id="IngredientsSearch" type="text" placeholder="Search Ingredients"
+                                        class="flex-fill">
+                                    <button id="IngredientsButtonAdd" class="button-icon">
+                                        <ion-icon name="add"></ion-icon>
+                                    </button>
+                                </div>
 
-                            <!-- Ingredients content -->
-                            <div id="IngredientsMessageList"></div>
-                            <% if (user && user.ingredients) { %>
-                            <div id="IngredientsList" data-ingredients="<%= user.ingredients.join('+') %>"></div>
-                            <% } else { %>
-                            <div id="IngredientsList" data-ingredients=""></div>
-                            <% } %>
-
-                            <div class="container-center flex-horizontal">
-                                <% if (user) { %>
-                                <button id="IngredientsButtonSaveIngredients" class="button button-loadable">Save
-                                    Ingredients</button>
+                                <!-- Ingredients content -->
+                                <div id="IngredientsMessageList"></div>
+                                <% if (user && user.ingredients) { %>
+                                <div id="IngredientsList" data-ingredients="<%= user.ingredients.join('+') %>"></div>
+                                <% } else { %>
+                                <div id="IngredientsList" data-ingredients=""></div>
                                 <% } %>
-                                <button id="IngredientsButtonFindRecipes" class="button button-next">Find
-                                    Recipes</button>
-                            </div>
+
+                                <div class="container-center flex-responsive">
+                                    <% if (user) { %>
+                                    <button id="IngredientsButtonSaveIngredients" class="button button-loadable">Save
+                                        Ingredients</button>
+                                    <% } %>
+                                    <button id="IngredientsButtonFindRecipes" class="button button-next">Find
+                                        Recipes</button>
+                                </div>
 
 
-                            <% if (!user) { %>
-                            <h3>Sign In</h3>
-                            <p>Want to save your ingredient list across your devices?
-                                Sign in with Google so that you don't need to re-enter your ingredients each time
-                                that you want to find a recipe</p>
-                            <div class="container-center flex-horizontal">
-                                <a class="button button-inline" href="/auth/google">Sign In with Google</a>
+                                <% if (!user) { %>
+                                <h3>Sign In</h3>
+                                <p>Want to save your ingredient list across your devices?
+                                    Sign in with Google so that you don't need to re-enter your ingredients each time
+                                    that you want to find a recipe</p>
+                                <div class="container-center flex-horizontal">
+                                    <a class="button button-inline" href="/auth/google">Sign In with Google</a>
+                                </div>
+                                <% } %>
                             </div>
-                            <% } %>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
                 </div>
             </div>
         </div>
