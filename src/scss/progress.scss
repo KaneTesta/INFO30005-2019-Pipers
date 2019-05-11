@@ -7,6 +7,20 @@ $progress-dot-size-small: 17px;
 // Animation
 $progress-animation-duration: 0.1s;
 
+@keyframes user-login {
+    from {
+        transform: translateY(-4px);
+
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+
+        opacity: 1;
+    }
+}
+
 @keyframes progress-dot-fade {
     from {
         opacity: 0;
@@ -67,6 +81,18 @@ $progress-animation-duration: 0.1s;
 
 .main {
     overflow: hidden;
+
+    .user-login {
+        animation: user-login $progress-animation-duration ease-out;
+        animation-direction: normal;
+        animation-fill-mode: both;
+    }
+
+    &.is-exiting .user-login {
+        animation: user-login $progress-animation-duration ease-in;
+        animation-direction: reverse;
+        animation-fill-mode: both;
+    }
 
     .progress-dots .progress-dot.active {
         animation: progress-dot-border $progress-animation-duration ease-out;
