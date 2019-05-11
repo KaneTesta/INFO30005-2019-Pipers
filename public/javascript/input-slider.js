@@ -7,6 +7,25 @@ $(document).on("transition", function () {
         let sliderMax = parseInt($slider.attr("data-max"));
         let sliderStep = parseInt($slider.attr("data-step"));
         let sliderValue = parseInt($slider.attr("data-value"));
+
+        let sliderMapRaw = $slider.attr("data-map");
+        let sliderMap = undefined;
+        if (sliderMapRaw) {
+            sliderMap = JSON.parse(sliderMapRaw);
+        }
+
+        function setValue(value) {
+            let mappedValue = null;
+            if (sliderMap) {
+                mappedValue = sliderMap[value];
+            } else {
+                mappedValue = value;
+            }
+
+            $sliderValue.html(mappedValue);
+            $sliderValue.data("data-value", mappedValue);
+        }
+
         // Setup slider
         $slider.slider({
             range: "min",
@@ -15,12 +34,12 @@ $(document).on("transition", function () {
             step: sliderStep,
             value: sliderValue,
             slide: function (event, ui) {
-                $sliderValue.html(ui.value);
+                setValue(ui.value);
             }
         });
 
         // Set default value
-        $sliderValue.html($slider.slider("value"));
+        setValue($slider.slider("value"));
         // Finish setup
         $slider.removeClass("slider");
     });

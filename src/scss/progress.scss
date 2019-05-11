@@ -3,6 +3,7 @@ $progress-dot-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
 $progress-max-dots: 10;
 $progress-dot-spacing: 32px;
 $progress-dot-size: 23px;
+$progress-dot-size-small: 17px;
 // Animation
 $progress-animation-duration: 0.1s;
 
@@ -23,6 +24,16 @@ $progress-animation-duration: 0.1s;
 
     to {
         border-color: $accent-color;
+    }
+}
+
+@keyframes progress-dot-border-alt {
+    from {
+        border-color: $border-color;
+    }
+
+    to {
+        border-color: $accent-color-alt;
     }
 }
 
@@ -65,6 +76,18 @@ $progress-animation-duration: 0.1s;
 
     &.is-exiting .progress-dots .progress-dot.active {
         animation: progress-dot-border $progress-animation-duration ease-in;
+        animation-direction: reverse;
+        animation-fill-mode: both;
+    }
+
+    .progress-dots-extra .progress-dot.active {
+        animation: progress-dot-border-alt $progress-animation-duration ease-out;
+        animation-direction: normal;
+        animation-fill-mode: both;
+    }
+
+    &.is-exiting .progress-dots-extra .progress-dot.active {
+        animation: progress-dot-border-alt $progress-animation-duration ease-in;
         animation-direction: reverse;
         animation-fill-mode: both;
     }
@@ -202,5 +225,40 @@ $progress-animation-duration: 0.1s;
                 visibility: visible;
             }
         }
+    }
+}
+
+.progress-dots.progress-dots-extra {
+    top: 32px;
+
+    height: 0;
+    margin-top: 20px;
+
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    transform: translateY(-1rem);
+
+    opacity: 0;
+
+    .progress-dot {
+        width: $progress-dot-size-small;
+        height: $progress-dot-size-small;
+
+        &::after {
+            background-color: $accent-color-alt;
+        }
+
+        &.active {
+            border-color: $accent-color-alt;
+        }
+    }
+
+    &.visible {
+        transform: none;
+
+        opacity: 1;
+    }
+
+    &.progress-extra-layout {
+        position: relative;
     }
 }

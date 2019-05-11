@@ -1,9 +1,19 @@
 <div id="ProgressDots" class="progress-dots">
-    <% for (let i = 0; i < 3; ++i) {%>
-        <% if (i === viewport) { %>
-            <div class="progress-dot active"></div>
-        <% } else { %>
-            <div class="progress-dot"></div>
-        <% } %>
+    <% for (let i = 0; i < 3; ++i) { %>
+    <% if (i === viewport) { %>
+    <div class="progress-dot active"></div>
+    <% } else { %>
+    <div class="progress-dot"></div>
+    <% } %>
+    <% } %>
+</div>
+
+<div id="ProgressDotsExtra" class="progress-dots progress-dots-extra">
+    <% for (let i = 3; i < 6; ++i) {%>
+    <% if (i === viewport) { %>
+    <div class="progress-dot active"></div>
+    <% } else { %>
+    <div class="progress-dot"></div>
+    <% } %>
     <% } %>
 </div>

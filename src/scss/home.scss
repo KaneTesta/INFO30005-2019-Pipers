@@ -200,6 +200,12 @@ select {
     background-color: $foreground-color;
 }
 
+a .feature {
+    text-decoration: none;
+
+    color: $text-color;
+}
+
 .white-bg {
     background: $foreground-color;
 }
@@ -212,42 +218,31 @@ select {
     font-size: 40px;
 }
 
-.column-left {
-    float: left;
 
-    width: 73%;
-}
+.contact {
+    display: block;
 
-.column-right {
-    float: left;
+    width: 75%;
+    height: 300px;
+    margin: 30px 12.5%;
+    padding: 30px;
 
-    width: 23%;
-    .recipe-button {
-        position: relative;
+    border: solid 1px rgb(112, 112, 112);
+    border-radius: $border-radius;
+    background-color: rgba(141, 248, 116,0.075);
 
-        display: flex;
+    &:hover {
+        box-shadow: 0 0 10px 1px rgba(0,0,0,0.5);
+    }
 
-        box-sizing: content-box;
-        margin-top: 80px;
-        padding: 8px 20px;
-
-        cursor: pointer;
-        transition: box-shadow 0.15s ease, background-color 0.1s ease, border-color 0.1s ease;
+    .name {
         text-align: center;
-        vertical-align: center;
-        text-decoration: none;
-        text-transform: uppercase;
+        text-transform: capitalize;
 
-        color: $text-color-accent;
-        border: 1px solid $accent-color;
-        border-radius: 24px;
-        background-color: $accent-color;
-        box-shadow: $button-shadow;
+        font-weight: bold;
+    }
 
-        font-size: 0.95em;
-        font-size: 0.75em;
-
-        align-items: center;
-        justify-content: center;
+    .number .address .about {
+        text-align: left;
     }
 }

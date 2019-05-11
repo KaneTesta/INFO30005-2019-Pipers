@@ -1,35 +1,38 @@
 {
-    "name": "info30005-2019-pipers",
-    "version": "0.0.0",
-    "private": true,
-    "scripts": {
-        "start": "npm run build:sass && node ./bin/www",
-        "test": "npm-run-all -p build:*",
-        "build:sass": "gulp sass",
-        "build:watch": "gulp sass:watch",
-        "build:run": "nodemon ./bin/www"
-    },
-    "dependencies": {
-        "cookie-parser": "~1.4.3",
-        "debug": "~2.6.9",
-        "dotenv": "^8.0.0",
-        "ejs": "^2.6.1",
-        "express": "~4.16.0",
-        "gulp": "^4.0.1",
-        "gulp-autoprefixer": "^6.1.0",
-        "gulp-sass": "^4.0.2",
-        "http-errors": "^1.7.2",
-        "mongodg": "^0.1.0",
-        "mongoose": "^5.5.3",
-        "mongoose-unique-validator": "^2.0.3",
-        "morgan": "~1.9.0",
-        "pluralize": "^7.0.0",
-        "request": "^2.88.0"
-    },
-    "devDependencies": {
-        "nodemon": "^1.18.11",
-        "npm-run-all": "^4.1.5",
-        "moment": "^2.24.0",
-        "recipe-ingredient-parser-v2": "^1.0.1"
-    }
+  "name": "info30005-2019-pipers",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm run build:sass && node ./bin/www",
+    "test": "npm-run-all -p build:*",
+    "build:sass": "gulp sass",
+    "build:watch": "gulp sass:watch",
+    "build:run": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "dotenv": "^8.0.0",
+    "ejs": "^2.6.1",
+    "express": "~4.16.0",
+    "express-session": "^1.16.1",
+    "gulp": "^4.0.1",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-sass": "^4.0.2",
+    "http-errors": "^1.7.2",
+    "mongodg": "^0.1.0",
+    "mongoose": "^5.5.3",
+    "mongoose-unique-validator": "^2.0.3",
+    "morgan": "~1.9.0",
+    "passport": "^0.4.0",
+    "passport-google-oauth": "^2.0.0",
+    "pluralize": "^7.0.0",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11",
+    "npm-run-all": "^4.1.5",
+    "moment": "^2.24.0",
+    "recipe-ingredient-parser-v2": "^1.0.1"
+  }
 }

@@ -1,4 +1,25 @@
 $(document).on("transition", function () {
+    let $search = $("#IngredientsSearch");
+    if (!$search.length) {
+        return;
+    }
+
+    const EJS_INGREDIENT = `
+    <div class="ingredient-element" data-ingredient="<%= ingredient %>">
+        <p><%= ingredient%></p>
+        <div class="flex-fill"></div>
+        <input type="checkbox" id="CheckboxPriority<%= ingredient %>" class="checkbox-pill button-priority button-icon">
+        <label for="CheckboxPriority<%= ingredient %>">
+            <ion-icon class="checkbox-icon checkbox-add" name="star-outline"></ion-icon>
+            <ion-icon class="checkbox-icon checkbox-checkmark" name="star"></ion-icon>
+            <span>Priority</span>
+        </label>
+        <button id="IngredientRemove<%=ingredient%>" class="button-error button-icon">
+            <ion-icon name="remove"></ion-icon>
+        </button>
+    </div>
+    `;
+
     function hideIngredientMessages(maxMessages = 0) {
         let $ingredientErrorList = $("#IngredientsMessageList");
         // Hide all existing errors
@@ -52,7 +73,7 @@ $(document).on("transition", function () {
      * Add an ingredient to the list of ingredients
      * @param {string[]} ingredientList The full list of ingredients to check against
      */
-    function addIngredient(ingredientList) {
+    function addIngredientFromSearch(ingredientList) {
         // Hide errors
         hideIngredientMessages(3);
         // Check ingredients
@@ -63,18 +84,31 @@ $(document).on("transition", function () {
                 element.toLowerCase() === searchValue.toLowerCase();
         });
 
+        addIngredient(ingredient, ingredientList, true);
+    }
+
+    function addIngredient(ingredient, ingredientList, fromUserInput) {
         if (ingredient !== undefined) {
+            // Capitalize first letter
+            ingredient = ingredient.charAt(0).toUpperCase() + ingredient.slice(1).toLowerCase();
+
+            // Check ingredient list
+            let findResult = ingredientList.find(function (element) {
+                return element !== undefined && element.toLowerCase() === ingredient.toLowerCase();
+            });
+
+            if (!findResult) {
+                return;
+            }
+
+            // Check if the ingredient already exists
             if (!hasIngredient(ingredient)) {
                 // Create ingredient element
                 let $ingredientsList = $("#IngredientsList");
-                let $ingredientElement = $("<div class=\"ingredient-element\"></div>");
-                $ingredientElement.attr("data-ingredient", ingredient);
-                $ingredientElement.html(ingredient);
-                // Create remove button
-                let $flexFill = $("<div class=\"flex-fill\"></div>");
-                $flexFill.appendTo($ingredientElement);
-                let $ingredientRemoveButton = $("<button class=\"button-error button-icon\"></button>");
-                $ingredientRemoveButton.appendTo($ingredientElement);
+
+                let $ingredientElement = $(ejs.render(EJS_INGREDIENT, { ingredient: ingredient }));
+                // Setup remove button
+                let $ingredientRemoveButton = $ingredientElement.children("#IngredientRemove" + ingredient);
                 $ingredientRemoveButton.on('click', function () {
                     // Animate the element out
                     $ingredientElement.css("opacity", 0);
@@ -83,13 +117,11 @@ $(document).on("transition", function () {
                     });
                 });
 
-                // Add icon for remove button
-                let $ingredientRemoveIcon = $("<ion-icon name=\"remove\"></ion-icon>");
-                $ingredientRemoveIcon.appendTo($ingredientRemoveButton);
-
                 // Hide element
-                $ingredientElement.hide();
-                $ingredientElement.css("opacity", 0);
+                if (fromUserInput) {
+                    $ingredientElement.hide();
+                    $ingredientElement.css("opacity", 0);
+                }
 
                 // Add at index
                 let addedIngredient = false;
@@ -112,18 +144,24 @@ $(document).on("transition", function () {
                 }
 
                 // Animate in
-                $ingredientElement.slideDown(250);
-                window.setTimeout(function () {
-                    $ingredientElement.css("opacity", 1);
-                }, 100);
+                if (fromUserInput) {
+                    $ingredientElement.slideDown(250);
+                    window.setTimeout(function () {
+                        $ingredientElement.css("opacity", 1);
+                    }, 100);
+                }
 
                 // Show success message
-                showIngredientMessage("'" + ingredient + "'" + " added to ingredients.");
+                if (fromUserInput) {
+                    showIngredientMessage("'" + ingredient + "'" + " added to ingredients.");
+                }
             } else {
                 // Ingredient already added
-                showIngredientMessage("'" + ingredient + "'" + " is already added.", "message-error");
+                if (fromUserInput) {
+                    showIngredientMessage("'" + ingredient + "'" + " is already added.", "message-error");
+                }
             }
-        } else {
+        } else if (fromUserInput) {
             // Ingredient not found
             if (searchValue === undefined || searchValue === "") {
                 showIngredientMessage("Please enter an ingredient into the search box.", "message-warning");
@@ -137,12 +175,22 @@ $(document).on("transition", function () {
      * Get an array of the ingredients that have been added
      * @returns {string[]}
      */
-    function getIngredients() {
+    function getIngredients(priority = false) {
         let ingredients = [];
         let $ingredientsList = $("#IngredientsList");
         $ingredientsList.children().each(function () {
             let $element = $(this);
-            ingredients.push($element.attr("data-ingredient").toLowerCase());
+            // Get ingredient name
+            let ingredientName = $element.attr("data-ingredient");
+            // Check priority
+            if (priority) {
+                let $priorityCheckbox = $element.children("#CheckboxPriority" + ingredientName);
+                if ($priorityCheckbox.is(":checked")) {
+                    ingredients.push(ingredientName.toLowerCase());
+                }
+            } else {
+                ingredients.push(ingredientName.toLowerCase());
+            }
         });
 
         return ingredients;
@@ -155,10 +203,34 @@ $(document).on("transition", function () {
      */
     function hasIngredient(ingredientName) {
         let ingredientElement = getIngredients().find(function (element) {
-            return ingredientName === element;
+            return ingredientName.toLowerCase() === element.toLowerCase();
         });
 
         return ingredientElement !== undefined;
+    }
+
+    /**
+     * Save the current ingredients for the user
+     */
+    function saveIngredients($button) {
+        $button.addClass("loading");
+
+        let params = {
+            ingredients: getIngredients()
+        };
+
+        let url = "/api/user/saveingredients";
+        $.post(url, params, function (data) {
+            $button.removeClass("loading");
+
+            if (data.error) {
+                showIngredientMessage("Error saving ingredients: " + data.error, "message-error");
+            } else {
+                showIngredientMessage("Ingredients saved")
+            }
+        }).fail(function (data) {
+            showIngredientMessage("Error saving ingredients", "message-error");
+        });
     }
 
     /**
@@ -185,18 +257,16 @@ $(document).on("transition", function () {
      */
     function getMaximumTime() {
         let $timeMinutes = $("#SliderMinutes");
-        let $timeHours = $("#SliderHours");
-        return $timeMinutes.slider("value") + ($timeHours.slider("value") * 60);
+        return $timeMinutes.data("data-value");
     }
 
     let $ingredientsSection = $("#IngredientsSection");
     let $ingredientsLoading = $("#IngredientsLoading");
     // Get ingredients from server
-    $.getJSON("./api/ingredients", function (data) {
+    $.getJSON("/api/ingredients", function (data) {
         /** @type {string[]} */
         let ingredientList = data.sort();
         // Setup autocomplete
-        let $search = $("#IngredientsSearch");
         $search.autocomplete({
             html: true,
             autoFocus: true,
@@ -234,7 +304,7 @@ $(document).on("transition", function () {
                 // Set value
                 $search.val(ui.item.label);
                 // Add ingredient
-                addIngredient(ingredientList);
+                addIngredientFromSearch(ingredientList);
                 // Clear value
                 $search.val("");
                 return false;
@@ -283,16 +353,28 @@ $(document).on("transition", function () {
 
         // Setup add button
         $("#IngredientsButtonAdd").on('click', function () {
-            addIngredient(ingredientList);
+            addIngredientFromSearch(ingredientList);
+        });
+
+        // Setup save ingredients button
+        let $saveIngredientsButton = $("#IngredientsButtonSaveIngredients");
+        $saveIngredientsButton.on('click', function () {
+            saveIngredients($saveIngredientsButton);
         });
 
         // Setup find recipes button
         $("#IngredientsButtonFindRecipes").on('click', function () {
+            // Save ingredients
+            saveIngredients($saveIngredientsButton);
             // Get url
             params = {
-                'ingredients': getIngredients()
+                "ingredients": getIngredients(),
+                "priority_ingredients": getIngredients(true),
+                "unavailable_cookware": getUnavailableCookware(),
+                "maximum_time": getMaximumTime()
             }
-            let url = "./recipe?" + jQuery.param(params);
+
+            let url = "/recipe?" + jQuery.param(params);
             // Check smoothState
             let $main = $('#Main');
             let smoothState = $main.data("smoothState");
@@ -303,6 +385,17 @@ $(document).on("transition", function () {
                 window.location.assign(url);
             }
         });
+
+        let $ingredientsList = $("#IngredientsList");
+        if ($ingredientsList) {
+            let userIngredientsData = $ingredientsList.attr("data-ingredients");
+            if (userIngredientsData) {
+                let userIngredients = userIngredientsData.split("+");
+                userIngredients.forEach(function (el) {
+                    addIngredient(el, ingredientList, false);
+                });
+            }
+        }
 
         // Show the ingredients section
         $ingredientsLoading.slideUp(250, function () {

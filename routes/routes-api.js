@@ -3,6 +3,8 @@ const router = express.Router();
 
 const controller = require('../controllers/recipeController');
 const ingredientController = require('../controllers/ingredientController');
+const contactController = require('../controllers/contactController');
+const userController = require('../controllers/userController');
 
 /**
  * 
@@ -10,15 +12,15 @@ const ingredientController = require('../controllers/ingredientController');
  * @param {Response} res 
  */
 function sendResponse(msg, res) {
-    if (msg.error) {
-        res.status(500).send(msg.error);
-    } else {
-        res.json(msg.result);
-    }
+  if (msg.error) {
+    res.status(500).send(msg.error);
+  } else {
+    res.json(msg.result);
+  }
 }
 
 router.get('/', (req, res) => {
-    res.send('The Pied Pipers');
+  res.send('The Pied Pipers');
 });
 
 /*
@@ -29,8 +31,11 @@ router.get('/', (req, res) => {
  */
 
 router.get('/recipes/:ingredients', function (req, res) {
-    let query = req.params.ingredients.split('+');
-    controller.findRecipeByIngredient(query, function (msg) { sendResponse(msg, res); });
+  let query = {
+    ingredients: req.params.ingredients.split('+')
+  };
+
+  controller.findRecipeByIngredients(query, function (msg) { sendResponse(msg, res); });
 });
 
 /*
@@ -39,7 +44,7 @@ router.get('/recipes/:ingredients', function (req, res) {
 */
 
 router.post('/recipes', function (req, res) {
-    controller.insertRecipe(req.body, function (msg) { sendResponse(msg, res); });
+  controller.insertRecipe(req.body, function (msg) { sendResponse(msg, res); });
 });
 
 /*
@@ -73,11 +78,14 @@ router.get('/storage/:ingredient', controller.findStorageInfo);
 */
 
 router
-    .route('/contacts')
+  .route('/contacts')
 
-    .get(controller.findContact)
+  .get(contactController.findContact)
 
-    .post(controller.insertContact);
+  .post(contactController.insertContact);
+
+router.get('/contacts/all', contactController.allContacts);
+router.delete('/contacts/:id', contactController.deleteContact);
 
 /*
 TODO
@@ -87,5 +95,22 @@ incorporate with the frontend
 */
 
 router.get('/ingredients', ingredientController.getIngredients);
+
+router.post('/user/saveingredients', function (req, res) {
+  if (req.session && req.session.passport && req.session.passport.user) {
+    userController.saveIngredients(req, function (msg) { sendResponse(msg, res); });
+  } else {
+    res.status(500).send("User not logged in");
+  }
+});
+
+router.post('/user/delete', function (req, res) {
+  if (req.session && req.session.passport && req.session.passport.user) {
+    let user_id = req.session.passport.user;
+    userController.deleteUser(user_id, function (msg) { sendResponse(msg, res); });
+  } else {
+    res.status(500).send("User not logged in");
+  }
+});
 
 module.exports = router;

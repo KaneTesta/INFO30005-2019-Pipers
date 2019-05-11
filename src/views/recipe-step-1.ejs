@@ -1,0 +1,40 @@
+<html>
+
+    <head>
+        <% include includes/head %>
+    </head>
+
+    <body>
+        <div id="Main" class="main">
+            <% include includes/elements/progress %>
+            <% include includes/elements/user-login %>
+
+            <div class="animation-element" data-viewport="<%= viewport %>">
+                <div class="body-wrap">
+                    <section class="container fill-middle-medium">
+                        <% if (data.url_back) { %>
+                        <a class="button button-back button-left" href="<%= data.url_back %>" data-target="2">Back</a>
+                        <% } %>
+
+                        <h1 class="heading"><%= data.recipe.title %></h1>
+                        <h3>Ingredients</h3>
+                        <ol class="recipe-steps">
+                            <% for (let i = 0; i < data.recipe.ingredients.length; ++i) { %>
+                            <li>
+                                <%- include("includes/elements/checkbox-pill", {label: data.recipe.ingredients[i].text, checked: false}); %>
+                            </li>
+                            <% } %>
+                        </ol>
+
+                        <a href="#" class="button button-inline button-next button-recipe"
+                            data-id="<%= data.recipe._id %>" data-step="2">Method</a>
+
+                    </section>
+                </div>
+            </div>
+        </div>
+    </body>
+    <footer>
+    </footer>
+
+</html>

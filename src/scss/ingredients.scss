@@ -18,8 +18,7 @@
 
     button,
     .button {
-        position: absolute;
-        right: 0;
+        margin-left: 8px;
     }
 }
 
@@ -28,7 +27,7 @@
     margin-bottom: 12px;
 }
 
-@keyframes ingredients-loading {
+@keyframes progress-loading {
     0% {
         transform: rotate(0deg);
     }
@@ -42,7 +41,7 @@
     }
 }
 
-.ingredients-loading {
+.progress-loading {
     padding: 1em;
 
     text-align: center;
@@ -57,7 +56,7 @@
         margin: 1em auto;
 
         content: "";
-        animation: ingredients-loading 1s ease 0s infinite;
+        animation: progress-loading 1s ease 0s infinite;
 
         border: 4px solid transparent;
         border-right-color: $accent-color;

@@ -7,6 +7,8 @@
     <body>
         <div id="Main" class="main">
             <% include includes/elements/progress %>
+            <% include includes/elements/user-login %>
+
 
             <div class="animation-element" data-viewport="<%= viewport %>">
                 <div class="body-wrap">
@@ -15,8 +17,14 @@
                         <a class="button button-back" href="ingredients" data-target="1">Back</a>
                         <h1 class="heading">Recipe Results</h1>
 
-                        <% for (let index = 0; index < recipes.length; ++index) { %>
-                        <%- include("includes/elements/recipe", {recipe: recipes[index], index: index + 1}); %>
+                        <% if (data.recipes && data.recipes.length > 0) { %>
+                        <div class="recipe-list">
+                            <% for (let index = 0; index < data.recipes.length; ++index) { %>
+                            <%- include("includes/elements/recipe", {recipe: data.recipes[index], index: index + 1}); %>
+                            <% } %>
+                        </div>
+                        <% } else { %>
+                        <div class="message message-error">No recipes found</div>
                         <% } %>
 
                     </section>

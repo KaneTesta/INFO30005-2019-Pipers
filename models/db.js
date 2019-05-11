@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-if (process.env.NODE_ENV !== 'production') require('dotenv').config()
+
 const ATLAS_USER = process.env.ATLAS_USER || '';
 const ATLAS_PASS = process.env.ATLAS_PASS || '';
 const dbURI = `mongodb+srv://${ATLAS_USER}:${ATLAS_PASS}@cluster0-0uuii.azure.mongodb.net/test?retryWrites=true`;
@@ -23,3 +23,4 @@ require('./recipe');
 require('./contact');
 require('./storage');
 require('./ingredient');
+require('./user');

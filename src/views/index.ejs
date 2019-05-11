@@ -7,9 +7,10 @@
     <body>
 
         <div id="Main" class="main">
-            <!--for smoothstate.js animation-->
             <% include includes/elements/progress %>
+            <% include includes/elements/user-login %>
 
+            <!--for smoothstate.js animation-->
             <div class="animation-element" data-viewport="<%= viewport %>">
                 <!--creates border effect-->
                 <div class="body-wrap">
@@ -22,7 +23,8 @@
                                     </div>
                                     <div class="flex-fill">
                                         <p class="subheading">End Waste</p>
-                                        <p>Help minimize your food wastage by finding recipes to cook with the food that you already have.
+                                        <p>Help minimize your food wastage by finding recipes to cook with the food that
+                                            you already have.
                                         </p>
                                         <a class="button button-next button-inline" href="ingredients"
                                             data-target="1">Add Ingredients</a>
@@ -37,8 +39,7 @@
                         <div class="container">
                             <div class="overlay-content">
                                 <div class="overlay-desc">
-                                    <h3 class="h2 text-white text-uppercase">Helping manage Australia's waste epidemic
-                                    </h3>
+                                    <h3 class="heading-section">Helping manage Australia's waste epidemic</h3>
                                 </div>
                             </div>
                         </div>
@@ -85,32 +86,37 @@
                     <section class="feature-box pt-100 pb-100 relative">
                         <div class="container">
                             <div class="row">
-                                <div class="col-lg-6 col-sm-6 d-flex align-items-stretch">
-                                    <div class="feature">
-                                        <div class="icon">
-                                            <ion-icon name="search"></ion-icon>
+                                <div class="relative col-lg-6 col-sm-6 d-flex align-items-stretch">
+                                    <a href="/ingredients">
+                                        <div class="feature">
+                                            <div class="icon">
+                                                <ion-icon name="search"></ion-icon>
+                                            </div>
+                                            <div class="desc">
+                                                <h4>Recipe Finder</h4>
+                                                <p>
+                                                    Have ingredients near use by or left over? Use our recipe builder to
+                                                    limit your wastage.
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="desc">
-                                            <h2 class="text-uppercase">Recipe Finder</h2>
-                                            <p>
-                                                Have ingredients near use by or left over? Use our recipe builder to
-                                                limit your wastage.
-                                            </p>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </div>
-                                <div class="col-lg-6 col-sm-6 d-flex align-items-stretch">
-                                    <div class="feature">
-                                        <div class="icon">
-                                            <ion-icon name="call"></ion-icon>
+                                <div class="relative col-lg-6 col-sm-6 d-flex align-items-stretch">
+                                    <a href="/contacts">
+                                        <div class="feature">
+                                            <div class="icon">
+                                                <ion-icon name="call"></ion-icon>
+                                            </div>
+                                            <div class="desc">
+                                                <h2 class="text-uppercase">Want to donate?</h2>
+                                                <p>
+                                                    Have ingredients you know you won't use? View our contacts you can
+                                                    donate your leftovers to.
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="desc">
-                                            <h2 class="text-uppercase">Want to donate?</h2>
-                                            <p>
-                                                View our contact list, full of contacts to donate food to.
-                                            </p>
-                                        </div>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>

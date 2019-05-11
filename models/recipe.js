@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var parser = require('recipe-ingredient-parser-v2');
+var pluralize = require('pluralize');
 
 //TODO
 // Search by quantities of ingredients
@@ -14,14 +16,17 @@ var recipeSchema = mongoose.Schema({
     trim: true,
     minlength: 1
   },
+  ingredients: [{
+    quantity: Number,
+    unit: String,
+    ingredient: mongoose.Schema.ObjectId
+  }],
   method: {
     type: [String],
     required: [true, "Recipe needs a method"]
   },
-  serves: Number,
-  tags: [String],
-  description: String,
   author: String,
+  serves: Number,
   source: String,
   image: String,
   notes: String,
@@ -49,49 +54,78 @@ var recipeSchema = mongoose.Schema({
   }
 });
 
+/**
+ * Search recipes including given ingredients
+ * Yields the recipes containing those ingredients, sorted by matches
+ * 
+ * TODO: paginate (https://www.npmjs.com/package/mongoose-aggregate-paginate)
+ * 
+ * @param {{ingredients: [String], priority_ingredients: [String], unavailable_cookware: [String], maximum_time: number}} query Array of ingredients
+ */
+recipeSchema.statics.byQuery = function (query) {
+  if (!query.maximum_time) {
+    query.maximum_time = Number.MAX_SAFE_INTEGER;
+  }
 
-recipeSchema.virtual('url').get(function () {
-  return "/recipe/" + this._id;
-});
-
-
-recipeSchema.statics.byIngredient = function (i) {
   return this.aggregate([
     {
-        $addFields: {
-            totalMatch: {
-                $size: {
-                    $setIntersection: [i, { $map: { input: "$ingredients", as: "ingredient", in: "$$ingredient.ingredient" } }]
-                }
-            }
-        }
+      $match: {
+        "totalTime": { $lte: query.maximum_time }
+      }
     },
     {
-        $sort: {
-            totalMatch: -1
-        }
-    },
-    {
-        $project: {
-            totalMatch: 0
-        }
-    }
-  ])}
-
-/* recipeSchema.query.byIngredient = function (ingredients) {
-  return this
-    .where('ingredients')
-    .and(ingredients.map((ing) => {
-      cleanedIngredient = ing.toLowerCase().trim();
-      return {
-        ingredients: {
-          $elemMatch: {
-            ingredient: cleanedIngredient
-          }
+      $addFields: {
+        hasPriorityIngredients: {
+          $setIsSubset: [query.priority_ingredients, {
+            $map: { input: "$ingredients", as: "ingredient", in: "$$ingredient.ingredient" }
+          }]
         }
       }
-    }));
-} */
+    },
+    {
+      $match: {
+        "hasPriorityIngredients": true
+      }
+    },
+    {
+      $addFields: {
+        matches: {
+          $setIntersection: [query.ingredients, {
+            $map: { input: "$ingredients", as: "ingredient", in: "$$ingredient.ingredient" }
+          }]
+        },
+        matches_priority: {
+          $setIntersection: [query.priority_ingredients, {
+            $map: { input: "$ingredients", as: "ingredient", in: "$$ingredient.ingredient" }
+          }]
+        }
+      }
+    },
+    {
+      $addFields: {
+        totalMatch: {
+          $size: "$matches"
+        }
+      }
+    },
+    {
+      $match: {
+        "totalMatch": { $gte: 1 }
+      }
+    },
+    {
+      $sort: {
+        totalMatch: -1
+      },
+    },
+    {
+      $project: {
+        hasPriorityIngredients: 0,
+        totalMatch: 0
+      }
+    }
+  ])
+}
 
 recipeSchema.query.sortByRating = function () {
   return this.sort({ 'aggregateRating.ratingValue': -1 });

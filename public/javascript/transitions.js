@@ -8,17 +8,30 @@
     'use strict';
 
     $(document).ready(function () {
-        $(document).trigger("transition");
         // Init here.
         let $main = $('#Main');
-        let $site = $('html, body');
+        let $body = $('body');
 
+        $(document).on("transition", function () {
+            let current = $('[data-viewport]').first().data('viewport');
+
+            let $progressExtra = $('.progress-dots-extra');
+            if (current >= 3 && current < 6) {
+                $progressExtra.addClass("visible");
+                $progressExtra.addClass("progress-extra-layout");
+            } else {
+                $progressExtra.removeClass("visible");
+                $progressExtra.removeClass("progress-extra-layout");
+            }
+        });
+
+        $main.attr('data-progress-extra', "false");
         let smoothState = $main.smoothState({
             prefetch: true,
             cacheLength: 2,
             onBefore: function ($anchor, $container) {
-                var current = $('[data-viewport]').first().data('viewport'),
-                    target = $anchor.data('target');
+                let current = $('[data-viewport]').first().data('viewport');
+                let target = $anchor.data('target');
                 current = current ? current : 0;
                 target = target ? target : 0;
                 // Find transition
@@ -32,11 +45,21 @@
                 }
 
                 $main.attr('data-transition', transition);
+                $main.attr('data-progress-extra', (target >= 3 && target < 6) ? "true" : "false");
             },
             onStart: {
                 duration: 250,
                 render: function (url, $container) {
                     $main.addClass('is-exiting');
+                    // Animate extra progress dots
+                    let $progressExtra = $('.progress-dots-extra');
+                    if ($main.attr('data-progress-extra') === "true") {
+                        $progressExtra.addClass("visible");
+                    } else {
+                        $progressExtra.removeClass("visible");
+                    }
+
+                    $body.stop().animate({ scrollTop: 0 }, 200);
                     // Restart your animation
                     smoothState.restartCSSAnimations();
                 }
@@ -50,5 +73,7 @@
                 }
             },
         }).data('smoothState');
+
+        $(document).trigger("transition");
     });
 }(jQuery));

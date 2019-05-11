@@ -1,36 +1,24 @@
 .recipe-row {
     margin: 16px 0;
-    padding: 16px 48px 0;
+    padding: 8px 48px;
 
-    border: solid 1px rgb(112, 112, 112);
-    background-color: rgba(141, 248, 116,0.075);
-
-    &:hover {
-        box-shadow: 0 0 10px 1px rgba(0,0,0,0.5);
-    }
+    border: $border-width solid $border-color;
+    border-radius: $border-radius;
+    background-color: mix($foreground-color, $accent-color, 92%);
 
     .recipe {
-        span {
-            display: block;
-
-            margin-top: 12px;
-
-            color: $text-color-detail;
-
-            font-size: 0.75em;
-            font-weight: 700;
-        }
+        position: relative;
 
         .recipe-info {
-            margin-left: 12px;
+            margin: 12px 0 24px 12px;
             padding: 0 24px;
 
-            border-left: 3px solid  $accent-color;
+            border-left: 3px solid $accent-color;
 
             p {
                 padding: 4px 0;
 
-                color: $text-color-detail;
+                color: $text-color-info;
 
                 &:first-child {
                     margin-top: 0;
@@ -40,24 +28,56 @@
                     margin-bottom: 0;
                 }
             }
-        }
 
-        .recipe-description {
-            margin: 36px 0;
-            padding: 0 24px;
+            &.recipe-ingredients {
+                border-color: $accent-color-alt;
 
-            ul li {
-                margin-bottom: 1em;
+                .ingredient-match {
+                    font-weight: 700;
+                }
 
-                list-style: decimal;
+                .ingredient-match-priority {
+                    color: $accent-color-alt;
+
+                    font-weight: 700;
+                }
+
+                .ingredient-match-partial {
+                    color: $warning-color;
+
+                    font-weight: 700;
+                }
             }
         }
 
-        img.thumbnail {
-            max-width: 50%;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+        .recipe-image {
+            max-width: 100%;
+            margin: 24px 0;
+
+            border: none;
+            border-radius: $border-radius;
+
+            @media screen and (min-width: $breakpoint-medium) {
+                float: right;
+
+                max-width: 50%;
+                margin-top: 0;
+                margin-left: 24px;
+            }
         }
+    }
+}
+
+.recipe-steps {
+    margin-bottom: 12px;
+
+    .checkbox-container {
+        display: block;
+    }
+
+    li {
+        margin-bottom: 12px;
+        margin-left: 36px;
+        padding-left: 12px;
     }
 }
