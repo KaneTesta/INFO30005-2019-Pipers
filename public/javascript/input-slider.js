@@ -23,7 +23,7 @@ $(document).on("transition", function () {
             }
 
             $sliderValue.html(mappedValue);
-            $sliderValue.data("data-value", mappedValue);
+            $slider.attr("data-value", mappedValue);
         }
 
         // Setup slider

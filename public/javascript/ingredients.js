@@ -257,7 +257,7 @@ $(document).on("transition", function () {
      */
     function getMaximumTime() {
         let $timeMinutes = $("#SliderMinutes");
-        return $timeMinutes.data("data-value");
+        return $timeMinutes.attr("data-value");
     }
 
     let $ingredientsSection = $("#IngredientsSection");
