@@ -33,10 +33,10 @@
                 let current = $('[data-viewport]').attr('data-viewport');
                 let target = $anchor.data('target');
                 current = current ? current : 0;
-                target = target ? target : current;
+                target = target ? target : 0;
                 // Find transition
                 let transition = 'page-fade';
-                if (current === target) {
+                if (current.toString() === target.toString()) {
                     transition = 'page-fade';
                 } else if (current < target) {
                     transition = 'page-right';

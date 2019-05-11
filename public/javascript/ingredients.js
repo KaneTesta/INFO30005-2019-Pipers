@@ -5,16 +5,16 @@ $(document).on("transition", function () {
     }
 
     const EJS_INGREDIENT = `
-    <div class="ingredient-element" data-ingredient="<%= ingredient %>">
-        <p><%= ingredient%></p>
+    <div class="ingredient-element" data-ingredient="<%= ingredient %>" data-ingredient-id="<%= ingredientId %>">
+        <p><%= ingredient %></p>
         <div class="flex-fill"></div>
-        <input type="checkbox" id="CheckboxPriority<%= ingredient %>" class="checkbox-pill button-priority button-icon">
-        <label for="CheckboxPriority<%= ingredient %>">
+        <input type="checkbox" id="CheckboxPriority<%= ingredientId %>" class="checkbox-pill button-priority button-icon">
+        <label for="CheckboxPriority<%= ingredientId %>">
             <ion-icon class="checkbox-icon checkbox-add" name="star-outline"></ion-icon>
             <ion-icon class="checkbox-icon checkbox-checkmark" name="star"></ion-icon>
             <span>Priority</span>
         </label>
-        <button id="IngredientRemove<%=ingredient%>" class="button-error button-icon">
+        <button id="IngredientRemove<%= ingredientId %>" class="button-error button-icon">
             <ion-icon name="remove"></ion-icon>
         </button>
     </div>
@@ -91,6 +91,8 @@ $(document).on("transition", function () {
         if (ingredient !== undefined) {
             // Capitalize first letter
             ingredient = ingredient.charAt(0).toUpperCase() + ingredient.slice(1).toLowerCase();
+            // Get id-friendly ingredient
+            let ingredientId = ingredient.replace(' ', '_');
 
             // Check ingredient list
             let findResult = ingredientList.find(function (element) {
@@ -106,9 +108,9 @@ $(document).on("transition", function () {
                 // Create ingredient element
                 let $ingredientsList = $("#IngredientsList");
 
-                let $ingredientElement = $(ejs.render(EJS_INGREDIENT, { ingredient: ingredient }));
+                let $ingredientElement = $(ejs.render(EJS_INGREDIENT, { ingredient: ingredient, ingredientId: ingredientId }));
                 // Setup remove button
-                let $ingredientRemoveButton = $ingredientElement.children("#IngredientRemove" + ingredient);
+                let $ingredientRemoveButton = $ingredientElement.children("#IngredientRemove" + ingredientId);
                 $ingredientRemoveButton.on('click', function () {
                     // Animate the element out
                     $ingredientElement.css("opacity", 0);
@@ -182,9 +184,10 @@ $(document).on("transition", function () {
             let $element = $(this);
             // Get ingredient name
             let ingredientName = $element.attr("data-ingredient");
+            let ingredientId = $element.attr("data-ingredient-id");
             // Check priority
             if (priority) {
-                let $priorityCheckbox = $element.children("#CheckboxPriority" + ingredientName);
+                let $priorityCheckbox = $element.children("#CheckboxPriority" + ingredientId);
                 if ($priorityCheckbox.is(":checked")) {
                     ingredients.push(ingredientName.toLowerCase());
                 }
