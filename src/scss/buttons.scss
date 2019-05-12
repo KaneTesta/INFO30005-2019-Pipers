@@ -121,6 +121,16 @@ button,
 
             float: left;
 
+            margin-right: 16px;
+
+            @media screen and (max-width: $breakpoint-medium) {
+                margin-right: 12px;
+            }
+
+            @media screen and (max-width: $breakpoint-small) {
+                margin-right: 8px;
+            }
+
             & + .heading {
                 text-align: left;
             }
@@ -151,13 +161,13 @@ button,
 
             float: right;
 
-            margin: 19px 0 0;
+            margin: 19px 0 19px;
             padding-top: 8px;
             padding-bottom: 8px;
         }
 
         @media screen and (max-width: $breakpoint-small) {
-            margin: 12px 0 0;
+            margin: 12px 0 12px;
         }
     }
 

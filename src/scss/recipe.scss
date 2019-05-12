@@ -6,14 +6,27 @@
     border-radius: $border-radius;
     background-color: mix($foreground-color, $accent-color, 92%);
 
+    @media screen and (max-width: $breakpoint-medium) {
+        padding: 8px 24px;
+    }
+
+    @media screen and (max-width: $breakpoint-small) {
+        padding: 8px 16px;
+    }
+
     .recipe {
         position: relative;
 
         .recipe-info {
             margin: 12px 0 24px 12px;
-            padding: 0 24px;
+            padding: 0;
+            padding-left: 24px;
 
             border-left: 3px solid $accent-color;
+
+            @media screen and (max-width: $breakpoint-medium) {
+                padding-left: 12px;
+            }
 
             p {
                 padding: 4px 0;
