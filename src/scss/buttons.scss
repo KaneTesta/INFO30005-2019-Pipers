@@ -211,7 +211,7 @@ button,
     }
 
     &.button-loadable {
-        transition: opacity 0.15s ease;
+        transition: box-shadow 0.15s ease, background-color 0.1s ease, border-color 0.1s ease, opacity 0.1s ease;
 
         &.loading {
             pointer-events: none;
