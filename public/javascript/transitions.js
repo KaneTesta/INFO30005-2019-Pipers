@@ -27,8 +27,8 @@
 
         $main.attr('data-progress-extra', "false");
         let smoothState = $main.smoothState({
-            prefetch: true,
-            cacheLength: 2,
+            prefetch: false,
+            cacheLength: 0,
             onBefore: function ($anchor, $container) {
                 let current = $('[data-viewport]').attr('data-viewport');
                 let target = $anchor.data('target');

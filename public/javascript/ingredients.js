@@ -232,6 +232,7 @@ $(document).on("transition", function () {
                 showIngredientMessage("Ingredients saved")
             }
         }).fail(function (data) {
+            $button.removeClass("loading");
             showIngredientMessage("Error saving ingredients", "message-error");
         });
     }
