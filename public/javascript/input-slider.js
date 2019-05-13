@@ -1,7 +1,7 @@
 $(document).on('transition', () => {
-  $('.slider').each(() => {
+  $('.slider').each((i, el) => {
     // Get values
-    const $slider = $(this);
+    const $slider = $(el);
     const $sliderValue = $(`#${$slider.attr('data-labelid')}`);
     const sliderMin = parseInt($slider.attr('data-min'));
     const sliderMax = parseInt($slider.attr('data-max'));
