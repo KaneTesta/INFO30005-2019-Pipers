@@ -8,19 +8,19 @@ body {
     position: relative;
 
     margin: 50px 50px;
-    padding: 16px 24px;
+    padding: 16px 0;
 
     background-color: $foreground-color;
     box-shadow: 0 0 48px 0 rgba(0, 0, 0, 0.2);
 
     @media screen and (max-width: $breakpoint-medium) {
         margin: 50px 24px;
-        padding: 16px 16px;
+        padding: 16px 0;
     }
 
     @media screen and (max-width: $breakpoint-small) {
         margin: 50px 12px;
-        padding: 16px 12px;
+        padding: 16px 0;
     }
 }
 
@@ -129,6 +129,10 @@ body {
 
     align-items: center;
     justify-content: center;
+}
+
+.container-home {
+    padding: 0 24px;
 }
 
 .flex-horizontal {
