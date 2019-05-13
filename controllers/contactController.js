@@ -2,24 +2,6 @@ const mongoose = require('mongoose');
 
 const Contact = mongoose.model('contact');
 
-// Insert one contact
-var insertContact = (req, res) => {
-  const contact = new Contact({
-    name: req.body.name,
-    phone: req.body.phone,
-    address: req.body.address,
-    description: req.body.description,
-    url: req.body.url,
-  });
-  contact.save((err, newContact) => {
-    if (!err) {
-      res.send(`${newContact.name} added!`);
-    } else {
-      res.status(500).send({ error: err });
-    }
-  });
-};
-
 // Find contacts by name
 const findContact = (req, res) => {
   Contact.find(req.query, (err, info) => {
@@ -53,7 +35,7 @@ const deleteContact = (req, res) => {
 };
 
 // Insert one contact
-var insertContact = (req, res) => {
+const insertContact = (req, res) => {
   const contact = new Contact({
     name: req.body.name,
     phone: req.body.phone,
