@@ -35,7 +35,7 @@ const findRecipeByID = (id, callback) => {
 
 // Insert one recipe
 const insertRecipe = (recipe, callback) => {
-  var recipe = new Recipe({
+  const recipeDoc = new Recipe({
     title: recipe.title,
     ingredients: recipe.ingredients,
     method: recipe.method,
@@ -43,7 +43,7 @@ const insertRecipe = (recipe, callback) => {
     serves: recipe.serves,
   });
 
-  recipe.save((err, newRecipe) => {
+  recipeDoc.save((err, newRecipe) => {
     callback({
       error: err,
       result: `Recipe: ${newRecipe.title} added!`,
