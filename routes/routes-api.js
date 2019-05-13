@@ -88,13 +88,6 @@ router
 router.get('/contacts/all', contactController.allContacts);
 router.delete('/contacts/:id', contactController.deleteContact);
 
-/*
-TODO
-Note, all of these routes have used different methods of collecting input to interact with the database,
-we should decide on one single method of passing info around to unify our backend, making it easier to
-incorporate with the frontend
-*/
-
 router.get('/ingredients', ingredientController.getIngredients);
 
 router.post('/user/saveingredients', (req, res) => {
