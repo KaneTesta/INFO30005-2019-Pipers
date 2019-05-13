@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const parser = require('recipe-ingredient-parser-v2');
-const pluralize = require('pluralize');
 const mongooseAggregatePaginate = require('mongoose-aggregate-paginate');
 
 
@@ -18,11 +16,6 @@ const recipeSchema = mongoose.Schema({
     trim: true,
     minlength: 1,
   },
-  ingredients: [{
-    quantity: Number,
-    unit: String,
-    ingredient: mongoose.Schema.ObjectId,
-  }],
   method: {
     type: [String],
     required: [true, 'Recipe needs a method'],
@@ -60,11 +53,9 @@ const recipeSchema = mongoose.Schema({
  * Search recipes including given ingredients
  * Yields the recipes containing those ingredients, sorted by matches
  *
- * TODO: paginate (https://www.npmjs.com/package/mongoose-aggregate-paginate)
- *
  * @param {{ingredients: [String], priority_ingredients: [String], unavailable_cookware: [String], maximum_time: number}} query Array of ingredients
  */
-recipeSchema.statics.byQuery = function (query) {
+recipeSchema.statics.byQuery = (query) => {
   if (!query.maximum_time) {
     query.maximum_time = Number.MAX_SAFE_INTEGER;
   }
@@ -127,18 +118,6 @@ recipeSchema.statics.byQuery = function (query) {
       },
     },
   ]);
-};
-
-recipeSchema.query.sortByRating = function () {
-  return this.sort({ 'aggregateRating.ratingValue': -1 });
-};
-
-recipeSchema.query.byServes = function (min, max) {
-  return this.where('serves').gte(min).lte(max);
-};
-
-recipeSchema.query.byMaximumTime = function (max) {
-  return this.where('totalTime').lte(max);
 };
 
 recipeSchema.plugin(mongooseAggregatePaginate);
