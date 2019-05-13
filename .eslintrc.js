@@ -4,6 +4,7 @@ module.exports = {
     node: true,
     browser: true,
     jquery: true,
+    mongo: true,
   },
   extends: 'airbnb-base',
   globals: {
