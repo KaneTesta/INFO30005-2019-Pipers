@@ -1,5 +1,5 @@
 $(document).on('transition', () => {
-  $('.slider').each(function () {
+  $('.slider').each(() => {
     // Get values
     const $slider = $(this);
     const $sliderValue = $(`#${$slider.attr('data-labelid')}`);
