@@ -92,7 +92,7 @@ $(document).on("transition", function () {
             // Capitalize first letter
             ingredient = ingredient.charAt(0).toUpperCase() + ingredient.slice(1).toLowerCase();
             // Get id-friendly ingredient
-            let ingredientId = ingredient.replace(' ', '_');
+            let ingredientId = ingredient.split(' ').join('_');
 
             // Check ingredient list
             let findResult = ingredientList.find(function (element) {
