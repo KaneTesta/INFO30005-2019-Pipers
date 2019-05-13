@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 
+function capitalizeFirstLetter(name) {
+  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+}
+
 const ingredientSchema = mongoose.Schema({
   name: {
     type: String,
@@ -14,7 +18,3 @@ const ingredientSchema = mongoose.Schema({
   pantry: String,
 });
 mongoose.model('ingredient', ingredientSchema, 'ingredients');
-
-function capitalizeFirstLetter(name) {
-  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-}
