@@ -1,16 +1,17 @@
-var mongoose = require('mongoose');
-var ingredientSchema = mongoose.Schema({
+const mongoose = require('mongoose');
+
+const ingredientSchema = mongoose.Schema({
   name: {
     type: String,
     require: [true, 'An ingredient needs a name'],
     trim: true,
     lowercase: true,
     minlength: 1,
-    get: capitalizeFirstLetter
+    get: capitalizeFirstLetter,
   },
   tip: String,
   fridge: String,
-  pantry: String
+  pantry: String,
 });
 mongoose.model('ingredient', ingredientSchema, 'ingredients');
 

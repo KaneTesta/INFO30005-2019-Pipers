@@ -1,18 +1,19 @@
-var mongoose = require('mongoose');
-var Contact = mongoose.model('contact');
+const mongoose = require('mongoose');
+
+const Contact = mongoose.model('contact');
 
 // Insert one contact
 var insertContact = (req, res) => {
-  var contact = new Contact({
+  const contact = new Contact({
     name: req.body.name,
     phone: req.body.phone,
     address: req.body.address,
     description: req.body.description,
-    url: req.body.url
+    url: req.body.url,
   });
   contact.save((err, newContact) => {
     if (!err) {
-      res.send(newContact.name + ' added!');
+      res.send(`${newContact.name} added!`);
     } else {
       res.status(500).send({ error: err });
     }
@@ -20,7 +21,7 @@ var insertContact = (req, res) => {
 };
 
 // Find contacts by name
-var findContact = (req, res) => {
+const findContact = (req, res) => {
   Contact.find(req.query, (err, info) => {
     if (!err) {
       res.send(info);
@@ -31,17 +32,17 @@ var findContact = (req, res) => {
 };
 
 // Return contacts
-var allContacts = (callback) => {
+const allContacts = (callback) => {
   Contact.find({}, (err, info) => {
     callback({
       error: err,
-      result: info
-    })
+      result: info,
+    });
   });
 };
 
-//Delete one contact by id
-var deleteContact = (req, res) => {
+// Delete one contact by id
+const deleteContact = (req, res) => {
   Contact.deleteOne({ _id: req.params.id }, (err) => {
     if (!err) {
       res.send('deleted');
@@ -49,20 +50,20 @@ var deleteContact = (req, res) => {
       res.status(500).send({ error: err });
     }
   });
-}
+};
 
 // Insert one contact
 var insertContact = (req, res) => {
-  var contact = new Contact({
+  const contact = new Contact({
     name: req.body.name,
     phone: req.body.phone,
     address: req.body.address,
     description: req.body.description,
-    url: req.body.url
+    url: req.body.url,
   });
   contact.save((err, newContact) => {
     if (!err) {
-      res.send(newContact.name + ' added!');
+      res.send(`${newContact.name} added!`);
     } else {
       res.status(500).send({ error: err });
     }
@@ -75,5 +76,5 @@ module.exports = {
   findContact,
   insertContact,
   deleteContact,
-  allContacts
+  allContacts,
 };

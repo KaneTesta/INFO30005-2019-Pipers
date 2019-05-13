@@ -135,3 +135,5 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 public/stylesheets/!style.css
 public/stylesheets/!style.css
+
+.vscode

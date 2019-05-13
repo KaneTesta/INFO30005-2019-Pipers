@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 
 const controller = require('../controllers/recipeController');
@@ -7,9 +8,9 @@ const contactController = require('../controllers/contactController');
 const userController = require('../controllers/userController');
 
 /**
- * 
- * @param {{error, result}} msg 
- * @param {Response} res 
+ *
+ * @param {{error, result}} msg
+ * @param {Response} res
  */
 function sendResponse(msg, res) {
   if (msg.error) {
@@ -30,12 +31,12 @@ router.get('/', (req, res) => {
   /api/recipes/Chicken+Tomato
  */
 
-router.get('/recipes/:ingredients', function (req, res) {
-  let query = {
-    ingredients: req.params.ingredients.split('+')
+router.get('/recipes/:ingredients', (req, res) => {
+  const query = {
+    ingredients: req.params.ingredients.split('+'),
   };
 
-  controller.findRecipeByIngredients(query, function (msg) { sendResponse(msg, res); });
+  controller.findRecipeByIngredients(query, (msg) => { sendResponse(msg, res); });
 });
 
 /*
@@ -43,8 +44,8 @@ router.get('/recipes/:ingredients', function (req, res) {
   ../models/recipe
 */
 
-router.post('/recipes', function (req, res) {
-  controller.insertRecipe(req.body, function (msg) { sendResponse(msg, res); });
+router.post('/recipes', (req, res) => {
+  controller.insertRecipe(req.body, (msg) => { sendResponse(msg, res); });
 });
 
 /*
@@ -96,30 +97,30 @@ incorporate with the frontend
 
 router.get('/ingredients', ingredientController.getIngredients);
 
-router.post('/user/saveingredients', function (req, res) {
+router.post('/user/saveingredients', (req, res) => {
   if (req.session && req.session.passport && req.session.passport.user) {
-    userController.saveIngredients(req, function (msg) { sendResponse(msg, res); });
+    userController.saveIngredients(req, (msg) => { sendResponse(msg, res); });
   } else {
-    res.status(500).send("User not logged in");
+    res.status(500).send('User not logged in');
   }
 });
 
-router.post('/user/delete', function (req, res) {
+router.post('/user/delete', (req, res) => {
   if (req.session && req.session.passport && req.session.passport.user) {
-    let user_id = req.session.passport.user;
-    userController.deleteUser(user_id, function (msg) { sendResponse(msg, res); });
+    const user_id = req.session.passport.user;
+    userController.deleteUser(user_id, (msg) => { sendResponse(msg, res); });
   } else {
-    res.status(500).send("User not logged in");
+    res.status(500).send('User not logged in');
   }
 });
 
-router.post('/user/logout', function (req, res) {
+router.post('/user/logout', (req, res) => {
   req.logout();
-  req.session.destroy(function (err) {
+  req.session.destroy((err) => {
     if (err) {
-      res.status(500).send("Error logging out");
+      res.status(500).send('Error logging out');
     } else {
-      res.send("Logged out");
+      res.send('Logged out');
     }
   });
 });

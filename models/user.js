@@ -1,11 +1,12 @@
-var mongoose = require('mongoose');
-var userSchema = mongoose.Schema({
-    user_id: {
-        type: String,
-        require: [true, 'An user needs an id']
-    },
-    display_name: String,
-    ingredients: [String]
+const mongoose = require('mongoose');
+
+const userSchema = mongoose.Schema({
+  user_id: {
+    type: String,
+    require: [true, 'An user needs an id'],
+  },
+  display_name: String,
+  ingredients: [String],
 });
 
 mongoose.model('user', userSchema, 'users');

@@ -7,16 +7,16 @@ const dbURI = `mongodb+srv://${ATLAS_USER}:${ATLAS_PASS}@cluster0-0uuii.azure.mo
 const options = {
   useNewUrlParser: true,
   useCreateIndex: true,
-  dbName: 'test'
+  dbName: 'test',
 };
 
 mongoose.connect(dbURI, options).then(
   () => {
     console.log('Database connection established!');
   },
-  err => {
+  (err) => {
     console.log('Error connecting Database instance due to: ', err);
-  }
+  },
 );
 
 require('./recipe');
@@ -26,5 +26,5 @@ require('./ingredient');
 require('./user');
 
 module.exports = {
-  databaseUrl: dbURI
+  databaseUrl: dbURI,
 };

@@ -1,31 +1,31 @@
-var mongoose = require('mongoose');
-var parser = require('recipe-ingredient-parser-v2');
-var pluralize = require('pluralize');
-var mongooseAggregatePaginate = require('mongoose-aggregate-paginate');
+const mongoose = require('mongoose');
+const parser = require('recipe-ingredient-parser-v2');
+const pluralize = require('pluralize');
+const mongooseAggregatePaginate = require('mongoose-aggregate-paginate');
 
 
-//TODO
+// TODO
 // Search by quantities of ingredients
 // Search by recipe time
 // Search by cookware
 // Search by serves
 // Combine ingredients from multiple recipes
 
-var recipeSchema = mongoose.Schema({
+const recipeSchema = mongoose.Schema({
   title: {
     type: String,
-    required: [true, "Recipe needs a title"],
+    required: [true, 'Recipe needs a title'],
     trim: true,
-    minlength: 1
+    minlength: 1,
   },
   ingredients: [{
     quantity: Number,
     unit: String,
-    ingredient: mongoose.Schema.ObjectId
+    ingredient: mongoose.Schema.ObjectId,
   }],
   method: {
     type: [String],
-    required: [true, "Recipe needs a method"]
+    required: [true, 'Recipe needs a method'],
   },
   author: String,
   serves: Number,
@@ -44,24 +44,24 @@ var recipeSchema = mongoose.Schema({
     fibreContent: String,
     proteinContent: String,
     cholestrolContent: String,
-    sodiumContent: String
+    sodiumContent: String,
   },
   aggregateRating: {
     ratingCount: Number,
-    ratingValue: Number
+    ratingValue: Number,
   },
   ingredients: {
     type: Array,
-    required: [true, "Recipe needs ingredients"]
-  }
+    required: [true, 'Recipe needs ingredients'],
+  },
 });
 
 /**
  * Search recipes including given ingredients
  * Yields the recipes containing those ingredients, sorted by matches
- * 
+ *
  * TODO: paginate (https://www.npmjs.com/package/mongoose-aggregate-paginate)
- * 
+ *
  * @param {{ingredients: [String], priority_ingredients: [String], unavailable_cookware: [String], maximum_time: number}} query Array of ingredients
  */
 recipeSchema.statics.byQuery = function (query) {
@@ -72,74 +72,74 @@ recipeSchema.statics.byQuery = function (query) {
   return this.aggregate([
     {
       $match: {
-        "totalTime": { $lte: query.maximum_time }
-      }
+        totalTime: { $lte: query.maximum_time },
+      },
     },
     {
       $addFields: {
         hasPriorityIngredients: {
           $setIsSubset: [query.priority_ingredients, {
-            $map: { input: "$ingredients", as: "ingredient", in: "$$ingredient.ingredient" }
-          }]
-        }
-      }
+            $map: { input: '$ingredients', as: 'ingredient', in: '$$ingredient.ingredient' },
+          }],
+        },
+      },
     },
     {
       $match: {
-        "hasPriorityIngredients": true
-      }
+        hasPriorityIngredients: true,
+      },
     },
     {
       $addFields: {
         matches: {
           $setIntersection: [query.ingredients, {
-            $map: { input: "$ingredients", as: "ingredient", in: "$$ingredient.ingredient" }
-          }]
+            $map: { input: '$ingredients', as: 'ingredient', in: '$$ingredient.ingredient' },
+          }],
         },
         matches_priority: {
           $setIntersection: [query.priority_ingredients, {
-            $map: { input: "$ingredients", as: "ingredient", in: "$$ingredient.ingredient" }
-          }]
-        }
-      }
+            $map: { input: '$ingredients', as: 'ingredient', in: '$$ingredient.ingredient' },
+          }],
+        },
+      },
     },
     {
       $addFields: {
         totalMatch: {
-          $size: "$matches"
-        }
-      }
+          $size: '$matches',
+        },
+      },
     },
     {
       $match: {
-        "totalMatch": { $gte: 1 }
-      }
+        totalMatch: { $gte: 1 },
+      },
     },
     {
       $sort: {
-        totalMatch: -1
+        totalMatch: -1,
       },
     },
     {
       $project: {
         hasPriorityIngredients: 0,
-        totalMatch: 0
-      }
-    }
-  ])
-}
+        totalMatch: 0,
+      },
+    },
+  ]);
+};
 
 recipeSchema.query.sortByRating = function () {
   return this.sort({ 'aggregateRating.ratingValue': -1 });
-}
+};
 
 recipeSchema.query.byServes = function (min, max) {
   return this.where('serves').gte(min).lte(max);
-}
+};
 
 recipeSchema.query.byMaximumTime = function (max) {
   return this.where('totalTime').lte(max);
-}
+};
 
 recipeSchema.plugin(mongooseAggregatePaginate);
 mongoose.model('recipe', recipeSchema, 'recipes');
