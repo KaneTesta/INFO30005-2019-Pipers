@@ -2,15 +2,23 @@ var mongoose = require('mongoose');
 var Recipe = mongoose.model('recipe');
 var Storage = mongoose.model('storage');
 
-// Find recipes containing one or multiple ingredients
-var findRecipeByIngredients = (query, callback) => {
+var findRecipeByIngredients = (query, options, callback) => {
     //Recipe.find({ ingredients: { $in: query } }, function (err, recipes) {
-    Recipe
-        .byQuery(query)
-        .exec(function (err, recipes) {
+    /*     Recipe
+            .byQuery(query)
+            .exec(function (err, recipes) {
+                callback({
+                    error: err,
+                    result: recipes.slice(0, 40)
+                });
+            }); */
+    Recipe.aggregatePaginate(Recipe.byQuery(query), options,
+        (err, recipes, pageCount, count) => {
             callback({
                 error: err,
-                result: recipes.slice(0, 40)
+                result: recipes,
+                pageCount: pageCount,
+                count: count,
             });
         });
 };
