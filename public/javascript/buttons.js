@@ -1,5 +1,5 @@
 $(document).on('transition', () => {
-  $('button[data-post]').each(function () {
+  $('button[data-post]').each(() => {
     const $button = $(this);
     const postUrl = $button.attr('data-post');
 
