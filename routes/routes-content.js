@@ -158,4 +158,14 @@ router.get('/user', (req, res) => {
 
 router.get('/recipe/:id', recipeController.findRecipeByID);
 
+router.post('/recipe/add', (req, res, next) => {
+  recipeController.insertRecipe(req.body.url, (msg) => {
+    if (msg.error) {
+      res.status(500).send(msg.error);
+    } else {
+      res.render('success');
+    }
+  });
+});
+
 module.exports = router;
