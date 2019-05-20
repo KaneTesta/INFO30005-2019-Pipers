@@ -44,4 +44,12 @@ $(document).on("transition", function () {
             }
         );
     }
+
+    $("#recipe-next").on("click", function (e) {
+        var search_params = new URLSearchParams(window.location.search);
+        search_params.set('page', 2)
+        window.location.search = search_params.toString();
+    });
+
+
 });

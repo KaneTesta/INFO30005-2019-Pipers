@@ -4,7 +4,7 @@ Team Project for WEB30005 shared repository.
 
 ## Running
 
-From command line, run `npm install` to install dependencies. Run `npm start` to run app, and `npm run serve` to run the live test version (autocompile scss, reload on file change, etc).
+From command line, run `npm install` to install dependencies. Run `npm start` to run app, and `npm test` to run the live test version (autocompile scss, reload on file change, etc).
 
 ## CSS
 

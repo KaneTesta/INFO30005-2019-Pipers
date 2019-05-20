@@ -2,34 +2,23 @@ var mongoose = require('mongoose');
 var Recipe = mongoose.model('recipe');
 var Storage = mongoose.model('storage');
 
-// Find recipes containing one or multiple ingredients
-var findRecipeByIngredients = (query, callback) => {
-    if (query === null || query === undefined) {
-        callback({ error: "query must be defined" });
-        return;
-    }
-
-    if (query.ingredients && !Array.isArray(query.ingredients)) {
-        callback({ error: "ingredients must be an array" });
-        return;
-    }
-
-    if (query.ingredients_priority && !Array.isArray(query.ingredients_priority)) {
-        callback({ error: "ingredients_priority must be an array" });
-        return;
-    }
-
-    if (query.unavailable_cookware && !Array.isArray(query.unavailable_cookware)) {
-        callback({ error: "unavailable_cookware must be an array" });
-        return;
-    }
-
-    Recipe
-        .byQuery(query)
-        .exec(function (err, recipes) {
+var findRecipeByIngredients = (query, options, callback) => {
+    //Recipe.find({ ingredients: { $in: query } }, function (err, recipes) {
+    /*     Recipe
+            .byQuery(query)
+            .exec(function (err, recipes) {
+                callback({
+                    error: err,
+                    result: recipes.slice(0, 40)
+                });
+            }); */
+    Recipe.aggregatePaginate(Recipe.byQuery(query), options,
+        (err, recipes, pageCount, count) => {
             callback({
                 error: err,
-                result: recipes.slice(0, 40)
+                result: recipes,
+                pageCount: pageCount,
+                count: count,
             });
         });
 };

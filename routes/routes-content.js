@@ -62,12 +62,17 @@ router.get('/recipe', function (req, res, next) {
         "maximum_time": parseInt(req.query.maximum_time) || 0,
     }
 
+    let options = {
+        page: req.query.page || 1,
+        limit: req.query.limit || 5
+    }
+
     // GET recipes from ingredients
-    recipeController.findRecipeByIngredients(query, function (msg) {
+    recipeController.findRecipeByIngredients(query, options, function (msg) {
         if (msg.error) {
             res.status(500).send(msg.error);
         } else {
-            getOptions(req, "Recipes", 2, { recipes: msg.result }, (options) => {
+            getOptions(req, "Recipes", 2, { recipes: msg.result, page: req.query.page }, (options) => {
                 res.render('recipe', options);
             });
         }

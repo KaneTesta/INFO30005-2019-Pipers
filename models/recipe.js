@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var parser = require('recipe-ingredient-parser-v2');
 var pluralize = require('pluralize');
+var mongooseAggregatePaginate = require('mongoose-aggregate-paginate');
+
 
 //TODO
 // Search by quantities of ingredients
@@ -139,4 +141,5 @@ recipeSchema.query.byMaximumTime = function (max) {
   return this.where('totalTime').lte(max);
 }
 
+recipeSchema.plugin(mongooseAggregatePaginate);
 mongoose.model('recipe', recipeSchema, 'recipes');
