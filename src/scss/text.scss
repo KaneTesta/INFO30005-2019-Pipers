@@ -83,6 +83,8 @@ h5 {
 }
 
 h6 {
+    margin-top: calc(0.2em + 24px);
+
     text-transform: uppercase;
 
     color: $text-color-detail;

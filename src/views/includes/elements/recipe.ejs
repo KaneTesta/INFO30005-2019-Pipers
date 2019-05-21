@@ -43,6 +43,11 @@
         <p class="recipe-description"><%= recipe.description %></p>
         <% }; %>
 
+        <% if (recipe.notes) { %>
+        <h6>Notes</h6>
+        <p class="recipe-description"><%= recipe.notes %></p>
+        <% }; %>
+
         <div class="flex-fill">
             <a href="#" class="button button-inline button-next button-recipe" data-id="<%= recipe._id %>"
                 data-step="1">See Recipe</a>
