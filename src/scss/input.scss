@@ -144,12 +144,12 @@ input[type="checkbox"].checkbox-box {
         padding-left: calc(#{$checkbox-icon-size} + 18px);
 
         cursor: pointer;
+        text-align: left;
 
         color: $text-color;
         border: none;
 
         align-items: center;
-        justify-content: center;
         user-select: none;
 
         .checkbox-icon {
