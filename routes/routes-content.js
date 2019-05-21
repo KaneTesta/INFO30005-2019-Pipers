@@ -1,5 +1,6 @@
 var express = require('express');
 var recipeController = require("../controllers/recipeController");
+var ingredientController = require("../controllers/ingredientController");
 var contactController = require("../controllers/contactController");
 var userController = require("../controllers/userController");
 
@@ -55,13 +56,15 @@ router.get('/ingredients', function (req, res, next) {
 
 /* GET recipe page. */
 router.get('/recipe', function (req, res, next) {
+    // Generate query
     let query = {
         "ingredients": req.query.ingredients || [],
         "priority_ingredients": req.query.priority_ingredients || [],
         "unavailable_cookware": req.query.ingredients || [],
-        "maximum_time": parseInt(req.query.maximum_time) || 0,
-    }
+        "maximum_time": parseInt(req.query.maximum_time) || 0
+    };
 
+    // Setup pagination options
     let page = parseInt(req.query.page) || 1;
     let limit = parseInt(req.query.limit) || 5;
     let options = {
@@ -74,9 +77,26 @@ router.get('/recipe', function (req, res, next) {
         if (msg.error) {
             res.status(500).send(msg.error);
         } else {
+            // Convert recipes
+            let serving_size = parseInt(req.query.serving_size);
+            if (serving_size && Array.isArray(msg.result)) {
+                msg.result.forEach((recipe) => {
+                    for (let i = 0; i < recipe.ingredients.length; ++i) {
+                        if (serving_size != recipe.serves) {
+                            recipe.ingredients[i].displayText = ingredientController.convertQuantity(
+                                recipe.ingredients[i], recipe.serves, serving_size
+                            );
+                        } else {
+                            recipe.ingredients[i].displayText = recipe.ingredients[i].text;
+                        }
+                    }
+                });
+            }
+
+            // Send recipes
             getOptions(req, "Recipes", 2, {
-                recipes: msg.result, serving_size: parseInt(req.query.serving_size),
-                page: page, limit: limit, pageTotal: msg.pageCount, recipeTotal: msg.count
+                recipes: msg.result, page: page, limit: limit,
+                pageTotal: msg.pageCount, recipeTotal: msg.count
             }, (options) => {
                 res.render('recipe', options);
             });

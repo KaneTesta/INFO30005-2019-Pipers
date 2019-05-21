@@ -24,7 +24,7 @@
                             <h5>Page <%= data.page %> of <%= data.pageTotal %></h5>
                             <p class="text-detail">Recipes <%= firstIndex %> - <%- firstIndex + data.recipes.length - 1 %></p>
 
-                            <%  include includes/elements/page-controls %>
+                            <% include includes/elements/page-controls %>
 
                             <div class="recipe-list">
                                 <% for (let index = 0; index < data.recipes.length; ++index) { %>
@@ -32,7 +32,7 @@
                                 <% } %>
                             </div>
 
-                            <%  include includes/elements/page-controls %>
+                            <% include includes/elements/page-controls %>
 
                             <% } else { %>
                             <div class="message message-error">No recipes found</div>

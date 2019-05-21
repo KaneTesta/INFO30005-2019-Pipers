@@ -28,76 +28,16 @@
         <h6>Ingredients</h6>
         <div class="recipe-info recipe-ingredients">
             <% for (let i = 0; i < recipe.ingredients.length; ++i) { %>
-            <% let ingredientText = recipe.ingredients[i].text; %>
-            <% if (recipe.serves && data.serving_size && recipe.ingredients[i].quantity) {
+            
+            <%
+            let ingredientText = recipe.ingredients[i].displayText;
+            if (recipe.serves && data.serving_size && recipe.ingredients[i].quantity) {
                 if (recipe.serves !== data.serving_size) {
-                    let oldQuantity = parseFloat(recipe.ingredients[i].quantity);
-                    let newQuantity = oldQuantity * (data.serving_size / recipe.serves);
-                    let decimalDigits = Math.floor(3 - Math.log10(newQuantity));
-                    if (decimalDigits < 0) {
-                        decimalDigits = 0;
-                    }
-
-                    let quantityText = parseFloat(newQuantity).toFixed(decimalDigits);
-                    // Format decimals as fractions
-                    for (let f1 = 1; f1 < 32; ++f1) {
-                        for (let f2 = 1; f2 < f1; ++f2) {
-                            let search = parseFloat(f2 / f1).toFixed(decimalDigits);
-                            if (search.startsWith("0.")) {
-                                search = search.substring(1);
-                                let rep = " " + f2 + "/" + f1;
-                                quantityText = quantityText.replace(search, rep);
-                            }
-                        }
-                    }
-
-                    // Remove trailing zeros
-                    if (quantityText.includes(".")) {
-                        while (quantityText.endsWith("0") || quantityText.endsWith(".")) {
-                            quantityText = quantityText.substring(0, quantityText.length - 1);
-                        }
-                    }
-
-                    // Remove leading zeros
-                    while (quantityText.startsWith("0") || quantityText.startsWith(" ")) {
-                        quantityText = quantityText.substring(1, quantityText.length);
-                    }
-
-                    // Add leading zero for decimal
-                    if (quantityText.startsWith(".")) {
-                        quantityText = "0" + quantityText;
-                    }
-
-                    // Format modified quantities
-                    quantityText = "<span class=\"ingredient-quantity-serving\">" + quantityText + "</span>";
-
-                    // Split by word and format
-                    let words = recipe.ingredients[i].text.split(" ");
-                    for (let wordIndex = 0; wordIndex < words.length; ++wordIndex) {
-                        let wordNumber = parseFloat(words[wordIndex]);
-                        let originalText = wordNumber;
-                        // Handle fractions
-                        let fractions = words[wordIndex].split("/");
-                        if (fractions.length === 2) {
-                            let num1 = parseFloat(fractions[0]);
-                            let num2 = parseFloat(fractions[1]);
-                            if (num1 && num2) {
-                                wordNumber = parseFloat(num1 / num2);
-                                originalText = num1 + "/" + num2;
-                            }
-                        }
-
-                        if (wordNumber) {
-                            //console.log(wordNumber, oldQuantity);
-                            if (Math.abs(wordNumber - oldQuantity) < Number.EPSILON) {
-                                words[wordIndex] = words[wordIndex].replace(originalText, quantityText);
-                            }
-                        }
-                    }
-
-                    ingredientText = words.join(" ");
+                    ingredientText = convertQuantity(recipe.ingredients[i],
+                        recipe.serves, data.serving_size);
                 }
-            }; %>
+            };
+            %>
 
             <% if (recipe.matches_priority.find((el) => el === recipe.ingredients[i].ingredient)) { %>
             <p class="ingredient-match-priority"><%- ingredientText %></p>

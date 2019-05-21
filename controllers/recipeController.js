@@ -3,15 +3,6 @@ var Recipe = mongoose.model('recipe');
 var Storage = mongoose.model('storage');
 
 var findRecipeByIngredients = (query, options, callback) => {
-    //Recipe.find({ ingredients: { $in: query } }, function (err, recipes) {
-    /*     Recipe
-            .byQuery(query)
-            .exec(function (err, recipes) {
-                callback({
-                    error: err,
-                    result: recipes.slice(0, 40)
-                });
-            }); */
     Recipe.aggregatePaginate(Recipe.byQuery(query), options,
         (err, recipes, pageCount, count) => {
             callback({
@@ -20,7 +11,8 @@ var findRecipeByIngredients = (query, options, callback) => {
                 pageCount: pageCount,
                 count: count,
             });
-        });
+        }
+    );
 };
 
 var findRecipeByID = (id, callback) => {
