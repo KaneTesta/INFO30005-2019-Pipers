@@ -24,20 +24,41 @@
             <% }; %>
         </div>
 
+        <% if (recipe.ingredients) { %>
         <h6>Ingredients</h6>
         <div class="recipe-info recipe-ingredients">
-            <% if (recipe.ingredients) { %>
             <% for (let i = 0; i < recipe.ingredients.length; ++i) { %>
+            <% let ingredientText = recipe.ingredients[i].text; %>
+            <% if (recipe.serves && data.serving_size && recipe.ingredients[i].quantity) {
+                let newQuantity = recipe.ingredients[i].quantity * (data.serving_size / recipe.serves);
+                let decimalPoints = Math.floor(3 - Math.log10(newQuantity));
+                if (decimalPoints < 0) {
+                    decimalPoints = 0;
+                }
+
+                let quantityText = parseFloat(newQuantity).toFixed(decimalPoints);
+                // Remove trailing zeros
+                while (quantityText.endsWith("0") || quantityText.endsWith(".")) {
+                    quantityText = quantityText.substring(0, quantityText.length - 1);
+                }
+
+                // Format decimals as fractions
+                quantityText = quantityText.replace(".5", " 1/2").replace(".75", " 3/4")
+                    .replace(".25", " 1/4").replace(".33", " 1/3").replace(".67", " 2/3");
+                quantityText = "<span class=\"ingredient-quantity-serving\">" + quantityText + "</span>";
+                ingredientText = ingredientText.replace(recipe.ingredients[i].quantity, quantityText);
+            }; %>
+
             <% if (recipe.matches_priority.find((el) => el === recipe.ingredients[i].ingredient)) { %>
-            <p class="ingredient-match-priority"><%= recipe.ingredients[i].text %></p>
+            <p class="ingredient-match-priority"><%- ingredientText %></p>
             <% } else if (recipe.matches.find((el) => el === recipe.ingredients[i].ingredient)) { %>
-            <p class="ingredient-match"><%= recipe.ingredients[i].text %></p>
+            <p class="ingredient-match"><%- ingredientText %></p>
             <% } else { %>
-            <p><%= recipe.ingredients[i].text %></p>
-            <% }; %>
+            <p><%- ingredientText %></p>
             <% }; %>
             <% }; %>
         </div>
+        <% }; %>
 
         <% if (recipe.description) { %>
         <p class="recipe-description"><%= recipe.description %></p>

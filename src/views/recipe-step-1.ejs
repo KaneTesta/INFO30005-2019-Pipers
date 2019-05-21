@@ -17,17 +17,29 @@
                             <% if (data.url_back) { %>
                             <a class="button button-back button-left" href="<%= data.url_back %>"
                                 data-target="2">Back</a>
-                            <% } %>
+                            <% }; %>
 
                             <h1 class="heading"><%= data.recipe.title %></h1>
+
+                            <p class="text-detail">You can check off your ingredients on the list below, or start cooking right away!</p>
                             <h3>Ingredients</h3>
                             <ol class="recipe-steps">
                                 <% for (let i = 0; i < data.recipe.ingredients.length; ++i) { %>
                                 <li>
-                                    <%- include("includes/elements/checkbox-pill", {label: data.recipe.ingredients[i].text, checked: false}); %>
+                                    <%- include("includes/elements/checkbox-box", {label: data.recipe.ingredients[i].text, checked: false}); %>
                                 </li>
-                                <% } %>
+                                <% }; %>
                             </ol>
+
+                            <% if (data.recipe.description) { %>
+                            <h6>Description</h6>
+                            <p class="recipe-description"><%= data.recipe.description %></p>
+                            <% }; %>
+
+                            <% if (data.recipe.notes) { %>
+                            <h6>Notes</h6>
+                            <p class="recipe-description"><%= data.recipe.notes %></p>
+                            <% }; %>
 
                             <a href="#" class="button button-inline button-next button-recipe"
                                 data-id="<%= data.recipe._id %>" data-step="2">Method</a>

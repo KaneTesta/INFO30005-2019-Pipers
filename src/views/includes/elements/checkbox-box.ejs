@@ -1,0 +1,12 @@
+<div class="checkbox-container">
+    <% let id = label.split(' ').join(''); %>
+    <% if (checked) {%>
+    <input class="checkbox-box" type="checkbox" id="Checkbox<%= id %>" value="<%= label %>" checked>
+    <% } else { %>
+    <input class="checkbox-box" type="checkbox" id="Checkbox<%= id %>" value="<%= label %>">
+    <% }; %>
+    <label for="Checkbox<%= id %>">
+        <ion-icon class="checkbox-icon checkbox-checkmark" name="checkmark"></ion-icon>
+        <span><%= label %></span>
+    </label>
+</div>

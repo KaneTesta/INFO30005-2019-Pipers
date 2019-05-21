@@ -255,13 +255,44 @@ $(document).on("transition", function () {
         return unavailableCookware;
     }
 
+    // Setup time slider and button
+    let $timeCheckbox = $("#CheckboxFilterbyTime");
+    let $timeSlider = $("#SliderMinutes");
+    $timeCheckbox.on("change", function () {
+        $timeSlider.slider("option", "disabled", !this.checked);
+    });
+    $timeCheckbox.trigger("change");
+
     /**
      * Get the maximum minutes for a recipe that the user has entered
      * @returns {int}
      */
     function getMaximumTime() {
-        let $timeMinutes = $("#SliderMinutes");
-        return $timeMinutes.attr("data-value");
+        if ($timeCheckbox.is(":checked")) {
+            return $timeSlider.attr("data-value");
+        } else {
+            return undefined;
+        }
+    }
+
+    // Setup serving size slider and button
+    let $servingCheckbox = $("#CheckboxAdjustServingSize");
+    let $servingSlider = $("#SliderPeople");
+    $servingCheckbox.on("change", function () {
+        $servingSlider.slider("option", "disabled", !this.checked);
+    });
+    $servingCheckbox.trigger("change");
+
+    /**
+     * Get the maximum minutes for a recipe that the user has entered
+     * @returns {int}
+     */
+    function getServingSize() {
+        if ($servingSlider.is(":checked")) {
+            return $servingSlider.attr("data-value");
+        } else {
+            return undefined;
+        }
     }
 
     let $ingredientsSection = $("#IngredientsSection");
@@ -375,7 +406,8 @@ $(document).on("transition", function () {
                 "ingredients": getIngredients(),
                 "priority_ingredients": getIngredients(true),
                 "unavailable_cookware": getUnavailableCookware(),
-                "maximum_time": getMaximumTime()
+                "maximum_time": getMaximumTime(),
+                "serving_size": getServingSize()
             }
 
             let url = "/recipe?" + jQuery.param(params);
