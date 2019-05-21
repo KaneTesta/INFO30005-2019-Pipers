@@ -34,6 +34,7 @@ h4,
 h5,
 h6 {
     margin: 0;
+    margin-left: -0.1em;
     padding: 0;
 
     text-decoration: none;
@@ -141,7 +142,6 @@ h6 {
 
 .text-detail {
     margin-top: 12px;
-    margin-left: 0.14em;
 
     color: $text-color-detail;
 

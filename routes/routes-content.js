@@ -74,7 +74,10 @@ router.get('/recipe', function (req, res, next) {
         if (msg.error) {
             res.status(500).send(msg.error);
         } else {
-            getOptions(req, "Recipes", 2, { recipes: msg.result, page: page, limit: limit }, (options) => {
+            getOptions(req, "Recipes", 2, {
+                recipes: msg.result, page: page, limit: limit,
+                pageTotal: msg.pageCount, recipeTotal: msg.count
+            }, (options) => {
                 res.render('recipe', options);
             });
         }

@@ -9,17 +9,19 @@
         <div class="recipe-info">
             <% if (recipe.totalTime) { %>
             <p>Time: <%= recipe.totalTime %> minutes</p>
-            <% } %>
+            <% }; %>
+
             <% if (recipe.prepTime) { %>
             <p>Prep time: <%= recipe.prepTime %> minutes</p>
-            <% } %>
+            <% }; %>
+
             <% if (recipe.cookTime) { %>
             <p>Cook time: <%= recipe.cookTime %> minutes</p>
-            <% } %>
+            <% }; %>
 
             <% if (recipe.serves) { %>
             <p>Serves: <%= recipe.serves %></p>
-            <% } %>
+            <% }; %>
         </div>
 
         <h6>Ingredients</h6>
@@ -32,19 +34,18 @@
             <p class="ingredient-match"><%= recipe.ingredients[i].text %></p>
             <% } else { %>
             <p><%= recipe.ingredients[i].text %></p>
-            <% } %>
-            <% } %>
-            <% } %>
+            <% }; %>
+            <% }; %>
+            <% }; %>
         </div>
 
         <% if (recipe.description) { %>
         <p class="recipe-description"><%= recipe.description %></p>
-        <% } %>
+        <% }; %>
 
         <div class="flex-fill">
             <a href="#" class="button button-inline button-next button-recipe" data-id="<%= recipe._id %>"
-                data-step="1">See
-                Recipe</a>
+                data-step="1">See Recipe</a>
         </div>
     </div>
 </div>

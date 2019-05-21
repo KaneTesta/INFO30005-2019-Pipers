@@ -21,8 +21,8 @@
                             <% if (data.recipes && data.recipes.length > 0) { %>
 
                             <% let firstIndex = ((data.page - 1) * data.limit) + 1; %>
-                            <h5>Page <%= data.page %></h5>
-                            <h6>Recipes <%= firstIndex %>-<%- firstIndex + data.recipes.length - 1 %></h6>
+                            <h5>Page <%= data.page %> of <%= data.pageTotal %></h5>
+                            <p class="text-detail">Recipes <%= firstIndex %> - <%- firstIndex + data.recipes.length - 1 %></p>
 
                             <%  include includes/elements/page-controls %>
 
