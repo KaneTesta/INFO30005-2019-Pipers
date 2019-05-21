@@ -62,9 +62,11 @@ router.get('/recipe', function (req, res, next) {
         "maximum_time": parseInt(req.query.maximum_time) || 0,
     }
 
+    let page = parseInt(req.query.page) || 1;
+    let limit = parseInt(req.query.limit) || 5;
     let options = {
-        page: req.query.page || 1,
-        limit: req.query.limit || 5
+        page: page,
+        limit: limit
     }
 
     // GET recipes from ingredients
@@ -72,7 +74,7 @@ router.get('/recipe', function (req, res, next) {
         if (msg.error) {
             res.status(500).send(msg.error);
         } else {
-            getOptions(req, "Recipes", 2, { recipes: msg.result, page: req.query.page }, (options) => {
+            getOptions(req, "Recipes", 2, { recipes: msg.result, page: page, limit: limit }, (options) => {
                 res.render('recipe', options);
             });
         }

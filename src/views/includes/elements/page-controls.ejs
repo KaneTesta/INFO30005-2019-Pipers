@@ -1,0 +1,9 @@
+<div class="button-pages flex-horizontal container-center">
+    <% if (data.page > 1) { %>
+    <button class="button button-inline button-prev recipe-button-page" data-target="<%- viewport - 1 %>" data-page="<%- data.page - 1 %>">Previous Page</button>
+    <% } %>
+
+    <% if (data.recipes.length >= data.limit) { %>
+    <button class="button button-inline button-next recipe-button-page" data-target="<%- viewport + 1 %>" data-page="<%- data.page + 1 %>">Next Page</button>
+    <% } %>
+</div>

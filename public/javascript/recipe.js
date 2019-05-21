@@ -45,11 +45,33 @@ $(document).on("transition", function () {
         );
     }
 
-    $("#recipe-next").on("click", function (e) {
-        var search_params = new URLSearchParams(window.location.search);
-        search_params.set('page', 2)
-        window.location.search = search_params.toString();
+    $(".recipe-button-page").on("click", function (e) {
+        let $el = $(this);
+        let search_params = new URLSearchParams(window.location.search);
+        let targetPage = parseInt($el.attr("data-page"));
+        search_params.set('page', targetPage);
+
+        let search_string = search_params.toString();
+        if (!search_string.startsWith("?")) {
+            search_string = "?" + search_string;
+        }
+
+        let url = window.location.origin + window.location.pathname + search_string;
+        // Check smoothState
+        let $main = $('#Main');
+        let smoothState = $main.data("smoothState");
+        if (smoothState !== undefined) {
+            if ($el.hasClass("button-next")) {
+                $main.attr('data-transition', 'page-right');
+            } else if ($el.hasClass("button-prev")) {
+                $main.attr('data-transition', 'page-left');
+            } else {
+                $main.attr('data-transition', 'page-fade');
+            }
+
+            smoothState.load(url);
+        } else {
+            window.location.assign(url);
+        }
     });
-
-
 });
