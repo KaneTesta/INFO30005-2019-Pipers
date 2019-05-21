@@ -288,7 +288,7 @@ $(document).on("transition", function () {
      * @returns {int}
      */
     function getServingSize() {
-        if ($servingSlider.is(":checked")) {
+        if ($servingCheckbox.is(":checked")) {
             return $servingSlider.attr("data-value");
         } else {
             return undefined;

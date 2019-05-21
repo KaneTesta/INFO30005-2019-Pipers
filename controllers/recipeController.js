@@ -3,6 +3,18 @@ var Recipe = mongoose.model('recipe');
 var Storage = mongoose.model('storage');
 
 var findRecipeByIngredients = (query, options, callback) => {
+    if (callback === null || callback === undefined) {
+        return;
+    }
+
+    if (query === null || query === undefined) {
+        callback({
+            error: "query cannot be null"
+        });
+
+        return;
+    }
+
     Recipe.aggregatePaginate(Recipe.byQuery(query), options,
         (err, recipes, pageCount, count) => {
             callback({

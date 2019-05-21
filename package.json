@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "npm run build:sass && node ./bin/www",
-    "test": "",
+    "test": "mocha",
     "serve": "npm-run-all -p build:*",
     "build:sass": "gulp sass",
     "build:watch": "gulp sass:watch",

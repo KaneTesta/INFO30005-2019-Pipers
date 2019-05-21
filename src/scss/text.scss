@@ -143,10 +143,14 @@ h6 {
 }
 
 .text-detail {
-    margin-top: 12px;
+    margin-bottom: 0.6em;
 
     color: $text-color-detail;
 
     font-size: 0.75em;
     font-weight: 700;
+}
+
+.text-detail-top {
+    margin-top: 1.2em;
 }
