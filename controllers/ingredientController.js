@@ -11,7 +11,7 @@ var Ingredient = mongoose.model('ingredient');
 function convertQuantity(ingredient, originalSize, targetSize) {
     let oldQuantity = parseFloat(ingredient.quantity);
     let newQuantity = oldQuantity * (targetSize / originalSize);
-    let decimalDigits = Math.log10(newQuantity) > 1 ? 0 : 3;
+    let decimalDigits = Math.log10(newQuantity) > 1 ? 0 : 2;
 
     let quantityText = parseFloat(newQuantity).toFixed(decimalDigits);
     // Format decimals as fractions

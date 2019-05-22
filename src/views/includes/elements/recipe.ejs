@@ -22,8 +22,8 @@
             <% if (recipe.serves) { %>
             <p>Serves: <%= recipe.serves %></p>
 
-            <% if (recipe.serving_size != recipe.serves) { %>
-            <p>Adjusted Serves: <%= data.serving_size %></p>
+            <% if (data.serving_size != recipe.serves) { %>
+            <p class="ingredient-quantity-serving">Adjusted Serving: <%= data.serving_size %></p>
             <% }; %>
             <% }; %>
         </div>
