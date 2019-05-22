@@ -6,6 +6,7 @@ $(document).on("transition", function () {
         let $element = $(this);
         let params = {
             "id": $element.attr("data-id"),
+            "serving_size": $element.attr("data-serving"),
             "q": window.location.href
         }
 

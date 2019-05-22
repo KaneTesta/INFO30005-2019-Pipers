@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var Recipe = mongoose.model('recipe');
 var Storage = mongoose.model('storage');
 
+var ingredientController = require("./ingredientController");
+
 var findRecipeByIngredients = (query, options, callback) => {
     if (callback === null || callback === undefined) {
         return;
@@ -67,7 +69,20 @@ var findStorageInfo = (req, res) => {
     });
 };
 
-
+/**
+ * Convert a recipe to a target serving size
+ */
+var convertRecipe = (recipe, targetSize) => {
+    for (let i = 0; i < recipe.ingredients.length; ++i) {
+        if (targetSize != recipe.serves) {
+            recipe.ingredients[i].displayText = ingredientController.convertQuantity(
+                recipe.ingredients[i], recipe.serves, targetSize
+            );
+        } else {
+            recipe.ingredients[i].displayText = recipe.ingredients[i].text;
+        }
+    }
+}
 
 
 // Exporting callbacks
@@ -76,4 +91,5 @@ module.exports = {
     findRecipeByID,
     insertRecipe,
     findStorageInfo,
+    convertRecipe
 };

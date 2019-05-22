@@ -21,6 +21,10 @@
 
             <% if (recipe.serves) { %>
             <p>Serves: <%= recipe.serves %></p>
+
+            <% if (recipe.serving_size != recipe.serves) { %>
+            <p>Adjusted Serves: <%= data.serving_size %></p>
+            <% }; %>
             <% }; %>
         </div>
 
@@ -29,15 +33,8 @@
         <div class="recipe-info recipe-ingredients">
             <% for (let i = 0; i < recipe.ingredients.length; ++i) { %>
             
-            <%
-            let ingredientText = recipe.ingredients[i].displayText;
-            if (recipe.serves && data.serving_size && recipe.ingredients[i].quantity) {
-                if (recipe.serves !== data.serving_size) {
-                    ingredientText = convertQuantity(recipe.ingredients[i],
-                        recipe.serves, data.serving_size);
-                }
-            };
-            %>
+            <% let ingredientText = recipe.ingredients[i].displayText || 
+                recipe.ingredients[i].text; %>
 
             <% if (recipe.matches_priority.find((el) => el === recipe.ingredients[i].ingredient)) { %>
             <p class="ingredient-match-priority"><%- ingredientText %></p>
@@ -61,7 +58,7 @@
 
         <div class="flex-fill">
             <a href="#" class="button button-inline button-next button-recipe" data-id="<%= recipe._id %>"
-                data-step="1">See Recipe</a>
+                data-serving="<%= data.serving_size %>" data-step="1">See Recipe</a>
         </div>
     </div>
 </div>

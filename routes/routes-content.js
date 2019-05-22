@@ -1,6 +1,5 @@
 var express = require('express');
 var recipeController = require("../controllers/recipeController");
-var ingredientController = require("../controllers/ingredientController");
 var contactController = require("../controllers/contactController");
 var userController = require("../controllers/userController");
 
@@ -81,21 +80,19 @@ router.get('/recipe', function (req, res, next) {
             let serving_size = parseInt(req.query.serving_size);
             if (serving_size && Array.isArray(msg.result)) {
                 msg.result.forEach((recipe) => {
-                    for (let i = 0; i < recipe.ingredients.length; ++i) {
-                        if (serving_size != recipe.serves) {
-                            recipe.ingredients[i].displayText = ingredientController.convertQuantity(
-                                recipe.ingredients[i], recipe.serves, serving_size
-                            );
-                        } else {
-                            recipe.ingredients[i].displayText = recipe.ingredients[i].text;
-                        }
+                    try {
+                        recipeController.convertRecipe(recipe, serving_size);
+                    } catch (e) {
+                        console.log(e);
                     }
                 });
             }
 
             // Send recipes
             getOptions(req, "Recipes", 2, {
-                recipes: msg.result, page: page, limit: limit,
+                recipes: msg.result,
+                serving_size: serving_size,
+                page: page, limit: limit,
                 pageTotal: msg.pageCount, recipeTotal: msg.count
             }, (options) => {
                 res.render('recipe', options);
@@ -111,6 +108,11 @@ router.get('/result/1/', function (req, res, next) {
         if (msg.error) {
             res.status(500).send(msg.error);
         } else {
+            let serving_size = parseInt(req.query.serving_size);
+            if (serving_size) {
+                recipeController.convertRecipe(msg.result, serving_size);
+            }
+
             getOptions(req, msg.result.title, 3, {
                 recipe: msg.result,
                 url_back: req.query.q
@@ -128,6 +130,11 @@ router.get('/result/2/', function (req, res, next) {
         if (msg.error) {
             res.status(500).send(msg.error);
         } else {
+            let serving_size = parseInt(req.query.serving_size);
+            if (serving_size && msg.result && msg.result.ingredients) {
+                recipeController.convertRecipe(msg.result, serving_size);
+            }
+
             getOptions(req, msg.result.title, 4, {
                 recipe: msg.result,
                 url_back: req.query.q

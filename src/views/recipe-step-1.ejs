@@ -25,8 +25,14 @@
                             <h3>Ingredients</h3>
                             <ol class="recipe-steps">
                                 <% for (let i = 0; i < data.recipe.ingredients.length; ++i) { %>
+
+                                <%
+                                let ingredientText = data.recipe.ingredients[i].displayText || 
+                                    data.recipe.ingredients[i].text;
+                                %>
+
                                 <li>
-                                    <%- include("includes/elements/checkbox-box", {label: data.recipe.ingredients[i].text, checked: false}); %>
+                                    <%- include("includes/elements/checkbox-box", {label: ingredientText, checked: false}); %>
                                 </li>
                                 <% }; %>
                             </ol>

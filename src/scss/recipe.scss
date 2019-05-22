@@ -54,12 +54,6 @@
 
                     font-weight: 700;
                 }
-
-                .ingredient-quantity-serving {
-                    color: $serving-color;
-
-                    font-weight: 700;
-                }
             }
         }
 
@@ -93,4 +87,10 @@
         margin-left: 36px;
         padding-left: 12px;
     }
+}
+
+.ingredient-quantity-serving {
+    color: $serving-color;
+
+    font-weight: 700;
 }
