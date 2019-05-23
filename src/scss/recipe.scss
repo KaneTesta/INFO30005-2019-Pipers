@@ -41,6 +41,10 @@
                 &:last-child {
                     margin-bottom: 0;
                 }
+
+                &.ingredient-quantity-serving {
+                    color: $serving-color;
+                }
             }
 
             &.recipe-ingredients {
@@ -52,12 +56,6 @@
 
                 .ingredient-match-priority {
                     color: $accent-color-alt;
-
-                    font-weight: 700;
-                }
-
-                .ingredient-match-partial {
-                    color: $warning-color;
 
                     font-weight: 700;
                 }
@@ -102,4 +100,10 @@
     .recipe-cleanup-item {
         padding-bottom: 24px;
     }
+}
+
+.ingredient-quantity-serving {
+    color: $serving-color;
+
+    font-weight: 700;
 }

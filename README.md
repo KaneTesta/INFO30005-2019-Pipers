@@ -4,7 +4,11 @@ Team Project for WEB30005 shared repository.
 
 ## Running
 
-From command line, run `npm install` to install dependencies. Run `npm start` to run app, and `npm test` to run the live test version (autocompile scss, reload on file change, etc).
+From command line, run `npm install` to install dependencies. Run `npm start` to run app, and `npm run serve` to run the live test version (autocompile scss, reload on file change, etc).
+
+## Testing
+
+Run `npm test` to run the mocha tests for the app.
 
 ## CSS
 
@@ -26,7 +30,6 @@ ingredientController.js
 All views are found in the /src/views/ directory
 
 All relevant models are found in the /models/ directory
-
 
 ## Access our master page
 endwaste.herokuapp.com

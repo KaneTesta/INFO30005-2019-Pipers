@@ -23,6 +23,7 @@ button,
 
     cursor: pointer;
     transition: box-shadow 0.15s ease, background-color 0.1s ease, border-color 0.1s ease;
+    vertical-align: middle;
     text-decoration: none;
     letter-spacing: 1;
     text-transform: uppercase;
@@ -65,7 +66,8 @@ button,
     }
 
     &.button-next,
-    &.button-back {
+    &.button-back,
+    &.button-prev {
         &::after {
             position: absolute;
             top: 0;
@@ -73,14 +75,14 @@ button,
 
             display: inline-block;
 
-            width: 8px;
-            height: 8px;
+            width: 0.6em;
+            height: 0.6em;
             margin: auto;
 
             content: "";
 
-            border-top: 3px solid $text-color-accent;
-            border-right: 3px solid $text-color-accent;
+            border-top: 0.2em solid $text-color-accent;
+            border-right: 0.2em solid $text-color-accent;
         }
     }
 
@@ -104,6 +106,31 @@ button,
         &:active {
             &::after {
                 right: 6px;
+            }
+        }
+    }
+
+    &.button-back,
+    &.button-prev {
+        padding-left: 36px;
+
+        &::after {
+            left: 18px;
+
+            transition: left 0.15s ease;
+            transform: rotate(-135deg);
+        }
+
+        &:hover,
+        &:focus {
+            &::after {
+                left: 12px;
+            }
+        }
+
+        &:active {
+            &::after {
+                left: 6px;
             }
         }
     }
@@ -133,26 +160,6 @@ button,
 
             & + .heading {
                 text-align: left;
-            }
-        }
-
-        &::after {
-            left: 18px;
-
-            transition: left 0.15s ease;
-            transform: rotate(-135deg);
-        }
-
-        &:hover,
-        &:focus {
-            &::after {
-                left: 12px;
-            }
-        }
-
-        &:active {
-            &::after {
-                left: 6px;
             }
         }
 
@@ -236,5 +243,22 @@ button,
     .button {
         margin-right: 0;
         margin-left: 0;
+    }
+}
+
+.button-pages {
+    button,
+    .button {
+        margin: 8px 12px;
+
+        font-size: 0.75em;
+
+        &.button-next {
+            margin-right: 0;
+        }
+
+        &.button-prev {
+            margin-left: 0;
+        }
     }
 }

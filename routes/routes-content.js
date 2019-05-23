@@ -55,11 +55,20 @@ router.get('/ingredients', function (req, res, next) {
 
 /* GET recipe page. */
 router.get('/recipe', function (req, res, next) {
+    // Generate query
     let query = {
         "ingredients": req.query.ingredients || [],
         "priority_ingredients": req.query.priority_ingredients || [],
         "unavailable_cookware": req.query.ingredients || [],
-        "maximum_time": parseInt(req.query.maximum_time) || 0,
+        "maximum_time": parseInt(req.query.maximum_time) || 0
+    };
+
+    // Setup pagination options
+    let page = parseInt(req.query.page) || 1;
+    let limit = parseInt(req.query.limit) || 5;
+    let options = {
+        page: page,
+        limit: limit
     }
 
     let options = {
@@ -72,7 +81,25 @@ router.get('/recipe', function (req, res, next) {
         if (msg.error) {
             res.status(500).send(msg.error);
         } else {
-            getOptions(req, "Recipes", 2, { recipes: msg.result }, (options) => {
+            // Convert recipes
+            let serving_size = parseInt(req.query.serving_size);
+            if (serving_size && Array.isArray(msg.result)) {
+                msg.result.forEach((recipe) => {
+                    try {
+                        recipeController.convertRecipe(recipe, serving_size);
+                    } catch (e) {
+                        console.log(e);
+                    }
+                });
+            }
+
+            // Send recipes
+            getOptions(req, "Recipes", 2, {
+                recipes: msg.result,
+                serving_size: serving_size,
+                page: page, limit: limit,
+                pageTotal: msg.pageCount, recipeTotal: msg.count
+            }, (options) => {
                 res.render('recipe', options);
             });
         }
@@ -86,6 +113,11 @@ router.get('/result/1/', function (req, res, next) {
         if (msg.error) {
             res.status(500).send(msg.error);
         } else {
+            let serving_size = parseInt(req.query.serving_size);
+            if (serving_size) {
+                recipeController.convertRecipe(msg.result, serving_size);
+            }
+
             getOptions(req, msg.result.title, 3, {
                 recipe: msg.result,
                 url_back: req.query.q
@@ -103,6 +135,11 @@ router.get('/result/2/', function (req, res, next) {
         if (msg.error) {
             res.status(500).send(msg.error);
         } else {
+            let serving_size = parseInt(req.query.serving_size);
+            if (serving_size && msg.result && msg.result.ingredients) {
+                recipeController.convertRecipe(msg.result, serving_size);
+            }
+
             getOptions(req, msg.result.title, 4, {
                 recipe: msg.result,
                 url_back: req.query.q

@@ -19,21 +19,31 @@
                             <h1 class="heading">Recipe Results</h1>
 
                             <% if (data.recipes && data.recipes.length > 0) { %>
+
+                            <% let firstIndex = ((data.page - 1) * data.limit) + 1; %>
+                            <h5>Page <%= data.page %> of <%= data.pageTotal %></h5>
+                            <p class="text-detail">Recipes <%= firstIndex %> - <%- firstIndex + data.recipes.length - 1 %></p>
+
+                            <% include includes/elements/page-controls %>
+
                             <div class="recipe-list">
                                 <% for (let index = 0; index < data.recipes.length; ++index) { %>
-                                <%- include("includes/elements/recipe", {recipe: data.recipes[index], index: index + 1}); %>
+                                <%- include("includes/elements/recipe", {recipe: data.recipes[index], index: index + firstIndex}); %>
                                 <% } %>
                             </div>
+
+                            <% include includes/elements/page-controls %>
+
                             <% } else { %>
                             <div class="message message-error">No recipes found</div>
                             <% } %>
-
                         </section>
                     </div>
                 </div>
             </div>
         </div>
     </body>
+    
     <footer>
     </footer>
 

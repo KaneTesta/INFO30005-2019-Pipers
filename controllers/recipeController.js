@@ -2,16 +2,21 @@ var mongoose = require('mongoose');
 var Recipe = mongoose.model('recipe');
 var Storage = mongoose.model('storage');
 
+var ingredientController = require("./ingredientController");
+
 var findRecipeByIngredients = (query, options, callback) => {
-    //Recipe.find({ ingredients: { $in: query } }, function (err, recipes) {
-    /*     Recipe
-            .byQuery(query)
-            .exec(function (err, recipes) {
-                callback({
-                    error: err,
-                    result: recipes.slice(0, 40)
-                });
-            }); */
+    if (callback === null || callback === undefined) {
+        return;
+    }
+
+    if (query === null || query === undefined) {
+        callback({
+            error: "query cannot be null"
+        });
+
+        return;
+    }
+
     Recipe.aggregatePaginate(Recipe.byQuery(query), options,
         (err, recipes, pageCount, count) => {
             callback({
@@ -20,7 +25,8 @@ var findRecipeByIngredients = (query, options, callback) => {
                 pageCount: pageCount,
                 count: count,
             });
-        });
+        }
+    );
 };
 
 var findRecipeByID = (id, callback) => {
@@ -63,7 +69,20 @@ var findStorageInfo = (req, res) => {
     });
 };
 
-
+/**
+ * Convert a recipe to a target serving size
+ */
+var convertRecipe = (recipe, targetSize) => {
+    for (let i = 0; i < recipe.ingredients.length; ++i) {
+        if (targetSize != recipe.serves) {
+            recipe.ingredients[i].displayText = ingredientController.convertQuantity(
+                recipe.ingredients[i], recipe.serves, targetSize
+            );
+        } else {
+            recipe.ingredients[i].displayText = recipe.ingredients[i].text;
+        }
+    }
+}
 
 
 // Exporting callbacks
@@ -72,4 +91,5 @@ module.exports = {
     findRecipeByID,
     insertRecipe,
     findStorageInfo,
+    convertRecipe
 };
