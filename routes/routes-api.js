@@ -95,6 +95,7 @@ incorporate with the frontend
 */
 
 router.get('/ingredients', ingredientController.getIngredients);
+router.get('/ingredient/:name', ingredientController.getIngredientInfo);
 
 router.post('/user/saveingredients', function (req, res) {
   if (req.session && req.session.passport && req.session.passport.user) {

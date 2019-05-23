@@ -15,3 +15,17 @@ module.exports.getIngredients = function (req, res) {
         });
 };
 
+module.exports.getIngredientInfo = (req, res) => {
+    Ingredient.findOne({"name": req.params.name}, (err, ingredient) => {
+        if (!err) {
+            if (ingredient) {
+                res.json(ingredient);
+            } else {
+                res.sendStatus(404);
+            }
+        } else {
+            res.sendStatus(500);
+        }
+    })
+}
+
