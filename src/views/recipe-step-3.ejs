@@ -21,12 +21,14 @@
 
                             <h1 class="heading"><%= data.recipe.title %></h1>
                             <h3>Cleanup</h3>
-                            <ol id="RecipeCleanup" class="recipe-steps">
+                            <div id="RecipeCleanupLoadingTips" class="progress-loading">Loading cleanup tips</div>
+                            <div id="RecipeCleanup" class="recipe-cleanup">
                                 <% for (let i = 0; i < data.recipe.ingredients.length; ++i) { %>
-                                <li data-ingredient="<%= data.recipe.ingredients[i].ingredient %>">
-                                </li>
+                                <div class="recipe-row recipe-cleanup-item"
+                                    data-ingredient="<%= data.recipe.ingredients[i].ingredient %>">
+                                </div>
                                 <% } %>
-                            </ol>
+                            </div>
 
                             <h5>Contacts</h5>
                             <p>Have extra food? See who you can contact to make sure that your food doesn't go to waste.
