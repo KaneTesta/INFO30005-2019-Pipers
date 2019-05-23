@@ -71,11 +71,6 @@ router.get('/recipe', function (req, res, next) {
         limit: limit
     }
 
-    let options = {
-        page: req.query.page || 1,
-        limit: req.query.limit || 5
-    }
-
     // GET recipes from ingredients
     recipeController.findRecipeByIngredients(query, options, function (msg) {
         if (msg.error) {
