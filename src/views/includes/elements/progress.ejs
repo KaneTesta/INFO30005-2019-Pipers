@@ -1,10 +1,16 @@
 <div id="ProgressDots" class="progress-dots">
-    <% for (let i = 0; i < 3; ++i) { %>
+    <% for (let i = 0; i < 2; ++i) { %>
     <% if (i === viewport) { %>
     <div class="progress-dot active"></div>
     <% } else { %>
     <div class="progress-dot"></div>
     <% } %>
+    <% } %>
+    
+    <% if (viewport >= 2) { %>
+    <div class="progress-dot active"></div>
+    <% } else { %>
+    <div class="progress-dot"></div>
     <% } %>
 </div>
 

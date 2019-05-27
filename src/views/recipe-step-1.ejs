@@ -21,8 +21,15 @@
 
                             <h1 class="heading"><%= data.recipe.title %></h1>
 
-                            <p class="text-detail">You can check off your ingredients on the list below, or start cooking right away!</p>
+                            <% if (data.serving_size) { %>
+                            <p class="text-detail">Original Serving Size: <%= data.recipe.serves %></p>
+                            <h6 class="heading-section">Serving Size</h6>
+                            <%- include("includes/elements/input-range", {label: "People", min: 1, max: 16, value: data.serving_size, step: 1, use_map: false}); %>
+                            <button id="RecipeButtonServingSize" class="button button-small">Update Serving Size</button>
+                            <% }; %>
+
                             <h3>Ingredients</h3>
+                            <p class="text-detail">You can check off your ingredients on the list below, or start cooking right away!</p>
                             <ol class="recipe-steps">
                                 <% for (let i = 0; i < data.recipe.ingredients.length; ++i) { %>
 

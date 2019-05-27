@@ -89,6 +89,29 @@ $(document).on("transition", function () {
         });
     }
 
+    $("#RecipeButtonServingSize").on("click", function (e) {
+        let $peopleSlider = $("#SliderPeople");
+        let search_params = new URLSearchParams(window.location.search);
+        let serving_size = parseInt($peopleSlider.attr("data-value"));
+        search_params.set('serving_size', serving_size);
+
+        let search_string = search_params.toString();
+        if (!search_string.startsWith("?")) {
+            search_string = "?" + search_string;
+        }
+
+        let url = window.location.origin + window.location.pathname + search_string;
+        // Check smoothState
+        let $main = $('#Main');
+        let smoothState = $main.data("smoothState");
+        if (smoothState !== undefined) {
+            $main.attr('data-transition', 'page-fade');
+            smoothState.load(url);
+        } else {
+            window.location.assign(url);
+        }
+    });
+
     $(".recipe-button-page").on("click", function (e) {
         let $el = $(this);
         let search_params = new URLSearchParams(window.location.search);

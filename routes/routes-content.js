@@ -115,7 +115,8 @@ router.get('/result/1/', function (req, res, next) {
 
             getOptions(req, msg.result.title, 3, {
                 recipe: msg.result,
-                url_back: req.query.q
+                url_back: req.query.q,
+                serving_size: serving_size
             }, (options) => {
                 res.render('recipe-step-1', options);
             });
