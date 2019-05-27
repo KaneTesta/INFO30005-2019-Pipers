@@ -47,6 +47,12 @@ button,
         margin: 12px 12px;
     }
 
+    &.button-small {
+        margin: 0;
+
+        font-size: 0.75em;
+    }
+
     &.button-inline {
         display: inline-flex;
     }
