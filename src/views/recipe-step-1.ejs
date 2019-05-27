@@ -20,6 +20,7 @@
                             <% }; %>
 
                             <h1 class="heading"><%= data.recipe.title %></h1>
+                            Serves: <input type="number" id="data-serving" onclick=() min="1" max="99" value="<%= data.recipe.serves %>" >
 
                             <p class="text-detail">You can check off your ingredients on the list below, or start cooking right away!</p>
                             <h3>Ingredients</h3>
