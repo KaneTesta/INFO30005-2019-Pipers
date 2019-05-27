@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Recipe = mongoose.model('recipe');
-var Storage = mongoose.model('storage');
 
 var ingredientController = require("./ingredientController");
 
@@ -38,24 +37,6 @@ var findRecipeByID = (id, callback) => {
     })
 }
 
-// Insert one recipe
-var insertRecipe = (recipe, callback) => {
-    var recipe = new Recipe({
-        title: recipe.title,
-        ingredients: recipe.ingredients,
-        method: recipe.method,
-        author: recipe.string,
-        serves: recipe.serves
-    });
-
-    recipe.save((err, newRecipe) => {
-        callback({
-            error: err,
-            result: 'Recipe: ' + newRecipe.title + ' added!'
-        });
-    });
-};
-
 // Find storage information for one ingredient
 var findStorageInfo = (req, res) => {
     var ingredientName = new RegExp('^' + req.params.ingredient, 'i');
@@ -89,7 +70,6 @@ var convertRecipe = (recipe, targetSize) => {
 module.exports = {
     findRecipeByIngredients,
     findRecipeByID,
-    insertRecipe,
     findStorageInfo,
-    convertRecipe
+    convertRecipe,
 };

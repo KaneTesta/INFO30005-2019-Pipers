@@ -125,4 +125,3 @@ module.exports = {
     getIngredientInfo: getIngredientInfo,
     convertQuantity: convertQuantity
 }
-

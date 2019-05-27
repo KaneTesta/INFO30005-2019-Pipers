@@ -1,15 +1,5 @@
 var mongoose = require('mongoose');
-var parser = require('recipe-ingredient-parser-v2');
-var pluralize = require('pluralize');
 var mongooseAggregatePaginate = require('mongoose-aggregate-paginate');
-
-
-//TODO
-// Search by quantities of ingredients
-// Search by recipe time
-// Search by cookware
-// Search by serves
-// Combine ingredients from multiple recipes
 
 var recipeSchema = mongoose.Schema({
   title: {
@@ -18,11 +8,6 @@ var recipeSchema = mongoose.Schema({
     trim: true,
     minlength: 1
   },
-  ingredients: [{
-    quantity: Number,
-    unit: String,
-    ingredient: mongoose.Schema.ObjectId
-  }],
   method: {
     type: [String],
     required: [true, "Recipe needs a method"]
@@ -127,18 +112,6 @@ recipeSchema.statics.byQuery = function (query) {
       }
     }
   ])
-}
-
-recipeSchema.query.sortByRating = function () {
-  return this.sort({ 'aggregateRating.ratingValue': -1 });
-}
-
-recipeSchema.query.byServes = function (min, max) {
-  return this.where('serves').gte(min).lte(max);
-}
-
-recipeSchema.query.byMaximumTime = function (max) {
-  return this.where('totalTime').lte(max);
 }
 
 recipeSchema.plugin(mongooseAggregatePaginate);

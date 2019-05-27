@@ -49,26 +49,7 @@ var deleteContact = (req, res) => {
       res.status(500).send({ error: err });
     }
   });
-}
-
-// Insert one contact
-var insertContact = (req, res) => {
-  var contact = new Contact({
-    name: req.body.name,
-    phone: req.body.phone,
-    address: req.body.address,
-    description: req.body.description,
-    url: req.body.url
-  });
-  contact.save((err, newContact) => {
-    if (!err) {
-      res.send(newContact.name + ' added!');
-    } else {
-      res.status(500).send({ error: err });
-    }
-  });
 };
-
 
 // Exporting callbacks
 module.exports = {
