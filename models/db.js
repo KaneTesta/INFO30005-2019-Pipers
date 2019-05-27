@@ -21,7 +21,6 @@ mongoose.connect(dbURI, options).then(
 
 require('./recipe');
 require('./contact');
-require('./storage');
 require('./ingredient');
 require('./user');
 
