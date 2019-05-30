@@ -102,6 +102,10 @@
     }
 }
 
+.cleanup-ingredient {
+    transition: opacity 0.15s ease;
+}
+
 .ingredient-quantity-serving {
     color: $serving-color;
 

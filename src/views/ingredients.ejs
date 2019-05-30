@@ -60,23 +60,6 @@
                                     </button>
                                 </div>
 
-                                <% if (user && user.ingredients && user.ingredients.length > 5) { %>
-                                <div class="container-center flex-responsive">
-                                    <button id="IngredientsButtonSaveIngredients" class="button button-loadable">Save
-                                        Ingredients</button>
-                                    <button id="IngredientsButtonFindRecipes" class="button button-next">Find
-                                        Recipes</button>
-                                </div>
-                                <% }; %>
-
-                                <!-- Ingredients content -->
-                                <div id="IngredientsMessageList"></div>
-                                <% if (user && user.ingredients) { %>
-                                <div id="IngredientsList" data-ingredients="<%= user.ingredients.join('+') %>"></div>
-                                <% } else { %>
-                                <div id="IngredientsList" data-ingredients=""></div>
-                                <% }; %>
-
                                 <div class="container-center flex-responsive">
                                     <% if (user) { %>
                                     <button id="IngredientsButtonSaveIngredients" class="button button-loadable">Save
@@ -86,6 +69,13 @@
                                         Recipes</button>
                                 </div>
 
+                                <!-- Ingredients content -->
+                                <div id="IngredientsMessageList"></div>
+                                <% if (user && user.ingredients) { %>
+                                <div id="IngredientsList" data-ingredients="<%= user.ingredients.join('+') %>"></div>
+                                <% } else { %>
+                                <div id="IngredientsList" data-ingredients=""></div>
+                                <% }; %>
 
                                 <% if (!user) { %>
                                 <h3>Sign In</h3>

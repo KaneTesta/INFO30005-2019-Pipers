@@ -141,4 +141,67 @@ $(document).on("transition", function () {
             window.location.assign(url);
         }
     });
+
+    function saveIngredients(ingredients) {
+        console.log(ingredients);
+        let params = {
+            ingredients: ingredients
+        };
+
+        let url = "/api/user/saveingredients";
+        $.post(url, params, function (data) {
+            console.log(data);
+        }).fail(function (data) {
+            console.log(data);
+        });
+    }
+
+    // Ingredient removal from cleanup screen
+    let $cleanupIngredientsList = $("#CleanupIngredientsList");
+    if ($cleanupIngredientsList && $cleanupIngredientsList.attr("data-ingredients")) {
+        let ingredients = $cleanupIngredientsList.attr("data-ingredients").split("+");
+        let ingredientsCommon = $cleanupIngredientsList.attr("data-ingredients-common").split("+");
+        function saveRemovedIngredients() {
+            // Save the ingredients data
+            let newIngredients = ingredients.slice();
+            let $currentIngredients = $cleanupIngredientsList.children();
+            ingredientsCommon.forEach(function (ingredient, index) {
+                let foundIngredient = false;
+                $currentIngredients.each(function () {
+                    let dataIngredient = $(this).attr("data-ingredient").toLowerCase();
+                    if (dataIngredient === ingredient.toLowerCase()) {
+                        foundIngredient = true;
+                    }
+                });
+
+                if (!foundIngredient) {
+                    // Remove the ingredient from the list
+                    let ingredientIndex = newIngredients.findIndex((newIngredient) => {
+                        return ingredient.toLowerCase() === newIngredient.toLowerCase();
+                    });
+
+                    console.log(ingredientIndex);
+                    if (ingredientIndex >= 0) {
+                        newIngredients.splice(ingredientIndex, 1);
+                    }
+                }
+            });
+
+            saveIngredients(newIngredients);
+        }
+
+        ingredientsCommon.forEach((ingredient) => {
+            let ingredientId = ingredient.split(" ").join("");
+            let $ingredientElement = $("#Ingredient" + ingredientId);
+            let $removeButton = $("#ButtonRemove" + ingredientId);
+            $removeButton.on('click', function () {
+                // Animate the element out
+                $ingredientElement.css("opacity", 0);
+                $ingredientElement.slideUp(200, function () {
+                    $ingredientElement.remove();
+                    saveRemovedIngredients();
+                });
+            });
+        });
+    }
 });
