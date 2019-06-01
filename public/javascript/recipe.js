@@ -45,12 +45,13 @@ $(document).on("transition", function () {
     `
 
     // Handle ingredient lists
-    let recipeCleanup = $("#RecipeCleanup");
-    if (recipeCleanup) {
-        let totalTips = recipeCleanup.children().length;
+    let $recipeCleanup = $("#RecipeCleanup");
+    if ($recipeCleanup) {
+        let totalTips = $recipeCleanup.children().length;
         let foundTips = 0;
+        let storageTips = 0;
         // Set ingredients
-        recipeCleanup.children().each(function () {
+        $recipeCleanup.children().each(function () {
             let $el = $(this);
             $el.hide();
 
@@ -66,6 +67,12 @@ $(document).on("transition", function () {
                         let tipsLoading = $("#RecipeCleanupLoadingTips");
                         tipsLoading.slideUp(400, function () {
                             tipsLoading.remove();
+                            // Create no storage tips message
+                            let $noTipsMessage = $("<div class=\"message\">No storage tips for this recipe</div>");
+                            $noTipsMessage.hide();
+                            // Add message to cleanup
+                            $noTipsMessage.appendTo($recipeCleanup);
+                            $noTipsMessage.slideDown(250);
                         });
                     }
 
@@ -81,6 +88,8 @@ $(document).on("transition", function () {
 
                             $el.slideDown(400);
                         }
+
+                        ++storageTips;
                     } else {
                         $el.remove();
                     }
