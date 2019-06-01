@@ -1,4 +1,5 @@
 $(document).on("transition", function () {
+    // Setup post buttons
     $("button[data-post]").each(function () {
         let $button = $(this);
         let postUrl = $button.attr("data-post");

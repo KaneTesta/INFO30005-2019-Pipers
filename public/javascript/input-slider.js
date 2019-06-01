@@ -1,3 +1,7 @@
+/**
+ * Setup sliders using jquery-ui
+ */
+
 $(document).on("transition", function () {
     $(".slider").each(function () {
         // Get values

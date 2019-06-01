@@ -89,6 +89,7 @@ $(document).on("transition", function () {
         });
     }
 
+    // Setup serving size adjustment button for recipes
     $("#RecipeButtonServingSize").on("click", function (e) {
         let $peopleSlider = $("#SliderPeople");
         let search_params = new URLSearchParams(window.location.search);
@@ -112,6 +113,8 @@ $(document).on("transition", function () {
         }
     });
 
+
+    // Setup next and previous page buttons
     $(".recipe-button-page").on("click", function (e) {
         let $el = $(this);
         let search_params = new URLSearchParams(window.location.search);
