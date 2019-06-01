@@ -67,12 +67,14 @@ $(document).on("transition", function () {
                         let tipsLoading = $("#RecipeCleanupLoadingTips");
                         tipsLoading.slideUp(400, function () {
                             tipsLoading.remove();
-                            // Create no storage tips message
-                            let $noTipsMessage = $("<div class=\"message\">No storage tips for this recipe</div>");
-                            $noTipsMessage.hide();
-                            // Add message to cleanup
-                            $noTipsMessage.appendTo($recipeCleanup);
-                            $noTipsMessage.slideDown(250);
+                            if (storageTips === 0) {
+                                // Create no storage tips message
+                                let $noTipsMessage = $("<div class=\"message\">No storage tips for this recipe</div>");
+                                $noTipsMessage.hide();
+                                // Add message to cleanup
+                                $noTipsMessage.appendTo($recipeCleanup);
+                                $noTipsMessage.slideDown(250);
+                            }
                         });
                     }
 
@@ -87,9 +89,8 @@ $(document).on("transition", function () {
                             }));
 
                             $el.slideDown(400);
+                            ++storageTips;
                         }
-
-                        ++storageTips;
                     } else {
                         $el.remove();
                     }
