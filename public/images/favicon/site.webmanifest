@@ -1,0 +1,19 @@
+{
+    "name": "End Waste",
+    "short_name": "End Waste",
+    "icons": [
+        {
+            "src": "/public/images/favicon/android-chrome-192x192.png?v=kP3NaJxeNe",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/public/images/favicon/android-chrome-512x512.png?v=kP3NaJxeNe",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#34a534",
+    "background_color": "#34a534",
+    "display": "standalone"
+}
